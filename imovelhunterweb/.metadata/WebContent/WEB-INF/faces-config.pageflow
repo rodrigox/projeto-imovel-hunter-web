@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14249150963731" configfile="/imovelhunterweb/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14249151384352" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14249151384353" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index2.xhtml" id="pf14249151384364" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14249151384353" path="/index2.xhtml"/>
+  <links id="pf14249151384353" target="pf14249151384364" source="pf14249151384352" outcome="index" redirect="true"/>
+</pageflow:Pageflow>
