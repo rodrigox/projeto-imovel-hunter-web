@@ -52,7 +52,7 @@
 		</bean>
 	</property>
 	<property name="dataSource" ref="pooledDataSource" />
-	<property name="persistenceUnitName" value="persistenceUnitBupWeb"/> 
+	<property name="persistenceUnitName" value="persistenceimovelhunter"/> 
 </bean>
 
 <bean name="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
