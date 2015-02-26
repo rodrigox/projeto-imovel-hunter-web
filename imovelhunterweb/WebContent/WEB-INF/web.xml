@@ -68,6 +68,19 @@
 		<servlet-name>PdfServlet</servlet-name>
 		<url-pattern>/servlets/pdf</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+<!-- 	primefaces -->
+	<context-param>
+	<param-name>primefaces.THEME</param-name>
+	<param-value>glass-x</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>		  
+	</filter>
   
   
   
