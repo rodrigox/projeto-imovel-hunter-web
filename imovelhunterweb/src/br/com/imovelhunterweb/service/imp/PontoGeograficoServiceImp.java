@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import br.com.imovelhunterweb.dao.PontoGeograficoDAO;
 import br.com.imovelhunterweb.entitys.PontoGeografico;
 import br.com.imovelhunterweb.service.PontoGeograficoService;
+
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 @Service("pontoGeograficoService")
 public class PontoGeograficoServiceImp implements PontoGeograficoService,Serializable {
