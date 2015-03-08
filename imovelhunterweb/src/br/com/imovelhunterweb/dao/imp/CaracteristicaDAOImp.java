@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.imovelhunterweb.dao.;
+import br.com.imovelhunterweb.dao.CarcateristicaDAO;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 
 @Repository("CaracteristicaDAO")
