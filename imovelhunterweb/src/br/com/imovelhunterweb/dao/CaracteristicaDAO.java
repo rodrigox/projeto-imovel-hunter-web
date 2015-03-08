@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import br.com.imovelhunterweb.entitys.Caracteristica;
 
-public interface CaracteristicasDAO extends GenericDAO<Caracteristica,Serializable>{
+public interface CaracteristicaDAO extends GenericDAO<Caracteristica,Serializable>{
 
 	
 
