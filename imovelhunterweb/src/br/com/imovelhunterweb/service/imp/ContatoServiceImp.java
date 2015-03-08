@@ -21,7 +21,7 @@ public class ContatoServiceImp implements ContatoService,Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608442898872230013L;
+	
 	
 	@Resource(name = "contatoDAO")
 	private ContatoDAO contatoDAO;

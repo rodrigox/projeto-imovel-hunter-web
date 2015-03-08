@@ -21,7 +21,7 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608442898872230013L;
+	
 	
 	@Resource(name = "imovelDAO")
 	private ImovelDAO imovelDAO;

@@ -21,7 +21,7 @@ public class GrupoCaracteristicaServiceImp implements GrupoCaracteristicaService
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608442898872230013L;
+	
 	
 	@Resource(name = "grupoCaracteristicaDAO")
 	private GrupoCaracteristicaDAO grupoCaracteristicaDAO;

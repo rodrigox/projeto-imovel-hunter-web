@@ -21,7 +21,7 @@ public class MensagemServiceImp implements MensagemService,Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608442898872230013L;
+	
 	
 	@Resource(name = "mensagemDAO")
 	private MensagemDAO mensagemDAO;

@@ -18,10 +18,6 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 @Service("usuarioService")
 public class UsuarioServiceImp implements UsuarioService,Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6608442898872230013L;
 	
 	@Resource(name = "usuarioDAO")
 	private UsuarioDAO usuarioDAO;
