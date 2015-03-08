@@ -8,7 +8,7 @@ import br.com.imovelhunterweb.dao.CarcateristicaDAO;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 
 @Repository("CaracteristicaDAO")
-public class CaracteristicaDAO extends GenericDAOImp<Caracteristica,Serializable> implements CaracteristicaDAO,Serializable{
+public class CaracteristicaDAOImp extends GenericDAOImp<Caracteristica,Serializable> implements CaracteristicaDAO,Serializable{
 	
-	
+
 }
