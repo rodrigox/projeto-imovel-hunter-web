@@ -22,7 +22,7 @@ public abstract class DAOFactory {
 			e.printStackTrace();
 		}
 		
-		factory = Persistence.createEntityManagerFactory("persistenceimovelhunter");
+		factory = Persistence.createEntityManagerFactory("configuracaoJPA");
 		
 		if (manager == null || !manager.isOpen()) {
 			manager = factory.createEntityManager();
