@@ -21,7 +21,7 @@ public class ImagemServiceImp implements ImagemService,Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608442898872230013L;
+	
 	
 	@Resource(name = "imagemDAO")
 	private ImagemDAO imagemDAO;
