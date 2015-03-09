@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import br.com.imovelhunterweb.dao.ContatoDAO;
 import br.com.imovelhunterweb.entitys.Contato;
 
-@Repository("ContatoDAO")
+@Repository("contatoDAO")
 public class ContatoDAOImp extends GenericDAOImp<Contato,Serializable> implements ContatoDAO,Serializable{
 	
 
