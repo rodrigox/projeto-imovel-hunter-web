@@ -11,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.imovelhunterweb.dao.GrupoCaracteristicaDAO;
 import br.com.imovelhunterweb.entitys.GrupoCaracteristica;
-import br.com.imovelhunterweb.service.GrupoCaracteristicaService;
+//import br.com.imovelhunterweb.service.GrupoCaracteristicaService;
+import br.com.imovelhunterweb.service.GrupoCarecteristicaService;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
 @Service("grupoCaracteristicaService")
-public class GrupoCaracteristicaServiceImp implements GrupoCaracteristicaService,Serializable {
+public class GrupoCaracteristicaServiceImp implements GrupoCarecteristicaService,Serializable {
 
 	/**
 	 * 
