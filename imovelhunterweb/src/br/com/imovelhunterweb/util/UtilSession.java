@@ -28,10 +28,8 @@ public class UtilSession {
 		return (HttpServletRequest) FacesContext
 		.getCurrentInstance().getExternalContext().getRequest();
 	}
+	
+	
 
-//	public static void genericShowMessage(String mensagem) {
-//		FacesMessage message = new FacesMessage(mensagem);
-//		message.setSeverity(FacesMessage.SEVERITY_ERROR);
-//		throw new ValidatorException(message);
-//	}
+
 }
