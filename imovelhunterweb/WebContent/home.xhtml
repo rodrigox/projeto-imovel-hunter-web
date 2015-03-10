@@ -8,68 +8,88 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Imovel Hunter Web</title>
-<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+	<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
 
-
-
+<!-- <link rel="stylesheet" type="text/css" href="estilo-personalizado.css"/>
+ -->
 
 
 
 
 </h:head>
-<h:body>
+<h:body onload="PF('dlg').show();">
 
 
 
 
 
-<h:form listener= "PF('dlg').show();"  > 
+	<h:form>
 
 
-     
-    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+
+		<!--  <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
         <p:graphicImage name="/demo/images/login.png" />
     </h:outputLink>
- 
-    <p:growl   id="growl" sticky="true" showDetail="true" life="3000" />  
- 
-  
-    <p:dialog header="Login" widgetVar="dlg" resizable="false" >
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="username" value="Username:" />
-            <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
- 
-            <h:outputLabel for="password" value="Password:" />
-            <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
- 
-            <f:facet name="footer">
-                <p:commandButton value="Login" update="growl" actionListener="#{userLoginView.login}"
-               
-                                 oncomplete="handleLoginRequest(xhr, status, args)" />
-                                 
-                <p:commandLink name="esqueciSenha" value ="Esqueci minnha senha"  > </p:commandLink>
-                
-            </f:facet> 
-        </h:panelGrid>
-    </p:dialog>
-</h:form>
- 
+  -->
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+
+		<p:dialog header="Login" widgetVar="dlg" resizable="false"
+			closable="false" modal="true" draggable="false">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="username" value="Username:" />
+				<p:inputText id="username" value="#{userLoginView.username}"
+					required="true" label="username" />
+
+				<h:outputLabel for="password" value="Password:" />
+				<p:password id="password" value="#{userLoginView.password}"
+					required="true" label="password" />
+
+				<f:facet name="footer">
+					
+
+					<h:panelGrid  columns="2" >
+					
+					<p:commandButton value="Login" update="growl"
+						actionListener="#{userLoginView.login}"
+						oncomplete="handleLoginRequest(xhr, status, args)" />
+
+
+
+						<p:commandLink name="esqueciSenha" style="margin-left:10px" value="Esqueci minnha senha">
+						</p:commandLink>
+
+						<h:outputLabel></h:outputLabel>
+
+
+						<p:commandLink name="goCriarCadastro" value="Criar Cadastro"  style="margin-left:10px">
+						</p:commandLink>
+
+					</h:panelGrid>
+
+
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
 
 
 
 
-<script type="text/javascript">
-    function handleLoginRequest(xhr, status, args) {
-        if(args.validationFailed || !args.loggedIn) {
-            PF('dlg').jq.effect("shake", {times:5}, 100);
-        }
-        else {
-            PF('dlg').hide();
-            $('#loginLink').fadeOut();
-        }
-    }
-</script>
 
-	
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed || !args.loggedIn) {
+				PF('dlg').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlg').hide();
+				$('#loginLink').fadeOut();
+			}
+		}
+	</script>
+
+
 </h:body>
 </html>
