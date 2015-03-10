@@ -22,4 +22,10 @@ public interface AnuncianteService {
 
 	List<Anunciante> listarTodos(int index,int quantidade);
 	
+	String recuperarSenha(String email);
+	
+	Anunciante buscarPorEmail(String email);
+	
+	Anunciante buscarPorLoginESenha(String login,String senha);
+	
 }
