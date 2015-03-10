@@ -22,26 +22,24 @@ import javax.mail.internet.MimeMultipart;
 public class Email {
 
 	private Properties propiedadesEmail;
-	private Authenticator autenticacaoEmail; // FIXME: ver quais atributos sao  nescessarios ficar aqui
+	private Authenticator autenticacaoEmail;
 	private Session sessaoEmail;
 	
 	private String nomeRemetente;
 	
 	private List<String> listaNome;
 	private List<String> listaEmail;
+	
+	private String login = "imovelhunter";
+	private String nossogmail = "imovelhunter@gmail.com";
+	private String nossaSenha = "imovelhunter123";
 
 	public Email(String nomeRemetente) {
 		this.nomeRemetente = nomeRemetente;
 		
 		this.propiedadesEmail = new Properties();
 		this.propiedadesEmail.setProperty("mail.transport.protocol", "smtp");
-		this.propiedadesEmail.setProperty("mail.host","smtp.superbutton.com.br"); // FIXME:
-																			// configuracao,
-																			// apenas
-																			// o
-																			// lado
-//		this.propiedadesEmail.setProperty("mail.smtp.socketFactory.port","587");
-//	    this.propiedadesEmail.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");																	// dierito"
+		this.propiedadesEmail.setProperty("mail.host","smtp.gmail.com"); 														
 		this.propiedadesEmail.setProperty("mail.smtp.port", "587");
 		this.propiedadesEmail.setProperty("mail.mime.charset", "ISO-8859-1");
 		this.propiedadesEmail.setProperty("mail.smtp.auth", "true");
@@ -49,8 +47,8 @@ public class Email {
 
 		this.autenticacaoEmail = new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("automato",
-						"bottomup14092011");
+				return new PasswordAuthentication(Email.this.login,
+						Email.this.nossaSenha);
 			}
 		};
 
@@ -94,7 +92,7 @@ public class Email {
 				
 			}
 
-			internetAddress = new InternetAddress("automato@superbutton.com.br", nomeRemetente);
+			internetAddress = new InternetAddress(this.nossogmail, nomeRemetente);
 			msg.setFrom(internetAddress);
 
 			msg.setSubject(assunto);
@@ -113,7 +111,7 @@ public class Email {
 			msg.setContent(mps);
 			
 			Transport transport = this.sessaoEmail.getTransport(); 
-			transport.connect("smtp.superbutton.com.br","automato@superbutton.com.br","bottomup14092011");  			
+			transport.connect("smtp.gmail.com",this.nossogmail,this.nossaSenha);  			
 			System.out.println(transport.isConnected());
 			
 			Transport.send(msg);
