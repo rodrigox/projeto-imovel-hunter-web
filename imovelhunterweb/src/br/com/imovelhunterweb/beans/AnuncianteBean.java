@@ -50,9 +50,7 @@ public class AnuncianteBean {
 		System.out.println("eeeeeeeeeeerrrrrrrrrrrrooooooooooooooooooooooo");
 		try{
 		AnuncianteService serv = new AnuncianteServiceImp();
-		System.out.println(this.anunciante.getNome());
-		System.out.println(this.anunciante.getDataDeNascimento().toString());
-		
+		System.out.println(this.anunciante.getNome());		
 		this.anunciante.setDataDeNascimento(new Date());
 		serv.inserir(this.anunciante);
 		}catch(Exception e){
