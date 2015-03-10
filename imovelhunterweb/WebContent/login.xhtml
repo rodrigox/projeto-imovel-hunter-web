@@ -23,55 +23,67 @@
 
 
 
-	<h:form>
+	
 
 
 
-		<!--  <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-        <p:graphicImage name="/demo/images/login.png" />
-    </h:outputLink>
-  -->
-		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+		
+		<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
 
 
 		<p:dialog header="Login" widgetVar="dlg" resizable="false"
 			closable="false" modal="true" draggable="false">
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel for="username" value="Username:" />
-				<p:inputText id="username" value="#{userLoginView.username}"
-					required="true" label="username" />
-
-				<h:outputLabel for="password" value="Password:" />
-				<p:password id="password" value="#{userLoginView.password}"
-					required="true" label="password" />
-
-				<f:facet name="footer">
-					
-
-					<h:panelGrid  columns="2" >
-					
-					<p:commandButton value="Login" update="growl"
-						actionListener="#{userLoginView.login}"
-						oncomplete="handleLoginRequest(xhr, status, args)" />
-
-
-
-						<p:commandLink name="esqueciSenha" style="margin-left:10px" value="Esqueci minnha senha">
-						</p:commandLink>
-
-						<h:outputLabel></h:outputLabel>
-
-
-						<p:commandLink name="goCriarCadastro" value="Criar Cadastro"  style="margin-left:10px">
-						</p:commandLink>
-
-					</h:panelGrid>
-
-
-				</f:facet>
-			</h:panelGrid>
+			
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{loginBean.login}"
+						required="false" label="username" />
+	
+					<h:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{loginBean.senha}"
+						required="false" label="password" />
+	
+					<f:facet name="footer">
+						
+	
+						<h:panelGrid  columns="2" >
+						
+						<p:commandButton value="Login"
+							actionListener="#{loginBean.logar}"
+							oncomplete="handleLoginRequest(xhr, status, args)" />
+	
+	
+	
+							<p:commandLink name="esqueciSenha" style="margin-left:10px" value="Esqueci minnha senha">
+							</p:commandLink>
+	
+							<h:outputLabel></h:outputLabel>
+	
+	
+							<p:commandLink name="goCriarCadastro" actionListener="#{loginBean.cadastrar}" value="Criar Cadastro"  style="margin-left:10px">
+							</p:commandLink>
+	
+						</h:panelGrid>
+	
+	
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
 		</p:dialog>
-	</h:form>
+	
 
 
 

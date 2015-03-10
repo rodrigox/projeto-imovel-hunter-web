@@ -166,9 +166,17 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 	public Anunciante buscarPorLoginESenha(String login, String senha) {
 		Map<String,Object> parametros = new HashMap<String,Object>();
 		parametros.put("login",login);
-		parametros.put("senha",senha);
-		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE (a.login = :=login OR a.email = :login) AND a.senha = :senha",parametros,0,1);
+		parametros.put("senha",Criptografar.gerarMd5(senha));
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE (a.login = :login OR a.email = :login) AND a.senha = :senha",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? anuncs.get(0) : null;
+	}
+
+	@Override
+	public boolean existeLogin(String login) {
+		Map<String,Object> parametros = new HashMap<String,Object>();
+		parametros.put("login",login);		
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.login = :login",parametros,0,1);
+		return anuncs != null && anuncs.size() > 0 ? true : false;
 	}
 	
 	

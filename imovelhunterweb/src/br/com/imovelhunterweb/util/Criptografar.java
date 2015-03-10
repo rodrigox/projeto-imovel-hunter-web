@@ -1,11 +1,17 @@
 package br.com.imovelhunterweb.util;
 
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Criptografar {
+public class Criptografar implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -479175766322284621L;
 
 	/**
 	 * converte uma String em um hasch MD5

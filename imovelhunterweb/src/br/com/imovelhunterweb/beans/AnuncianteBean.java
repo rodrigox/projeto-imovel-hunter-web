@@ -1,13 +1,15 @@
 package br.com.imovelhunterweb.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.service.AnuncianteService;
@@ -25,6 +27,8 @@ public class AnuncianteBean implements Serializable {
 	private static final long serialVersionUID = 2842024280524632375L;
 	private Anunciante anunciante;
 	private String confirmarSenha;
+	private String dataDeNascimento;
+	private SimpleDateFormat simpleDateFormat;
 	
 	/**
 	 * Este atributo é o que irá utilizar a persistencia do anunciante, O spring cuida da parte de fazer a injeção de dependência desse atributo
@@ -43,10 +47,15 @@ public class AnuncianteBean implements Serializable {
 	
 	@PostConstruct
 	public void init(){		
-		this.anunciante = new Anunciante();	
+		this.anunciante = new Anunciante();			
+		this.anunciante.setDataDeVencimento(new Date());
 		this.confirmarSenha = "";
 		
+		this.dataDeNascimento = new String();
 		this.primeUtil = new PrimeUtil();
+		
+		this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
 	}
 	
 	
@@ -67,22 +76,38 @@ public class AnuncianteBean implements Serializable {
 	}
 	
 	
-	public void cadastrarAnunciante(ActionEvent actionEvent){
-		try{
-			this.anunciante = this.anuncianteService.inserir(this.anunciante);
-			//Valida se o anunciante foi inserido
-			if(this.anunciante.getIdAnunciante() != 0 ){
-				//Exibe uma mensagem para o usuário
-				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Cadastro","Anunciante cadastrado com sucesso");
-				//Instancia um novo anunciante para que seja cadastrado um novo
-				this.anunciante = new Anunciante();
-				//Limpa a caixinha do confirmar senha
-				this.confirmarSenha = "";
+	public void cadastrarAnunciante(){
+		try{			
+			if(!this.anuncianteService.existeLogin(this.anunciante.getLogin())){
+				this.anunciante.setDataDeNascimento(this.simpleDateFormat.parse(this.dataDeNascimento));
+				Date dataAgora = new Date();
+				Calendar calendario = Calendar.getInstance();
+				calendario.setTime(dataAgora);
+				calendario.add(Calendar.DAY_OF_MONTH,30);
+				Date dataVencimento = calendario.getTime();
+				this.anunciante.setDataDeCriacao(dataAgora);
+				this.anunciante.setDataDeVencimento(dataVencimento);
+				this.anunciante = this.anuncianteService.inserir(this.anunciante);
+				//Valida se o anunciante foi inserido
+				if(this.anunciante.getIdAnunciante() != 0 ){
+					//Exibe uma mensagem para o usuário
+					this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Cadastro","Anunciante cadastrado com sucesso");
+					//Instancia um novo anunciante para que seja cadastrado um novo
+					this.anunciante = new Anunciante();
+					//Limpa a caixinha do confirmar senha
+					this.confirmarSenha = "";
+					//Limpa data de nascimento
+					this.dataDeNascimento = "";
+					//Exibe uma mensagem para o usuário
+					this.primeUtil.update("cadastroAnunciantes");
+				}else{
+					//Exibe uma mensagem para o usuário
+					this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Cadastro","Erro ao cadastrar o anunciante");
+				}
+			}else{
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_WARN,"Cadastro","Login já está em uso");
 				//Exibe uma mensagem para o usuário
 				this.primeUtil.update("cadastroAnunciantes");
-			}else{
-				//Exibe uma mensagem para o usuário
-				this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Cadastro","Erro ao cadastrar o anunciante");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -96,6 +121,16 @@ public class AnuncianteBean implements Serializable {
 
 	public void setAnuncianteService(AnuncianteService anuncianteService) {
 		this.anuncianteService = anuncianteService;
+	}
+
+
+	public String getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+
+	public void setDataDeNascimento(String dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
 	} 
 	
 

@@ -27,5 +27,7 @@ public interface AnuncianteService {
 	Anunciante buscarPorEmail(String email);
 	
 	Anunciante buscarPorLoginESenha(String login,String senha);
+
+	boolean existeLogin(String login);
 	
 }
