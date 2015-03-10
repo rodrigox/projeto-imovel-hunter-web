@@ -102,6 +102,10 @@ public class LoginBean implements Serializable {
 		this.primeUtil.update("idFormMensagem");
 	}
 	
+	public void irParaRecuperar(){
+		this.navegador.redirecionarPara("recuperasenha.xhtml");
+	}
+	
 	public void cadastrar(){
 		this.navegador.redirecionarPara("cadastroAnunciante.xhtml");
 	}

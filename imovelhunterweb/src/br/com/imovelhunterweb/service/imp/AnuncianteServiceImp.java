@@ -158,7 +158,7 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 	public Anunciante buscarPorEmail(String email) {
 		Map<String,Object> parametros = new HashMap<String,Object>();
 		parametros.put("email",email);
-		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.email = :=email",parametros,0,1);
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.email = :email",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? anuncs.get(0) : null;
 	}
 

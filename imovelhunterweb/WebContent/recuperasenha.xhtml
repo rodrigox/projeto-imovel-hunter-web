@@ -43,38 +43,23 @@
 		</h:form>
 
 
-		<p:dialog header="Login" widgetVar="dlg" resizable="false"
+		<p:dialog header="Recuperar senha" widgetVar="dlg" resizable="false"
 			closable="false" modal="true" draggable="false">
 			
 			<h:form>
 				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="username" value="Username:" />
-					<p:inputText id="username" value="#{loginBean.login}"
-						required="false" label="username" />
-	
-					<h:outputLabel for="password" value="Password:" />
-					<p:password id="password" value="#{loginBean.senha}"
-						required="false" label="password" />
+					<h:outputLabel for="email" value="Email:" />
+					<p:inputText id="username" value="#{loginBean.email}"
+						required="false" label="email" />				
 	
 					<f:facet name="footer">
 						
 	
 						<h:panelGrid  columns="2" >
 						
-						<p:commandButton value="Login"
-							actionListener="#{loginBean.logar}"
-							oncomplete="handleLoginRequest(xhr, status, args)" />
-	
-	
-	
-							<p:commandLink name="esqueciSenha" actionListener="#{loginBean.irParaRecuperar}" style="margin-left:10px" value="Esqueci minnha senha">
-							</p:commandLink>
-	
-							<h:outputLabel></h:outputLabel>
-	
-	
-							<p:commandLink name="goCriarCadastro" actionListener="#{loginBean.cadastrar}" value="Criar Cadastro"  style="margin-left:10px">
-							</p:commandLink>
+						<p:commandButton value="Enviar"
+							actionListener="#{loginBean.recuperarSenha}"
+							 />
 	
 						</h:panelGrid>
 	
@@ -89,18 +74,7 @@
 
 
 
-	<script type="text/javascript">
-		function handleLoginRequest(xhr, status, args) {
-			if (args.validationFailed || !args.loggedIn) {
-				PF('dlg').jq.effect("shake", {
-					times : 5
-				}, 100);
-			} else {
-				PF('dlg').hide();
-				$('#loginLink').fadeOut();
-			}
-		}
-	</script>
+	
 
 
 </h:body>
