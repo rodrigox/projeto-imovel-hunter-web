@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>
+<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+</h:head>
+<h:body>
+ 
+  <div id ="perfil_anunciante" title= "Perfil">
+  	<p:dialog header ="Perfil" id= "dialogLogin" minWidth = "500" width="450" 
+  		      modal = "true" closable ="false" position ="center"
+  		      showEffect="slide" draggable="true" resizable="false" visible="true">
+  		<h:form id="cadastroAnunciantes" name="cadAnunciantes">
+  			<h:panelGrid columns="2">
+  				
+  				<h:outputLabel value="nome*"> </h:outputLabel>
+  				<p:inputText id="jsf_nome" requerid="true" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
+  				
+  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
+  				<p:inputText id="jsf_sobrenome" requerid="true" value="#{anuncianteBean.anunciante.sobreNome}"> </p:inputText>
+  				
+  				<h:outputLabel value="email*"> </h:outputLabel>
+  				<p:inputText id="jsf_email" requerid="true" value="#{anuncianteBean.anunciante.email}"> </p:inputText>
+  				
+  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
+  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="true" value="#{anuncianteBean.anunciante.dataDeNascimento}"> </p:inputText>
+  				
+  				<h:outputLabel value="CRECI"> </h:outputLabel>
+  				<p:inputText id="jsf_creci" requerid="true" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
+  				
+  				<h:outputLabel  value="CPF*"> </h:outputLabel>
+  				<p:inputText id="jsf_cpf" requerid="true" value="#{anuncianteBean.anunciante.cpf}"> </p:inputText>
+  				
+  				<h:outputLabel value="Login*"> </h:outputLabel>
+  				<p:inputText id="jsf_login" requerid="true" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
+  				
+  				<h:outputLabel value="Senha*"> </h:outputLabel>
+  				<p:inputText id="jsf_senha" requerid="true" value="#{anuncianteBean.anunciante.senha}"> </p:inputText>
+  								 	
+  			 	<f:facet name="footer">
+  			 		<p:row>
+  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
+  			 				<p:commandButton value="Sair"></p:commandButton>
+  			 			</p:outputPanel>
+  			 		</p:row> 			 	
+  			 	</f:facet>		 	  			 
+  			</h:panelGrid>			
+  		</h:form>	    
+  	</p:dialog>
+  	</div>
+</h:body>
+</html>
