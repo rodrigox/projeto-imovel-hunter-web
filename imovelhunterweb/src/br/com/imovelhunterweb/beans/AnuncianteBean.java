@@ -78,6 +78,14 @@ public class AnuncianteBean implements Serializable {
 	
 	public void cadastrarAnunciante(){
 		try{			
+			if(this.anuncianteService.existeEmail(this.anunciante.getEmail())){
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_WARN,"Cadastro","Este email já está cadastrado");
+				//Exibe uma mensagem para o usuário
+				this.primeUtil.update("cadastroAnunciantes");
+				//Atualiza o componente que exibe a mensagem para o usuário, para que ele exiba
+				this.primeUtil.update("idFormMensagem");
+				return;
+			}
 			if(!this.anuncianteService.existeLogin(this.anunciante.getLogin())){
 				this.anunciante.setDataDeNascimento(this.simpleDateFormat.parse(this.dataDeNascimento));
 				Date dataAgora = new Date();

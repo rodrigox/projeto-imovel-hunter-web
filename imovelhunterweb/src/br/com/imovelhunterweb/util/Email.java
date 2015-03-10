@@ -112,7 +112,7 @@ public class Email {
 			
 			Transport transport = this.sessaoEmail.getTransport(); 
 			transport.connect("smtp.gmail.com",this.nossogmail,this.nossaSenha);  			
-			System.out.println(transport.isConnected());
+//			System.out.println(transport.isConnected());
 			
 			Transport.send(msg);
 		} catch (UnsupportedEncodingException e) {
