@@ -87,6 +87,8 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 	}
 
 	@Override
+	@Transactional
+	@Rollback
 	public String recuperarSenha(String email) {
 		
 		
@@ -132,7 +134,7 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 
 			String senhaAntiga = anuncianteContemplado.getSenha();
 			anuncianteContemplado.setSenha(senhaCriptografada);
-			this.atualizar(anuncianteContemplado);
+			anuncianteContemplado = this.anuncianteDAO.update(anuncianteContemplado);
 			
 			
 			try {							
@@ -143,7 +145,7 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 			}
 			catch (Exception e) {
 				anuncianteContemplado.setSenha(senhaAntiga);
-				this.atualizar(anuncianteContemplado);
+				anuncianteContemplado = this.anuncianteDAO.update(anuncianteContemplado);
 				e.printStackTrace();						
 				return "EErro na recuperação da senha";								
 			}
@@ -176,6 +178,14 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 		Map<String,Object> parametros = new HashMap<String,Object>();
 		parametros.put("login",login);		
 		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.login = :login",parametros,0,1);
+		return anuncs != null && anuncs.size() > 0 ? true : false;
+	}
+
+	@Override
+	public boolean existeEmail(String email) {
+		Map<String,Object> parametros = new HashMap<String,Object>();
+		parametros.put("email",email);		
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.email = :login",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? true : false;
 	}
 	

@@ -40,6 +40,8 @@ public class EditarAnuncianteBean implements Serializable{
 	private String confirmarSenha;
 	
 	private String dataDeNascimento;
+	
+	private String email;
 
 	
 	@PostConstruct
@@ -54,6 +56,8 @@ public class EditarAnuncianteBean implements Serializable{
 		this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		this.dataDeNascimento = this.simpleDateFormat.format(this.anunciante.getDataDeNascimento());
+		
+		this.email = this.anunciante.getEmail();
 
 
 	}
@@ -74,10 +78,15 @@ public class EditarAnuncianteBean implements Serializable{
 
 	public void atualizarAnunciante(){
 		try{
-		this.anunciante.setDataDeNascimento(this.simpleDateFormat.parse(this.dataDeNascimento));
-		this.anuncianteService.atualizar(anunciante);
-		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Atualização","Anunciante atualizado com sucesso");
-		this.primeUtil.update("idFormMensagem");
+			if(!this.anunciante.getEmail().equals(this.email) && this.anuncianteService.existeEmail(this.anunciante.getEmail())){
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_WARN,"Atenção","Esse email está sendo utilizado por outra conta");
+				this.primeUtil.update("idFormMensagem");
+				return;
+			}
+			this.anunciante.setDataDeNascimento(this.simpleDateFormat.parse(this.dataDeNascimento));
+			this.anuncianteService.atualizar(anunciante);
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Atualização","Anunciante atualizado com sucesso");
+			this.primeUtil.update("idFormMensagem");
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
@@ -130,6 +139,18 @@ public class EditarAnuncianteBean implements Serializable{
 
 	public void setDataDeNascimento(String dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
