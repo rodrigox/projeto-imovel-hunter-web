@@ -11,12 +11,26 @@
 <!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
 </h:head>
 <h:body>
+
+
+	<!-- dialog de processo -->
+	<p:ajaxStatus onstart="processandoDialog.show();"
+		onsuccess="processandoDialog.hide();" />
+	<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+		header="#{msg['ajax.processando']}" draggable="false" closable="false"
+		style="font-size:8pt;">
+		<p:graphicImage value="/images/ajax_loader.gif" />
+	</p:dialog>
+	
+	<h:form id="idFormMensagem">
+		<p:growl autoUpdate="false" showDetail="true" life="3000" />
+	</h:form>
  
   <div id ="cadastro_anunciante" title= "Anunciantes">
   	<p:dialog header ="Cadastro de Anunciantes" id= "dialogLogin" minWidth = "500" width="450" 
   		      modal = "true" closable ="false" position ="center"
   		      showEffect="slide" draggable="true" resizable="false" visible="true">
-  		<h:form id="cadastroAnunciantes" name="cadAnunciantes">
+  		<h:form id="cadastroAnunciantes">
   			<h:panelGrid columns="2">
   				
   				<h:outputLabel value="nome*"> </h:outputLabel>
