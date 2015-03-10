@@ -1,8 +1,10 @@
 package br.com.imovelhunterweb.beans;
 
-import javax.annotation.ManagedBean;
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -14,10 +16,14 @@ import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
-@ManagedBean("loginBean")
+@ManagedBean(name = "loginBean")
 @ViewScoped
-public class LoginBean {
+public class LoginBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2465262372102338614L;
 	private String login;
 	private String senha;
 	private String email;
@@ -32,10 +38,7 @@ public class LoginBean {
 	private Anunciante anuncianteLogado;
 	
 	@PostConstruct
-	public void init(){
-		this.login = new String();
-		this.senha = new String();
-		this.email = new String();
+	public void init(){		
 		
 		this.primeUtil = new PrimeUtil();
 		this.navegador = new Navegador();
@@ -97,6 +100,10 @@ public class LoginBean {
 		}			
 		//Atualiza o componente que exibe a mensagem para o usuário, para que ele exiba
 		this.primeUtil.update("idFormMensagem");
+	}
+	
+	public void cadastrar(){
+		this.navegador.redirecionarPara("cadastroAnunciante.xhtml");
 	}
 
 	public String getLogin() {
