@@ -61,19 +61,18 @@
   				<p:inputText id="jsf_cpf" requerid="true" value="#{editarAnuncianteBean.anunciante.cpf}"> </p:inputText> 				
   				
   				<h:outputLabel value="Senha*"> </h:outputLabel>
-  				<p:inputText id="jsf_senha" requerid="true" value="#{editarAnuncianteBean.anunciante.senha}"> </p:inputText>
+  				<p:password id="jsf_senha" requerid="true" value="#{editarAnuncianteBean.senha}"> </p:password>
   			
   				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
-  				<p:inputText id="jsf_conf_senha" requerid="true" value="#{editarAnuncianteBean.confirmarSenha}"> </p:inputText>
+  				<p:password id="jsf_conf_senha" requerid="true" value="#{editarAnuncianteBean.confirmarSenha}"> </p:password>
   								 	
   			 	<f:facet name="footer">
   			 		<p:row>
   			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
   			 				
-<!--   			 				<p:commandButton actionListener="#{editarAnuncianteBean.atualizarAnunciante}" value="Atualizar"></p:commandButton> -->
   			 				
   			 				
-  			 				<p:commandButton value="Remover" actionListener="#{editarAnuncianteBean.atualizarAnunciante}">
+  			 				<p:commandButton value="Atualizar" actionListener="#{editarAnuncianteBean.atualizarAnunciante}">
 						        <p:confirm header="Confirmação" message="Deseja atualizar?" icon="ui-icon-alert" />
 						    </p:commandButton>
   			 				
@@ -81,7 +80,6 @@
 						        <p:confirm header="Confirmação" message="Deseja remover?" icon="ui-icon-alert" />
 						    </p:commandButton>
   			 				
-<!--   			 				<p:commandButton actionListener="#{editarAnuncianteBean.remover}" value="Remover cadastro"></p:commandButton> -->
   			 			</p:outputPanel>
   			 		</p:row> 			 	
   			 	</f:facet>		 	  			 
