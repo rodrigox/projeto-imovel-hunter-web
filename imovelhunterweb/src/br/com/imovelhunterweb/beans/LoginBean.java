@@ -51,13 +51,13 @@ public class LoginBean implements Serializable {
 			if(anunciante != null){
 				this.anuncianteLogado = anunciante;
 				UtilSession.setHttpSessionObject("anuncianteLogado",anunciante);			
-				this.navegador.redirecionarPara("nomeDaTela.xhtml");
+				this.navegador.redirecionarPara("editarAnunciante.xhtml");
 			}else{
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_WARN,"Inválido","Login ou senha inválido");
 				this.primeUtil.update("idFormMensagem");
 			}
 		}else{
-			this.navegador.redirecionarPara("nomeDaTela.xhtml");
+			this.navegador.redirecionarPara("editarAnunciante.xhtml");
 		}
 	}
 	
