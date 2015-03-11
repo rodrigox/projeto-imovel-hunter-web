@@ -52,7 +52,8 @@ public class EditarAnuncianteBean implements Serializable{
 		this.primeUtil = new PrimeUtil();
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
-			this.navegador.redirecionarPara("telaDeLogin.xhtml");
+			this.navegador.redirecionarPara("login.xhtml");
+			return;
 		}
 		
 		this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
