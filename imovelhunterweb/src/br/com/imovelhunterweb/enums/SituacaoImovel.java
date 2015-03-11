@@ -1,6 +1,6 @@
 package br.com.imovelhunterweb.enums;
 
 public enum SituacaoImovel {
-	VENDA, LOCACAO, VENDIDO, DESATIVADO
+	VENDA, LOCACAO, VENDIDO, LOCADO, DESATIVADO
 
 }
