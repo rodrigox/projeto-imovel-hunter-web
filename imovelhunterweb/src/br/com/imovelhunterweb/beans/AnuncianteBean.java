@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.service.AnuncianteService;
+import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 
 
@@ -29,6 +30,7 @@ public class AnuncianteBean implements Serializable {
 	private String confirmarSenha;
 	private String dataDeNascimento;
 	private SimpleDateFormat simpleDateFormat;
+	private Navegador navegador;
 	
 	/**
 	 * Este atributo é o que irá utilizar a persistencia do anunciante, O spring cuida da parte de fazer a injeção de dependência desse atributo
@@ -55,7 +57,8 @@ public class AnuncianteBean implements Serializable {
 		this.primeUtil = new PrimeUtil();
 		
 		this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+			
+		this.navegador = new Navegador();
 	}
 	
 	
@@ -108,6 +111,8 @@ public class AnuncianteBean implements Serializable {
 					this.dataDeNascimento = "";
 					//Exibe uma mensagem para o usuário
 					this.primeUtil.update("cadastroAnunciantes");
+					
+					this.navegador.redirecionarPara("login.xhtml");
 				}else{
 					//Exibe uma mensagem para o usuário
 					this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Cadastro","Erro ao cadastrar o anunciante");

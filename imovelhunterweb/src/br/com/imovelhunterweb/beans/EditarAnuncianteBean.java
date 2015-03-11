@@ -37,6 +37,8 @@ public class EditarAnuncianteBean implements Serializable{
 	
 	private SimpleDateFormat simpleDateFormat;
 	
+	private String senha;
+	
 	private String confirmarSenha;
 	
 	private String dataDeNascimento;
@@ -83,6 +85,9 @@ public class EditarAnuncianteBean implements Serializable{
 				this.primeUtil.update("idFormMensagem");
 				return;
 			}
+			if(this.senha.length() > 0){
+				this.anunciante.setSenha(this.senha);
+			}
 			this.anunciante.setDataDeNascimento(this.simpleDateFormat.parse(this.dataDeNascimento));
 			this.anuncianteService.atualizar(anunciante);
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Atualização","Anunciante atualizado com sucesso");
@@ -105,7 +110,7 @@ public class EditarAnuncianteBean implements Serializable{
 			  HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
 			  session.invalidate();
 			
-			this.navegador.redirecionarPara("telaDeLogin.xhtml");
+			this.navegador.redirecionarPara("login.xhtml");
 		}else{
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Erro","Erro ao tentar remover o perfil");
 			this.primeUtil.update("idFormMensagem");
@@ -151,6 +156,18 @@ public class EditarAnuncianteBean implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
