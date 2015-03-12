@@ -16,33 +16,30 @@
   	<p:dialog header ="Perfil" id= "dialogLogin" minWidth = "500" width="450" 
   		      modal = "true" closable ="false" position ="center"
   		      showEffect="slide" draggable="true" resizable="false" visible="true">
-  		<h:form id="cadastroAnunciantes" name="cadAnunciantes">
+  		<h:form id="perfilAnunciantes" name="perfAnunciantes">
   			<h:panelGrid columns="2">
   				
   				<h:outputLabel value="nome*"> </h:outputLabel>
-  				<p:inputText id="jsf_nome" requerid="true" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
+  				<p:inputText id="jsf_nome" requerid="true" value="#{perfilperfilAnuncianteBean.anunciante.nome}"> </p:inputText>
   				
   				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
-  				<p:inputText id="jsf_sobrenome" requerid="true" value="#{anuncianteBean.anunciante.sobreNome}"> </p:inputText>
+  				<p:inputText id="jsf_sobrenome" requerid="true" value="#{perfilperfilAnuncianteBean.anunciante.sobreNome}"> </p:inputText>
   				
   				<h:outputLabel value="email*"> </h:outputLabel>
-  				<p:inputText id="jsf_email" requerid="true" value="#{anuncianteBean.anunciante.email}"> </p:inputText>
+  				<p:inputText id="jsf_email" requerid="true" value="#{perfilperfilAnuncianteBean.anunciante.email}"> </p:inputText>
   				
   				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
-  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="true" value="#{anuncianteBean.anunciante.dataDeNascimento}"> </p:inputText>
+  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="true" value="#{perfilAnuncianteBean.anunciante.dataDeNascimento}"> </p:inputText>
   				
   				<h:outputLabel value="CRECI"> </h:outputLabel>
-  				<p:inputText id="jsf_creci" requerid="true" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
+  				<p:inputText id="jsf_creci" requerid="true" value="#{perfilAnuncianteBean.anunciante.creci}"> </p:inputText>
   				
   				<h:outputLabel  value="CPF*"> </h:outputLabel>
-  				<p:inputText id="jsf_cpf" requerid="true" value="#{anuncianteBean.anunciante.cpf}"> </p:inputText>
+  				<p:inputText id="jsf_cpf" requerid="true" value="#{perfilAnuncianteBean.anunciante.cpf}"> </p:inputText>
   				
   				<h:outputLabel value="Login*"> </h:outputLabel>
-  				<p:inputText id="jsf_login" requerid="true" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
-  				
-  				<h:outputLabel value="Senha*"> </h:outputLabel>
-  				<p:inputText id="jsf_senha" requerid="true" value="#{anuncianteBean.anunciante.senha}"> </p:inputText>
-  								 	
+  				<p:inputText id="jsf_login" requerid="true" value="#{perfilAnuncianteBean.anunciante.login}"> </p:inputText>
+  				 								 	
   			 	<f:facet name="footer">
   			 		<p:row>
   			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
