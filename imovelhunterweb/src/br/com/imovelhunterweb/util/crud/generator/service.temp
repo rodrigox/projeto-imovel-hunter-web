@@ -1,0 +1,83 @@
+#{pacoteDoService}
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
+#{imports}
+
+
+@Service("#{nomeDaClasseMin}Service")
+public class #{nomeDaClasse}ServiceImp implements #{nomeDaClasse}Service,Serializable {
+
+	
+	
+	
+	@Resource(name = "#{nomeDaClasseMin}DAO")
+	private #{nomeDaClasse}DAO #{nomeDaClasseMin}DAO;
+
+	@Override
+	@Transactional
+	@Rollback
+	public #{nomeDaClasseMin} inserir(#{nomeDaClasse} #{nomeDaClasseMin}) {
+		return this.#{nomeDaClasseMin}DAO.insert(#{nomeDaClasseMin});
+	}
+
+	@Override
+	@Transactional
+	@Rollback
+	public #{nomeDaClasse} atualizar(#{nomeDaClasse} #{nomeDaClasseMin}) {
+		return this.contatoDAO.update(#{nomeDaClasseMin});
+	}
+
+	@Override
+	@Transactional
+	@Rollback
+	public Boolean remover(#{nomeDaClasse} #{nomeDaClasseMin}) {
+		try{
+			this.#{nomeDaClasseMin}DAO.remove(#{nomeDaClasseMin});
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	@Transactional
+	@Rollback
+	public Boolean removerPorId(#{nomeDaClasse} #{nomeDaClasseMin}) {
+		try{
+			this.#{nomeDaClasse}DAO.removeById(#{nomeDaClasseMin}.getId#{nomeDaClasse}());
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public #{nomeDaClasse} buscarPorId(ID id) {
+		return this.#{nomeDaClasseMin}DAO.findById(id);
+	}
+
+	@Override
+	public List<#{nomeDaClasse}> listarTodos() {
+		return this.#{nomeDaClasseMin}DAO.findAll();
+	}
+
+	@Override
+	public List<#{nomeDaClasse}> listarTodos(int index, int quantidade) {
+		return this.#{nomeDaClasseMin}DAO.findAll(index,quantidade);
+	}
+	
+	
+}

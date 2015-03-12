@@ -84,7 +84,7 @@ public class TemplateService {
 	}
 
 	private void replaceKey(String chave,String valor){
-		this.template = this.template.replaceAll(chave,valor);
+		this.template = this.template.replace(chave,valor);
 	}
 	
 	/**
