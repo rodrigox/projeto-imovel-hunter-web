@@ -53,8 +53,8 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="login.xhtml">Login</a>
+                    <li class="page-scroll" onclick="PF('dlg').show();">
+                        <a href="">Login</a>
                     </li>
                     
                     <li class="page-scroll">
@@ -211,6 +211,67 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
+    
+<!--     primefaces -->
+
+
+	<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+    
+    <p:dialog header="Login" widgetVar="dlg" resizable="false"
+			closable="true" modal="false" draggable="false">
+			
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{loginBean.login}"
+						required="false" label="username" />
+	
+					<h:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{loginBean.senha}"
+						required="false" label="password" />
+	
+					<f:facet name="footer">
+						
+	
+						<h:panelGrid  columns="2" >
+						
+						<p:commandButton value="Login"
+							actionListener="#{loginBean.logar}"
+							oncomplete="handleLoginRequest(xhr, status, args)" />
+	
+	
+	
+							<p:commandLink name="esqueciSenha" actionListener="#{loginBean.irParaRecuperar}" style="margin-left:10px" value="Esqueci minnha senha">
+							</p:commandLink>
+	
+							<h:outputLabel></h:outputLabel>
+	
+	
+							<p:commandLink name="goCriarCadastro" actionListener="#{loginBean.cadastrar}" value="Criar Cadastro"  style="margin-left:10px">
+							</p:commandLink>
+	
+						</h:panelGrid>
+	
+	
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		
+<!-- 		primefaces fim -->
 
    
     <!-- jQuery -->
