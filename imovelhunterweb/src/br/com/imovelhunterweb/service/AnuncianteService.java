@@ -32,4 +32,6 @@ public interface AnuncianteService {
 
 	boolean existeEmail(String email);
 	
+	boolean existeCpf(String cpf);
+	
 }

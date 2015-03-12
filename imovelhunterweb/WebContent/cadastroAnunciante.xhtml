@@ -29,7 +29,7 @@
   <div id ="cadastro_anunciante" title= "Anunciantes">
   	<p:dialog header ="Cadastro de Anunciantes" id= "dialogLogin" minWidth = "500" width="450" 
   		      modal = "false" closable ="false" position ="center"
-  		      showEffect="slide" draggable="true" resizable="false" visible="true">
+  		      showEffect="pop" draggable="true" resizable="false" visible="true">
   		<h:form id="cadastroAnunciantes">
   			<h:panelGrid columns="2">
   				
@@ -49,7 +49,7 @@
   				<p:inputText id="jsf_creci" requerid="false" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
   				
   				<h:outputLabel  value="CPF*"> </h:outputLabel>
-  				<p:inputText id="jsf_cpf" requerid="false" value="#{anuncianteBean.anunciante.cpf}"> </p:inputText>
+  				<p:inputMask id="jsf_cpf" mask="999.999.999-99"  requerid="false" value="#{anuncianteBean.anunciante.cpf}"> </p:inputMask>
   				
   				<h:outputLabel value="Login*"> </h:outputLabel>
   				<p:inputText id="jsf_login" requerid="false" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
