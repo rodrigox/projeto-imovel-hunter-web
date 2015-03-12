@@ -43,28 +43,25 @@
   			<h:panelGrid columns="2">
   				
   				<h:outputLabel value="nome*"> </h:outputLabel>
-  				<p:inputText id="jsf_nome" requerid="true" value="#{editarAnuncianteBean.anunciante.nome}"> </p:inputText>
+  				<p:inputText id="jsf_nome" requerid="false" value="#{editarAnuncianteBean.anunciante.nome}"> </p:inputText>
   				
   				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
-  				<p:inputText id="jsf_sobrenome" requerid="true" value="#{editarAnuncianteBean.anunciante.sobreNome}"> </p:inputText>
+  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{editarAnuncianteBean.anunciante.sobreNome}"> </p:inputText>
   				
   				<h:outputLabel value="email*"> </h:outputLabel>
-  				<p:inputText id="jsf_email" requerid="true" value="#{editarAnuncianteBean.email}"> </p:inputText>
+  				<p:inputText id="jsf_email" requerid="false" value="#{editarAnuncianteBean.email}"> </p:inputText>
   				
   				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
-  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="true" value="#{editarAnuncianteBean.dataDeNascimento}"> </p:inputText>
+  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{editarAnuncianteBean.dataDeNascimento}"> </p:inputText>
   				
   				<h:outputLabel value="CRECI"> </h:outputLabel>
-  				<p:inputText id="jsf_creci" requerid="true" value="#{editarAnuncianteBean.anunciante.creci}"> </p:inputText>
-  				
-  				<h:outputLabel  value="CPF*"> </h:outputLabel>
-  				<p:inputText id="jsf_cpf" requerid="true" value="#{editarAnuncianteBean.anunciante.cpf}"> </p:inputText> 				
-  				
+  				<p:inputText id="jsf_creci" requerid="false" value="#{editarAnuncianteBean.anunciante.creci}"> </p:inputText>  				
+  			
   				<h:outputLabel value="Senha*"> </h:outputLabel>
-  				<p:password id="jsf_senha" requerid="true" value="#{editarAnuncianteBean.senha}"> </p:password>
+  				<p:password id="jsf_senha" requerid="false" value="#{editarAnuncianteBean.senha}"> </p:password>
   			
   				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
-  				<p:password id="jsf_conf_senha" requerid="true" value="#{editarAnuncianteBean.confirmarSenha}"> </p:password>
+  				<p:password id="jsf_conf_senha" requerid="false" value="#{editarAnuncianteBean.confirmarSenha}"> </p:password>
   								 	
   			 	<f:facet name="footer">
   			 		<p:row>

@@ -188,6 +188,14 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.email = :email",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? true : false;
 	}
+
+	@Override
+	public boolean existeCpf(String cpf) {
+		Map<String,Object> parametros = new HashMap<String,Object>();
+		parametros.put("cpf",cpf);		
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.cpf = :cpf",parametros,0,1);
+		return anuncs != null && anuncs.size() > 0 ? true : false;
+	}
 	
 	
 }
