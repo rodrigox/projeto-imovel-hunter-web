@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,10 +10,163 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Imovel Hunter Web</title>
 <!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
-</h:head>
-<h:body>
-
-<p:outputLabel>#{indexBean.bemVindo}</p:outputLabel>
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
-</h:body>
+</h:head>
+<body>
+
+	<!-- 	primefaces -->
+	
+	<h:form>
+    <p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+	</h:form>
+	
+	
+	<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+	
+	
+<!-- 	primefaces fim -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
+			
+				<div class="coluna col4">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col8">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li onclick="rc()"><a href="" onclick="rc()" >Logar</a></li>
+							<li><a href="">Sobre</a></li>
+							<li><a href="">Fale conosco</a></li>
+							<li><a href="">Serviços</a></li>
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		
+		</div>
+	
+	</div>
+	
+	<div class="linha">
+	
+		<section>
+		
+			<div class="coluna col3 sidebar">
+				<h3>Título informação</h3>
+				<ul class="sem-marcador sem-padding">
+					<li><a>informação 1</a></li>
+					<li><a>informação 2</a></li>
+					<li><a>informação 3</a></li>
+					<li><a>informação 4</a></li>
+					<li><a>informação 5</a></li>
+					<li><a>informação 6</a></li>
+					<li><a>informação 7</a></li>
+				</ul>
+				<a href="cliente.xhtml" class="botao">bastante informação &raquo;</a>
+			</div>
+			
+			
+			<div class="coluna col9">
+			
+				<h2>Informação: <em>outra informação</em></h2>
+				<img src="images/empresa.png" alt="" />
+				<p>mais informação</p>
+				<a href="clientes.xhtml" class="botao">bando de informação</a>
+			</div>
+		
+		</section>
+	
+	</div>
+	
+	
+	<div class="conteudo-extra">
+	
+		<div class="linha">
+		
+			<div class="coluna col7">
+			
+				<section>
+				
+					<h2>Como um site pode ajudar sua empresa?</h2>
+					<p>Glu glu</p>
+					<p>Glu glu</p>
+					<p>Ie ie</p>					
+				</section>
+			
+			</div>
+			
+			
+			<div class="coluna col5">
+				
+				<h3>Ultimas notícias</h3>
+			
+				<ul class="sem-marcador sem-padding noticias">
+					<li>
+						<img src="images/empresapequena.png" alt="" />
+						<h4>Título da notícia</h4>		
+						<p>Farofafá <a href="" style="cursor:pointer;">Leia mais</a></p>			
+					</li>
+					<li>
+						<img src="images/empresapequena.png" alt="" />
+						<h4>Título da notícia</h4>		
+						<p>Farofafá <a href="" style="cursor:pointer;">Leia mais</a></p>			
+					</li>
+					<li>
+						<img src="images/empresapequena.png" alt="" />
+						<h4>Título da notícia</h4>		
+						<p>Farofafá <a href="" style="cursor:pointer;">Leia mais</a></p>			
+					</li>				
+				</ul>
+			
+			
+			</div>
+		
+		</div>
+	
+	</div>
+	
+	<div class="footer">
+		
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; 2015 - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+	
+
+	
+</body>
 </html>
