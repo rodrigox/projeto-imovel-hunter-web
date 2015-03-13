@@ -3,6 +3,7 @@ package br.com.imovelhunterweb.util.crud.generator;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +63,28 @@ public class GeradorDeCrud {
 	
 	/**
 	 * Esse método cria todos os cruds do pacote de entidade
+	 * @throws IOException 
 	 */
-	public void criarTodosOsCruds(){
+	public void criarTodosOsCruds() throws IOException{
+		
+		for(String classe : this.classesEncontradas){
+			
+			TemplateDAO tempDAO = new TemplateDAO();
+			TemplateDAOImp tempDAOImp = new TemplateDAOImp();			
+			TemplateService tempService = new TemplateService();
+			TemplateServiceImp tempoServiceImp = new TemplateServiceImp();
+			
+			
+			
+			
+			
+			
+			tempDAO = null;
+			tempDAOImp = null;			
+			tempService = null;
+			tempoServiceImp = null;
+			
+		}
 		
 	}
 	
