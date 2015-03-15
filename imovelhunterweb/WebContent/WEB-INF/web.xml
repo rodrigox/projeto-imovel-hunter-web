@@ -69,8 +69,7 @@
 		<url-pattern>/servlets/pdf</url-pattern>
 	</servlet-mapping>
 	
-	
-	
+
 <!-- 	primefaces -->
 	<context-param>
 	<param-name>primefaces.THEME</param-name>
@@ -81,7 +80,11 @@
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
 		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>		  
 	</filter>
-  
-  
-  
+	
+	<filter-mapping>  
+    	<filter-name>PrimeFaces FileUpload Filter</filter-name>  
+        <servlet-name>Faces Servlet</servlet-name>  
+        <url-pattern>*.xhtml</url-pattern> 
+    </filter-mapping>  
+
 </web-app>
