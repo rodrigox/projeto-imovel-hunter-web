@@ -24,8 +24,8 @@
 		var senha = document.getElementById('idInputPassword').value;
 		
 		var params  = new Array();  
-		params ["login"] = login;  
-		params ["senha"] = senha;  
+		params ["name"] = login;  
+		params ["value"] = senha;  
 		
 		
 		rc(params);
@@ -164,7 +164,7 @@
 						
 							<td>
 							
-								<input type="button" onclick="logar();" class="botaoazul" value="Logar" />
+								<input type="button" onclick="rc([{name:'login',value:10}]);" class="botaoazul" value="Logar" />
 							
 							</td>							
 						
