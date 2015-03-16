@@ -79,7 +79,7 @@ public class LoginBean implements Serializable {
 			contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Erro ao encerar a sessão",""));
 		}
-		  return "telaDeLogin.xhtml";
+		  return "index.xhtml";
 	}
 	
 	public void recuperarSenha(){					
