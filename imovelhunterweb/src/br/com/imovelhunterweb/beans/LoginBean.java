@@ -45,8 +45,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	public void logar(){
-	    String value = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
-
+	    Object value = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
 		if(this.anuncianteLogado == null){
 			Anunciante anunciante = this.anuncianteService.buscarPorLoginESenha(this.login,this.senha);
 			
