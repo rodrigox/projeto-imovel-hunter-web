@@ -20,7 +20,7 @@
 	<!-- 	primefaces -->
 	
 	<h:form>
-    <p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+    	<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
 	</h:form>
 	
 	
@@ -37,6 +37,9 @@
 		<h:form id="idFormMensagem">
 			<p:growl autoUpdate="false" showDetail="true" life="3000" />
 		</h:form>
+		
+		
+		
 	
 	
 <!-- 	primefaces fim -->
@@ -89,7 +92,90 @@
 				<center><label style="text-transform: uppercase;">Logar</label></center>					
 			</div>
 			
+			<div style="height: 30%;" />
 			
+			<center>
+				<table  cellpadding="10px" cellspacing="10px">
+					<tbody>
+						<tr>
+							<td>
+								<label class="corlabel">
+								Login: 
+								</label>
+							</td>
+							<td>
+								<input type="text" class="corlabel"/>
+							</td>
+							
+							
+						</tr>
+						
+						
+						
+						<tr>
+							<td>
+								<label class="corlabel" >
+								Senha:  
+								</label>
+							</td>
+							<td>
+								<input type="password" class="corlabel"/>
+							</td>
+						</tr>					
+						
+						
+						
+					</tbody>
+				</table>
+				
+				
+				
+				
+			</center>
+			
+			<div style="height:5%;" />
+			
+			<center>
+			
+				
+				<table  cellpadding="10px" cellspacing="10px">
+					<tbody>
+						<tr>
+						
+							<td>
+							
+								<input type="button" onclick="rc();" class="botaoazul" value="Logar" />
+							
+							</td>							
+						
+							<td>
+							
+							&nbsp;&nbsp;
+							
+							</td>
+							
+							<td >
+							
+								<a style="display: block !important;" href="recuperasenha.xhtml"  >Esqueci minha senha</a>
+								<a style="display: block !important;" href="cadastroanunciante.xhtml"  >Cadastrar-se</a>
+							
+							</td>
+							
+							
+							
+							
+						
+						</tr>
+						
+						
+					
+						
+						
+					</tbody>
+				</table>
+			
+			
+			</center>
 		
 		</div>
 	
