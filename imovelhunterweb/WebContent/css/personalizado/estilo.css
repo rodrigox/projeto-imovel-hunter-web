@@ -24,6 +24,13 @@ a:hover{
 	float: left;
 }
 
+.container{
+	width: 960px;
+	margin: 0 auto;
+	overflow: auto;
+	padding: 5px 0;
+}
+
 .col1{
 	width: 60px;
 }
