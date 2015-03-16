@@ -14,6 +14,26 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
+	
+	<script>
+	
+	
+	function logar(){
+		
+		var login = document.getElementById('idInputLogin').value;
+		var senha = document.getElementById('idInputPassword').value;
+		
+		var params  = new Array();  
+		params ["login"] = login;  
+		params ["senha"] = senha;  
+		
+		
+		rc(params);
+		
+	}
+	
+	</script>
+	
 </h:head>
 <body>
 
@@ -104,7 +124,7 @@
 								</label>
 							</td>
 							<td>
-								<input type="text" class="corlabel"/>
+								<input type="text" id="idInputLogin" class="corlabel"/>
 							</td>
 							
 							
@@ -119,7 +139,7 @@
 								</label>
 							</td>
 							<td>
-								<input type="password" class="corlabel"/>
+								<input type="password" id="idInputPassword" class="corlabel"/>
 							</td>
 						</tr>					
 						
@@ -144,7 +164,7 @@
 						
 							<td>
 							
-								<input type="button" onclick="rc();" class="botaoazul" value="Logar" />
+								<input type="button" onclick="logar();" class="botaoazul" value="Logar" />
 							
 							</td>							
 						
