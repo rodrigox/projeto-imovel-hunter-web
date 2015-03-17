@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Imovel Hunter Web</title>	
 	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="stylesheet" href="css/personalizado/colunasgrid.css" />
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
@@ -80,17 +81,77 @@
 				        <p:tab title="Informações gerais">
 				            <h:panelGrid columns="2" cellpadding="10">
 				                
-				                <h:outputText value="nomeDoProprietario" />
-				                <p:inputText id="sfs_nomeDoProprietario" value=""></p:inputText>    
+				                <h:outputText value="Nome Do Proprietario" />
+				                <p:inputText id="sfs_nomeDoProprietario" value=""></p:inputText>
+				                    
  
 				                				                
 				            </h:panelGrid>
 				        </p:tab>
 				        <p:tab title="Características">
-				            <h:panelGrid columns="2" cellpadding="10">
+				            <h:panelGrid columns="2" cellpadding="20" columnClasses="coluna" cellspacing="15">
 				                
-				                <h:outputText value="Adicionar os checkbox pra selecao das caracteristicas" />
+				                <h:outputText 	value="Numero de quartos: " />
+				                <p:inputText id="sfs_numeroQuartos" value=""></p:inputText>
+				              
+								<h:outputText value="Banheiros: " />
+				                <p:inputText id="sfs_numeroBanheiros" value=""></p:inputText>
+				                
+				                <h:outputText value="Área util m²: " />
+				                <p:inputText id="sfs_areaUtil" value=""></p:inputText>
+				              
+				                <h:outputText value="Valor venda R$: " />
+				                <p:inputText id="sfs_valorVenda" value=""></p:inputText>
+				              
+				                <h:outputText value="Valor do condominio R$: " />
+				                <p:inputText id="sfs_valorCondominio" value=""></p:inputText>
+				                
+				                <h:outputText value="Minha casa minha vida: " />
+				                <h:selectOneMenu  value="#{user.favMinhacasa}" >
+				                   	<f:selectItem itemValue="1" itemLabel="Sim" />
+				                   	<f:selectItem itemValue="2" itemLabel="Não" />				                
+				                </h:selectOneMenu><br />				              
+								<br/><br/>
+								
+															
 				            </h:panelGrid>
+				          			            
+				            <h:outputText position="center" value="Caracteristicas adicionais" />				               
+				              
+								<p:panelGrid columns="6" position="center" styleClass="colunasgrid" layout="grid">           
+								   
+								   <h:outputText value="Suíte"></h:outputText>
+								   <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								   
+								   <h:outputText value="Suíte"/>
+								   <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								   
+								   <h:outputText value="Suíte"/>
+								 	<p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								 
+								 	<h:outputText value="Suíte"/>
+								 	<p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								 	
+								 	<h:outputText value="Suíte"/>
+								    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								    
+								    <h:outputText value="Suíte"/>
+								    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								    
+								    <h:outputText value="Suíte"/>
+								    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								    
+								    <h:outputText value="Suíte"/>
+								    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								    
+								    <h:outputText value="Suíte"/>
+								    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}"></p:selectBooleanCheckbox>
+								    
+								    
+								    
+								</p:panelGrid>				   	
+								
+	
 				        </p:tab>
 				        <p:tab title="Galeria">
 				            <h:panelGrid columns="2" cellpadding="10">
