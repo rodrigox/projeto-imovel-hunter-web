@@ -23,9 +23,16 @@
 		var login = document.getElementById('idInputLogin').value;
 		var senha = document.getElementById('idInputPassword').value;
 		
+		var map = new Map();
+		
+		map.set("name",login);
+		
+		
+	
+		
 		var params  = new Array();  
-		params ["name"] = login;  
-		params ["value"] = senha;  
+		params [0] = "{name:'"+login+"',value:'"+senha+"'}";  
+		  
 		
 		
 		rc(params);
@@ -35,7 +42,7 @@
 	</script>
 	
 </h:head>
-<body>
+<h:body>
 
 	<!-- 	primefaces -->
 	
@@ -90,7 +97,7 @@
 				</div>
 				
 			</header>
-		
+		 
 		</div>
 	
 	</div>
@@ -164,7 +171,8 @@
 						
 							<td>
 							
-								<input type="button" onclick="rc([{name:'login',value:10}]);" class="botaoazul" value="Logar" />
+								<input type="button" onclick="rc([{name:'login',value:document.getElementById('idInputLogin').value},{name:'senha',value:document.getElementById('idInputPassword').value}]);" class="botaoazul" value="Logar" />
+													
 							
 							</td>							
 						
@@ -231,5 +239,5 @@
 <!-- 	Rodapé fim -->
 
 	
-</body>
+</h:body>
 </html>
