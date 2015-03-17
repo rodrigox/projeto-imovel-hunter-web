@@ -1,75 +1,179 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Imovel Hunter Web</title>
-<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+	<title>Imovel Hunter Web</title>	
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	
+	
+	<style>
+	
+	.ui-widget-header {
+	  border: 1px solid #eeeeee;
+	  background: #1f3c58;
+	  color: #FFFFFF;
+	  font-weight: bold;
+	}
+	
+	</style>
+	
 </h:head>
 <h:body>
 
-
-	<!-- dialog de processo -->
-	<p:ajaxStatus onstart="processandoDialog.show();"
-		onsuccess="processandoDialog.hide();" />
-	<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
-		header="#{msg['ajax.processando']}" draggable="false" closable="false"
-		style="font-size:8pt;">
-		<p:graphicImage value="/images/ajax_loader.gif" />
-	</p:dialog>
+	<!-- 	primefaces -->
 	
-	<h:form id="idFormMensagem">
-		<p:growl autoUpdate="false" showDetail="true" life="3000" />
+	<h:form>
+    	<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
 	</h:form>
- 
-  <div id ="cadastro_anunciante" title= "Anunciantes">
-  	<p:dialog header ="Cadastro de Anunciantes" id= "dialogLogin" minWidth = "500" width="450" 
-  		      modal = "false" closable ="false" position ="center"
-  		      showEffect="pop" draggable="true" resizable="false" visible="true">
-  		<h:form id="cadastroAnunciantes">
-  			<h:panelGrid columns="2">
-  				
-  				<h:outputLabel value="nome*"> </h:outputLabel>
-  				<p:inputText id="jsf_nome" requerid="false" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
-  				
-  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
-  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{anuncianteBean.anunciante.sobreNome}"> </p:inputText>
-  				
-  				<h:outputLabel value="email*"> </h:outputLabel>
-  				<p:inputText id="jsf_email" requerid="false" value="#{anuncianteBean.anunciante.email}"> </p:inputText>
-  				
-  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
-  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{anuncianteBean.dataDeNascimento}"> </p:inputText>
-  				
-  				<h:outputLabel value="CRECI"> </h:outputLabel>
-  				<p:inputText id="jsf_creci" requerid="false" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
-  				
-  				<h:outputLabel  value="CPF*"> </h:outputLabel>
-  				<p:inputMask id="jsf_cpf" mask="999.999.999-99"  requerid="false" value="#{anuncianteBean.anunciante.cpf}"> </p:inputMask>
-  				
-  				<h:outputLabel value="Login*"> </h:outputLabel>
-  				<p:inputText id="jsf_login" requerid="false" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
-  				
-  				<h:outputLabel value="Senha*"> </h:outputLabel>
-  				<p:password id="jsf_senha" requerid="false" value="#{anuncianteBean.anunciante.senha}"> </p:password>
-  			
-  				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
-  				<p:password id="jsf_conf_senha" requerid="false" value="#{anuncianteBean.confirmarSenha}"> </p:password>
-  								 	
-  			 	<f:facet name="footer">
-  			 		<p:row>
-  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
-  			 				<p:commandButton actionListener="#{anuncianteBean.cadastrarAnunciante}" value="Cadastrar"></p:commandButton>
-  			 			</p:outputPanel>
-  			 		</p:row> 			 	
-  			 	</f:facet>		 	  			 
-  			</h:panelGrid>			
-  		</h:form>	    
-  	</p:dialog>
-  	</div>
+	
+	
+	<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+		
+		
+		
+	
+	
+<!-- 	primefaces fim -->
+
+
+<!-- 	cabeçalho -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
+			
+				<div class="coluna col4">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col8">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li><a href="index.xhtml" >Home</a></li>
+							<li><a href="">Sobre</a></li>
+							<li><a href="">Fale conosco</a></li>
+							<li><a href="">Serviços</a></li>
+							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		 
+		</div>
+	
+	</div>
+	
+<!-- 	cabeçalho fim -->
+	
+	
+<!-- 	Corpo do meio -->
+
+	<div class="linha" style="height:100px;" />
+
+	<div class="linha">
+	
+		<div class="coluna col12">
+		
+			<h:form id="cadastroAnunciantes">
+			<center>
+				<p:panel header="Cadastro">
+		  			<h:panelGrid columns="2">
+		  				
+		  				<h:outputLabel value="nome*"> </h:outputLabel>
+		  				<p:inputText id="jsf_nome" requerid="false" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
+		  				
+		  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
+		  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{anuncianteBean.anunciante.sobreNome}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="email*"> </h:outputLabel>
+		  				<p:inputText id="jsf_email" requerid="false" value="#{anuncianteBean.anunciante.email}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
+		  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{anuncianteBean.dataDeNascimento}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="CRECI"> </h:outputLabel>
+		  				<p:inputText id="jsf_creci" requerid="false" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
+		  				
+		  				<h:outputLabel  value="CPF*"> </h:outputLabel>
+		  				<p:inputMask id="jsf_cpf" mask="999.999.999-99"  requerid="false" value="#{anuncianteBean.anunciante.cpf}"> </p:inputMask>
+		  				
+		  				<h:outputLabel value="Login*"> </h:outputLabel>
+		  				<p:inputText id="jsf_login" requerid="false" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="Senha*"> </h:outputLabel>
+		  				<p:password id="jsf_senha" requerid="false" value="#{anuncianteBean.anunciante.senha}"> </p:password>
+		  			
+		  				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
+		  				<p:password id="jsf_conf_senha" requerid="false" value="#{anuncianteBean.confirmarSenha}"> </p:password>
+		  								 	
+		  			 	<f:facet name="footer">
+		  			 		<p:row>
+		  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
+		  			 				<p:commandButton actionListener="#{anuncianteBean.cadastrarAnunciante}" value="Cadastrar"></p:commandButton>
+		  			 			</p:outputPanel>
+		  			 		</p:row> 			 	
+		  			 	</f:facet>		 	  			 
+		  			</h:panelGrid>		
+	  			</p:panel>
+  			</center>	
+  		</h:form>	
+		
+		</div>
+	
+	</div>
+	
+	<div class="linha" style="height:100px;" />
+	
+<!-- 	Corpo do meio fim -->
+	
+<!-- 	Rodapé -->
+	
+	<div class="footer">
+		
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+<!-- 	Rodapé fim -->
+
+	
 </h:body>
 </html>

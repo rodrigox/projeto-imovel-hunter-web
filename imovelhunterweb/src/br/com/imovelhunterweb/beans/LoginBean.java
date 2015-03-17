@@ -1,11 +1,14 @@
 package br.com.imovelhunterweb.beans;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -17,7 +20,7 @@ import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
 @ManagedBean(name = "loginBean")
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable {
 
 	/**
@@ -28,6 +31,8 @@ public class LoginBean implements Serializable {
 	private String senha;
 	private String email;
 	
+	private int anoAgora;
+	
 	private PrimeUtil primeUtil;
 	
 	private Navegador navegador;
@@ -37,17 +42,31 @@ public class LoginBean implements Serializable {
 	
 	private Anunciante anuncianteLogado;
 	
+	private String logado;
+	
 	@PostConstruct
 	public void init(){		
 		
 		this.primeUtil = new PrimeUtil();
 		this.navegador = new Navegador();
+		
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(new Date());
+		
+		this.anoAgora = calendario.get(Calendar.YEAR);
+		
+		this.anuncianteLogado = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
+		if(this.anuncianteLogado != null){
+			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+		}else{
+			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
+		}
 	}
 	
 	public void logar(){
 		
-	    Object login = (String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
-	    Object senha = (String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("senha");
+	    Object login = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
+	    Object senha = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("senha");
 	    
 	    this.login = (String) login;
 	    
@@ -59,13 +78,19 @@ public class LoginBean implements Serializable {
 			if(anunciante != null){
 				this.anuncianteLogado = anunciante;
 				UtilSession.setHttpSessionObject("anuncianteLogado",anunciante);			
-				this.navegador.redirecionarPara("editarAnunciante.xhtml");
+				this.navegador.redirecionarPara("index.xhtml");
 			}else{
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_WARN,"Inválido","Login ou senha inválido");
 				this.primeUtil.update("idFormMensagem");
 			}
 		}else{
-			this.navegador.redirecionarPara("editarAnunciante.xhtml");
+			this.navegador.redirecionarPara("index.xhtml");
+		}
+		
+		if(this.anuncianteLogado != null){
+			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+		}else{
+			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
 		}
 	}
 	
@@ -81,6 +106,13 @@ public class LoginBean implements Serializable {
 			  this.senha = "";
 			  this.email = "";			 
 			  this.anuncianteLogado = null;
+			  
+			  if(this.anuncianteLogado != null){
+					this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+				}else{
+					this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
+				}
+			  
 			  
 		} catch (Exception e) {
 			contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -144,6 +176,14 @@ public class LoginBean implements Serializable {
 
 	public void setAnuncianteService(AnuncianteService anuncianteService) {
 		this.anuncianteService = anuncianteService;
+	}
+
+	public int getAnoAgora() {
+		return anoAgora;
+	}
+
+	public String getLogado() {
+		return logado;
 	}
 	
 }

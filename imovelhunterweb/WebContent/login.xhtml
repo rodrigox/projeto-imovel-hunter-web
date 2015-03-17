@@ -18,26 +18,6 @@
 	<script>
 	
 	
-	function logar(){
-		
-		var login = document.getElementById('idInputLogin').value;
-		var senha = document.getElementById('idInputPassword').value;
-		
-		var map = new Map();
-		
-		map.set("name",login);
-		
-		
-	
-		
-		var params  = new Array();  
-		params [0] = "{name:'"+login+"',value:'"+senha+"'}";  
-		  
-		
-		
-		rc(params);
-		
-	}
 	
 	</script>
 	
@@ -88,10 +68,11 @@
 					<nav>
 						<ul class="menu inline sem-marcador">
 							<li><a href="index.xhtml" >Home</a></li>
-							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
 							<li><a href="">Sobre</a></li>
 							<li><a href="">Fale conosco</a></li>
 							<li><a href="">Serviços</a></li>
+							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
+							
 						</ul>
 					</nav>
 				</div>
@@ -185,7 +166,7 @@
 							<td >
 							
 								<a style="display: block !important;" href="recuperasenha.xhtml"  >Esqueci minha senha</a>
-								<a style="display: block !important;" href="cadastroanunciante.xhtml"  >Cadastrar-se</a>
+								<a style="display: block !important;" href="cadastroAnunciante.xhtml"  >Cadastrar-se</a>
 							
 							</td>
 							
@@ -225,7 +206,7 @@
 			
 				<div class="coluna col12">
 					
-					<span>&copy; 2015 - Imovel Hunter</span>
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
 					
 				</div>
 			

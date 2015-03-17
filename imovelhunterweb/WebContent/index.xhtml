@@ -20,9 +20,8 @@
 	<!-- 	primefaces -->
 	
 	<h:form>
-    <p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
 	</h:form>
-	
 	
 	<!-- dialog de processo -->
 		<p:ajaxStatus onstart="processandoDialog.show();"
@@ -55,10 +54,10 @@
 					<nav>
 						<ul class="menu inline sem-marcador">
 							<li><a class="selecionado" href="index.xhtml"  >Home</a></li>
-							<li><a href="login.xhtml"  >Logar</a></li>
 							<li><a href="">Sobre</a></li>
 							<li><a href="">Fale conosco</a></li>
 							<li><a href="">Serviços</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 						</ul>
 					</nav>
 				</div>
@@ -186,7 +185,7 @@ Por outro lado, a determinação clara de objetivos assume importantes posiçõe
 			
 				<div class="coluna col12">
 					
-					<span>&copy; 2015 - Imovel Hunter</span>
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
 					
 				</div>
 			
