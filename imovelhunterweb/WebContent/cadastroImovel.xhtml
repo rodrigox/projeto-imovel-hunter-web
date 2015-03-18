@@ -16,12 +16,12 @@
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
 </h:head>
-<body>
+<h:body>
 
 	<!-- 	primefaces -->
 	
 	<h:form>
-    <p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
 	</h:form>
 	
 	
@@ -48,16 +48,19 @@
 		
 			<header>
 			
-				<div class="coluna col4">
+				<div class="coluna col2">
 					<h1 class="logo">Imovel Hunter</h1>
 				</div>
 				
-				<div class="coluna col8">
+				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
-							<li><a class="selecionado" href="index.xhtml">Home</a></li>
-							<li><a href="login.xhtml">Logout</a></li>
-
+							<li><a href="index.xhtml"  >Home</a></li>
+							<li><a class="selecionado" href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
+							<li><a href="">Sobre</a></li>
+							<li><a href="">Fale conosco</a></li>
+							<li><a href="">Serviços</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 						</ul>
 					</nav>
 				</div>
@@ -195,7 +198,7 @@
 			
 				<div class="coluna col12">
 					
-					<span>&copy; 2015 - Imovel Hunter</span>
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
 					
 				</div>
 			
@@ -207,5 +210,5 @@
 	</div>
 	
 
-</body>
+</h:body>
 </html>

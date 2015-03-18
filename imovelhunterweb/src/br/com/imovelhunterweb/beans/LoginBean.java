@@ -44,6 +44,8 @@ public class LoginBean implements Serializable {
 	
 	private String logado;
 	
+	private String cadastroImovel;
+	
 	@PostConstruct
 	public void init(){		
 		
@@ -58,8 +60,10 @@ public class LoginBean implements Serializable {
 		this.anuncianteLogado = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anuncianteLogado != null){
 			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+			this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
 		}else{
 			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
+			this.cadastroImovel = "";
 		}
 	}
 	
@@ -89,8 +93,10 @@ public class LoginBean implements Serializable {
 		
 		if(this.anuncianteLogado != null){
 			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+			this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
 		}else{
 			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
+			this.cadastroImovel = "";
 		}
 	}
 	
@@ -109,8 +115,10 @@ public class LoginBean implements Serializable {
 			  
 			  if(this.anuncianteLogado != null){
 					this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
+					this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
 				}else{
 					this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
+					this.cadastroImovel = "";
 				}
 			  
 			  
@@ -118,6 +126,7 @@ public class LoginBean implements Serializable {
 			contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Erro ao encerar a sessÃ£o",""));
 		}
+		 this.navegador.redirecionarPara("index.xhtml");
 		  return "index.xhtml";
 	}
 	
@@ -184,6 +193,10 @@ public class LoginBean implements Serializable {
 
 	public String getLogado() {
 		return logado;
+	}
+
+	public String getCadastroImovel() {
+		return cadastroImovel;
 	}
 	
 }

@@ -3,7 +3,7 @@
   <display-name>imovelhunterweb</display-name>
   
   <welcome-file-list>
-    <welcome-file>menuPrincipal.xhtml</welcome-file>    
+    <welcome-file>index.xhtml</welcome-file>    
   </welcome-file-list>
   
   <servlet>
