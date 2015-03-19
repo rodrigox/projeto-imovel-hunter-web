@@ -10,24 +10,37 @@
 	<title>Imovel Hunter Web</title>
 	<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
 
-<!-- <link rel="stylesheet" type="text/css" href="estilo-personalizado.css"/>
- -->
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 
-
+<style>
+	
+	.ui-widget-header {
+	  border: 1px solid #eeeeee;
+	  background: #1f3c58;
+	  color: #FFFFFF;
+	  font-weight: bold;
+	  text-align: center;
+	}
+	
+	.ui-panelgrid td{
+		
+		padding: 2px 5px;
+	
+	}
+	
+	</style>
 
 
 </h:head>
-<h:body onload="PF('dlg').show();">
+<h:body>
 
-
-
-
-
+		<h:form>
+    		<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+		</h:form>
 	
-
-
-
-		
 		<!-- dialog de processo -->
 		<p:ajaxStatus onstart="processandoDialog.show();"
 			onsuccess="processandoDialog.hide();" />
@@ -41,53 +54,120 @@
 		<h:form id="idFormMensagem">
 			<p:growl autoUpdate="false" showDetail="true" life="3000" />
 		</h:form>
-
-
-		<p:dialog header="Fale Conosco" widgetVar="dlg" resizable="false"
-			closable="false" modal="false" draggable="false">
-			
-			<h:form>
-				<h:panelGrid columns="4" cellpadding="5">
-					<h:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{FaleConoscoBean.email}"	required="false" label="nome" />	
-					<h:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" value="#{FaleConoscoBean.email}" required="false" label="email" />	
-					<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
-					<p:inputText id="telefoneFixo" value="#{FaleConoscoBean.telefoneFixo}"	required="false" label="nome" />	
-					<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
-					<p:inputText id="telefoneCelular" value="#{FaleConoscoBean.telefoneCelular}" required="false" label="email" />
-					
 		
-					
-				</h:panelGrid>
-					<h:form>              
-					    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
-				
-					    <p:inputTextarea rows="10" cols="100" completeMethod="#{faleConosco.completeArea}" queryDelay="750" minQueryLength="4" />
-					 
+		
+		<!-- 	cabeçalho -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
 			
-					</h:form>
-					
-					
-			</h:form>
-			<f:facet name="footer">
+				<div class="coluna col2">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col10">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li><a href="index.xhtml" >Home</a></li>
+							<h:outputText escape="false" value="#{loginBean.cadastroImovel}"></h:outputText>
+							<li><a href="">Sobre</a></li>
+							<li><a class="selecionado" href="">Fale conosco</a></li>
+							<li><a href="">Serviços</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
+							
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		 
+		</div>
+	
+	</div>
+	
+<!-- 	cabeçalho fim -->
+
+	<div class="linha" style="height:100px;" />
+
+	<div class="linha">
+	
+		
+
+		<div class="coluna col12">
+		
+			<p:panel  header="Fale Conosco" resizable="false"
+				closable="false" modal="false" draggable="false">
+				
+				<h:form>
+					<h:panelGrid styleClass="ui-panelgrid" columns="4" cellpadding="5">
+						<h:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" value="#{FaleConoscoBean.email}"	required="false" label="nome" />	
+						<h:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" value="#{FaleConoscoBean.email}" required="false" label="email" />	
+						<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
+						<p:inputText id="telefoneFixo" value="#{FaleConoscoBean.telefoneFixo}"	required="false" label="nome" />	
+						<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
+						<p:inputText id="telefoneCelular" value="#{FaleConoscoBean.telefoneCelular}" required="false" label="email" />
 						
-	
-						<h:panelGrid  columns="2" >
+			
 						
-						<p:commandButton value="Enviar"
-							actionListener="#{loginBean.recuperarSenha}"
-							 />
-	
-						</h:panelGrid>
-	
-	
-					</f:facet>
-		</p:dialog>
-	
+					</h:panelGrid>
+						<h:form>              
+						    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
+					
+						    <p:inputTextarea autoResize="true" rows="10" cols="80" completeMethod="#{faleConosco.completeArea}" queryDelay="750" minQueryLength="4" />
+						 
+				
+						</h:form>
+						
+						
+				</h:form>
+				<f:facet name="footer">
+							
+		
+							<h:panelGrid  columns="2" >
+							
+							<p:commandButton value="Enviar"
+								actionListener="#{loginBean.recuperarSenha}"
+								 />
+		
+							</h:panelGrid>
+		
+		
+						</f:facet>
+			</p:panel>
+		
+			</div>
+		
+		</div>
+		
+		<div class="linha" style="height:100px;" />
 
-
-
+<!-- 	Rodapé -->
+	
+	<div class="footer">
+		
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+<!-- 	Rodapé fim -->
 
 
 	

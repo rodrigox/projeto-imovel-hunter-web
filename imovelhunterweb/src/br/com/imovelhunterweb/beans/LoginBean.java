@@ -72,9 +72,9 @@ public class LoginBean implements Serializable {
 	    Object login = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
 	    Object senha = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("senha");
 	    
-	    this.login = (String) login;
+	    this.login = login != null ? (String)login : this.login;
 	    
-	    this.senha = (String) senha;
+	    this.senha = senha != null ? (String)senha : this.senha;
 	    
 		if(this.anuncianteLogado == null){
 			Anunciante anunciante = this.anuncianteService.buscarPorLoginESenha(this.login,this.senha);
@@ -130,7 +130,11 @@ public class LoginBean implements Serializable {
 		  return "index.xhtml";
 	}
 	
-	public void recuperarSenha(){					
+	public void recuperarSenha(){		
+	    Object email = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("email");
+
+	    this.email = email != null ? (String)email : this.email;
+	    
 		String status = this.anuncianteService.recuperarSenha(this.email);
 		String texto = status.substring(1);				
 		
