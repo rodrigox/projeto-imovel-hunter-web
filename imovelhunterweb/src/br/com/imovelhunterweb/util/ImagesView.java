@@ -13,8 +13,8 @@ public class ImagesView {
     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
-        for (int i = 1; i <= 7; i++) {
-            images.add("sg" + i + ".jpg");
+        for (int i = 1; i <= 4; i++) {
+            images.add("imv" + i + ".jpg");
         }
     }
  
@@ -22,3 +22,6 @@ public class ImagesView {
         return images;
     }
 }
+
+
+
