@@ -148,7 +148,7 @@
 				        <p:tab title="Galeria">
 				        	<p:panel header="galeria">
 				            <h:panelGrid id="painelGrid" columns="2" cellpadding="10">
-						        <h:form id="formUpload" enctype="multipart/form-data">    
+						        <!--  <h:form id="formUpload" enctype="multipart/form-data">    -->
 								    
 								    <p:dataTable style="width:800px;" id="galeria" value="#{imovelBean.imagens}" var="item" rows="1" emptyMessage="Nenhuma imagem cadastrada no momento."
 								   								 paginator="true" paginatorTemplate="{CurrentPageReport}
@@ -183,13 +183,13 @@
 						                    sizeLimit="5000000" 
 						                    style="width:800px;"						                        
 						                    allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>    
-						  			<form>
+						  			
 					            	<h:commandButton value="Finalizar"  actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
-									</form>
-									<h:form id="idFormMensagem">
-										<p:growl autoUpdate="false" showDetail="true" life="3000" />
-									</h:form>
-						        </h:form>  
+									
+									
+									<p:growl autoUpdate="false" showDetail="true" life="3000" />
+									
+						        <!--  </h:form>  -->
 				            </h:panelGrid>
 				        </p:panel>
 				        </p:tab>	        			        		        		    
