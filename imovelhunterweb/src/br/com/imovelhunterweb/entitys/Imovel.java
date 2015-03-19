@@ -80,7 +80,7 @@ public class Imovel implements Serializable{
 	private String estado;
 	
 	@Column
-	private String CEP;
+	private String cep;
 	
 	@Column
 	private String pais;
@@ -233,12 +233,12 @@ public class Imovel implements Serializable{
 		this.estado = estado;
 	}
 
-	public String getCEP() {
-		return CEP;
+	public String getCep() {
+		return this.cep;
 	}
 
-	public void setCEP(String cEP) {
-		CEP = cEP;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getPais() {
