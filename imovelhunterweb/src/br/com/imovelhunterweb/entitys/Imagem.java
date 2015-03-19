@@ -28,6 +28,16 @@ public class Imagem implements Serializable {
 	@ManyToOne
 	private Imovel imovel;
 
+
+
+	public Imagem(String nome, String descricao, String caminhoImagem,
+			Imovel imovel) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.caminhoImagem = caminhoImagem;
+		this.imovel = imovel;
+	}
+
 	public long getIdImagem() {
 		return idImagem;
 	}
