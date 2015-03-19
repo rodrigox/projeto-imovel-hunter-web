@@ -31,6 +31,17 @@
 	
 	}
 	
+	.corpretaprocessando div{
+	
+		color: #000000 !important;
+		font-size:8pt !important;
+	
+	}
+	
+	
+	
+	
+	
 	</style>
 
 
@@ -47,6 +58,7 @@
 			
 		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
 			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			styleClass="corpretaprocessando"
 			style="font-size:8pt;">
 			<p:graphicImage value="/images/ajax_loader.gif" />
 		</p:dialog>
@@ -97,48 +109,51 @@
 		
 
 		<div class="coluna col12">
-		
-			<p:panel  header="Fale Conosco" resizable="false"
-				closable="false" modal="false" draggable="false">
-				
-				<h:form>
-					<h:panelGrid styleClass="ui-panelgrid" columns="4" cellpadding="5">
-						<h:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{FaleConoscoBean.email}"	required="false" label="nome" />	
-						<h:outputLabel for="email" value="Email:" />
-						<p:inputText id="email" value="#{FaleConoscoBean.email}" required="false" label="email" />	
-						<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
-						<p:inputText id="telefoneFixo" value="#{FaleConoscoBean.telefoneFixo}"	required="false" label="nome" />	
-						<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
-						<p:inputText id="telefoneCelular" value="#{FaleConoscoBean.telefoneCelular}" required="false" label="email" />
-						
-			
-						
-					</h:panelGrid>
-						<h:form>              
-						    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
+			<h:form id="idFormFaleConosco">
+				<p:panel  header="Fale Conosco" resizable="false"
+					closable="false" modal="false" draggable="false">
 					
-						    <p:inputTextarea autoResize="true" rows="10" cols="80" completeMethod="#{faleConosco.completeArea}" queryDelay="750" minQueryLength="4" />
-						 
+					
+						<h:panelGrid styleClass="ui-panelgrid" columns="4" cellpadding="5">
+							<h:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" value="#{faleConoscoBean.nome}"	required="false"/>	
+							<h:outputLabel for="email" value="Email:" />
+							<p:inputText id="email" value="#{faleConoscoBean.email}" required="false"/>	
+							<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
+							<p:inputText id="telefoneFixo" value="#{faleConoscoBean.telefoneFixo}"	required="false"/>	
+							<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
+							<p:inputText id="telefoneCelular" value="#{faleConoscoBean.telefoneCelular}" required="false" />
+							<h:outputLabel for="assunto" value="Assunto:" />
+							<p:inputText id="assunto" value="#{faleConoscoBean.assunto}" required="false"/>
+							
 				
-						</h:form>
-						
-						
-				</h:form>
-				<f:facet name="footer">
 							
-		
-							<h:panelGrid  columns="2" >
+						</h:panelGrid>
+							             
+							    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
+						
+							    <p:inputTextarea value="#{faleConoscoBean.mensagem}" autoResize="true" rows="10" cols="80" />
+							 
+					
 							
-							<p:commandButton value="Enviar"
-								actionListener="#{loginBean.recuperarSenha}"
-								 />
-		
-							</h:panelGrid>
-		
-		
-						</f:facet>
-			</p:panel>
+							
+							
+					
+					<f:facet name="footer">
+								
+			
+								<h:panelGrid  columns="2" >
+								
+								<p:commandButton styleClass="botaoazul" value="Enviar"
+									actionListener="#{faleConoscoBean.enviarMensagem}"
+									 />
+			
+								</h:panelGrid>
+			
+			
+							</f:facet>
+				</p:panel>
+			</h:form>
 		
 			</div>
 		
