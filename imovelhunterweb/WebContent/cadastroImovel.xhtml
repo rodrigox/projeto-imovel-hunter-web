@@ -179,14 +179,16 @@
 						                    mode="advanced" 
 						                    auto = "true"   
 						                    label="Procurar" 
-						                    update="messages, galeria"    
+						                    update="galeria"    
 						                    sizeLimit="5000000" 
 						                    style="width:800px;"						                        
 						                    allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>    
 						  			<form>
-					            	<h:commandButton value="Finalizar" actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
+					            	<h:commandButton value="Finalizar"  actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
 									</form>
-									<p:growl id="messages" showDetail="true"/>  
+									<h:form id="idFormMensagem">
+										<p:growl autoUpdate="false" showDetail="true" life="3000" />
+									</h:form>
 						        </h:form>  
 				            </h:panelGrid>
 				        </p:panel>
