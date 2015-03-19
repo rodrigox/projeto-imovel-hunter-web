@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>
+	<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="estilo-personalizado.css"/>
+ -->
+
+
+
+
+</h:head>
+<h:body onload="PF('dlg').show();">
+
+
+
+
+
+	
+
+
+
+		
+		<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+
+
+		<p:dialog header="Recuperar senha" widgetVar="dlg" resizable="false"
+			closable="false" modal="false" draggable="false">
+			
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="email" value="Email:" />
+					<p:inputText id="username" value="#{loginBean.email}"
+						required="false" label="email" />				
+	
+					<f:facet name="footer">
+						
+	
+						<h:panelGrid  columns="2" >
+						
+						<p:commandButton value="Enviar"
+							actionListener="#{loginBean.recuperarSenha}"
+							 />
+	
+						</h:panelGrid>
+	
+	
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+
+
+
+
+
+	
+
+
+</h:body>
+</html>
