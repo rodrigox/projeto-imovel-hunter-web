@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>
+	<!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="estilo-personalizado.css"/>
+ -->
+
+
+
+
+</h:head>
+<h:body onload="PF('dlg').show();">
+
+
+
+
+
+	
+
+
+
+		
+		<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+
+
+		<p:dialog header="Fale Conosco" widgetVar="dlg" resizable="false"
+			closable="false" modal="false" draggable="false">
+			
+			<h:form>
+				<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{FaleConoscoBean.email}"	required="false" label="nome" />	
+					<h:outputLabel for="email" value="Email:" />
+					<p:inputText id="email" value="#{FaleConoscoBean.email}" required="false" label="email" />	
+					<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
+					<p:inputText id="telefoneFixo" value="#{FaleConoscoBean.telefoneFixo}"	required="false" label="nome" />	
+					<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
+					<p:inputText id="telefoneCelular" value="#{FaleConoscoBean.telefoneCelular}" required="false" label="email" />
+					
+		
+					
+				</h:panelGrid>
+					<h:form>              
+					    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
+				
+					    <p:inputTextarea rows="10" cols="100" completeMethod="#{faleConosco.completeArea}" queryDelay="750" minQueryLength="4" />
+					 
+			
+					</h:form>
+					
+					
+			</h:form>
+			<f:facet name="footer">
+						
+	
+						<h:panelGrid  columns="2" >
+						
+						<p:commandButton value="Enviar"
+							actionListener="#{loginBean.recuperarSenha}"
+							 />
+	
+						</h:panelGrid>
+	
+	
+					</f:facet>
+		</p:dialog>
+	
+
+
+
+
+
+	
+
+
+</h:body>
+</html>
