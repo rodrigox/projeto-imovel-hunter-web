@@ -24,6 +24,12 @@
 	  font-weight: bold;
 	}
 	
+	.ui-panelgrid td{
+		
+		padding: 2px 5px;
+	
+	}
+	
 	</style>
 	
 </h:head>
@@ -102,7 +108,7 @@
 			<h:form id="cadastroAnunciantes">
 			<center>
 				<p:panel header="Cadastro">
-		  			<h:panelGrid columns="2">
+		  			<h:panelGrid styleClass="ui-panelgrid" columns="2">
 		  				
 		  				<h:outputLabel value="nome*"> </h:outputLabel>
 		  				<p:inputText id="jsf_nome" requerid="false" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
