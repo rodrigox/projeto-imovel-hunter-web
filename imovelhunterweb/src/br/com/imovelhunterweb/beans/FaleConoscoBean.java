@@ -22,7 +22,7 @@ import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
-@ManagedBean(name = "loginBean")
+@ManagedBean(name = "faleConoscoBean")
 @SessionScoped
 public class FaleConoscoBean implements Serializable {
 
