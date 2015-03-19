@@ -33,5 +33,7 @@ public interface AnuncianteService {
 	boolean existeEmail(String email);
 	
 	boolean existeCpf(String cpf);
+
+	Object[] enviarMensagem(String assunto, String mensagem);
 	
 }

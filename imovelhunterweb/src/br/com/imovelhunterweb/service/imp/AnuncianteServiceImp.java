@@ -155,6 +155,20 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 			return "AE-mail inválido";					
 		}	
 	}
+	
+	@Override
+	public Object[] enviarMensagem(String assunto, String mensagem) {
+		try {							
+			Email emaill= new Email(assunto);
+			emaill.adicionarDestinatario("Imovel Hunter fale conosco","imovelhunter@gmail.com");
+			emaill.enviar(assunto,mensagem);
+			return new Object[]{true,"Mensagem enviada com sucesso"};									
+		}
+		catch (Exception e) {			
+			e.printStackTrace();						
+			return new Object[]{false,"Erro ao enviar a mensagem"};							
+		}		
+	}
 
 	@Override
 	public Anunciante buscarPorEmail(String email) {
@@ -196,6 +210,8 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.cpf = :cpf",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? true : false;
 	}
+
+	
 	
 	
 }

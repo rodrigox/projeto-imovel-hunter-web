@@ -23,7 +23,7 @@ import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
 @ManagedBean(name = "faleConoscoBean")
-@SessionScoped
+@ViewScoped
 public class FaleConoscoBean implements Serializable {
 
 	/**
@@ -35,6 +35,55 @@ public class FaleConoscoBean implements Serializable {
 	private String telefoneFixo;
 	private String telefoneCelular;
 	private String mensagem;
+	private String assunto;
+	
+	private Navegador navegador;
+	private PrimeUtil primeUtil;
+	
+	@ManagedProperty("#{anuncianteService}")
+	private AnuncianteService anuncianteService;
+	
+	@PostConstruct
+	public void init(){
+		this.navegador = new Navegador();
+		this.primeUtil = new PrimeUtil();
+	}
+	
+	
+	public void enviarMensagem(){
+		if(this.validarCampos()){	
+			
+			String mensagemEnvio = "email: "+this.email+"\r\nTelefone: "+this.telefoneCelular+"\r\nTelefone fixo: "+this.telefoneFixo+"\r\nMensagem: \r\n";
+			mensagemEnvio += this.mensagem;
+			
+			Object[] resposta = this.anuncianteService.enviarMensagem(this.assunto,mensagemEnvio);
+			
+			boolean resultado = (Boolean)resposta[0];
+			String mensagem = (String)resposta[1];
+			
+			if(resultado){
+				this.mensagem = "";
+				this.email = "";
+				this.telefoneCelular = "";
+				this.assunto = "";
+				this.nome = "";
+				
+				//Nessa parte exibe a mensagem e limpa todo o resto
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Enviado",mensagem);					
+			}else{
+				//Nessa parte exibe a mensagem de erro
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Erro",mensagem);				
+			}
+			this.primeUtil.update(":idFormFaleConosco");
+			this.primeUtil.update(":idFormMensagem");			
+		}
+	}
+	
+	private boolean validarCampos(){
+		
+		
+		return true;
+	}
 	
 	public List<String> completeArea(String query) {
         List<String> results = new ArrayList<String>();
@@ -87,6 +136,19 @@ public class FaleConoscoBean implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
+	}
+
+
+	public void setAnuncianteService(AnuncianteService anuncianteService) {
+		this.anuncianteService = anuncianteService;
 	}
 	
 	
