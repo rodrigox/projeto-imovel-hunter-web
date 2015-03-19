@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -265,7 +266,7 @@ public class ImovelBean implements Serializable{
             File f = new File(retornaCaminho(nomeArquivo));  
             if(!f.getParentFile().exists())f.getParentFile().mkdirs();  
             if(!f.exists())f.createNewFile();  
-            System.out.println(f.getAbsolutePath());  
+            //System.out.println(f.getAbsolutePath());  
             FileOutputStream fos = new FileOutputStream(retornaCaminho(nomeArquivo));  
             fos.write(foto);  
             fos.flush();  
@@ -276,7 +277,6 @@ public class ImovelBean implements Serializable{
     }  
 	
 	public void removerImagem(String imagem){
-		System.out.println("tentando remover imagem");
 		for(Imagem im : this.imovelImagens){
 			if(im.getCaminhoImagem().equals(imagem)){
 				this.imovelImagens.remove(im);
@@ -309,13 +309,24 @@ public class ImovelBean implements Serializable{
         this.imovel.setSituacaoImovel(SituacaoImovel.VENDA);
 
 		Imovel im = this.imovelService.inserir(this.imovel);
+		if (im != null){
 		for(int i = 0; i < this.imovelImagens.size(); i++){
 			this.imovelImagens.get(i).setImovel(im);
 			Imagem img = this.imagemService.inserir(this.imovelImagens.get(i));
-			String nomeImagemServidor = img.getIdImagem() + "_" + img.getCaminhoImagem(); 
-			enviarImagemAoServidor(nomeImagemServidor, img.getCaminhoImagem());
+			if (img != null){
+				String nomeImagemServidor = img.getIdImagem() + "_" + img.getCaminhoImagem(); 
+				enviarImagemAoServidor(nomeImagemServidor, img.getCaminhoImagem());
+			}
 		}
+		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Cadastro","Imóvel cadastrado com sucesso.");
+		this.primeUtil.update("cadastroImovel.xhtml");
+        this.navegador.redirecionarPara("cadastroImovel.xhtml");
 
+		}else{
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Erro","Não fui possível cadastrar o imóvel.");
+			this.primeUtil.update("cadastroImovel.xhtml");
+			
+		}
 	}
 	
 
@@ -362,8 +373,8 @@ public class ImovelBean implements Serializable{
         if (diretorio.isDirectory()) {
             String[] registros = diretorio.list();
             for (int i=0; i<registros.length; i++) { 
-               boolean success = deletarTemp(new File(diretorio, registros[i]));
-                if (!success) {
+               boolean deletado = deletarTemp(new File(diretorio, registros[i]));
+                if (!deletado) {
                     return false;
                 }
             }
