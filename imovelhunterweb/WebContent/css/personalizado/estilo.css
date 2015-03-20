@@ -19,6 +19,13 @@ a:hover{
 	padding: 5px 0;
 }
 
+.linha-maior{
+	width: 1140px;
+	margin: 0 auto;
+	overflow: auto;
+	padding: 5px 0;
+}
+
 .coluna{
 	padding: 0 10px;
 	float: left;
@@ -67,6 +74,23 @@ a:hover{
 .col12{
 	width: 940px;
 }
+
+.col13{
+	width: 1020px;
+	height: 480px;
+}
+
+.col14{
+	width: 1080px;
+	height: 480px;	
+}
+
+.col15{
+	width: 1140px;
+	height: 480px;	
+}
+
+
 
 /*Estilos reutilizaveis*/
 
