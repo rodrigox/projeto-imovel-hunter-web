@@ -82,7 +82,14 @@ public class LoginBean implements Serializable {
 	    this.senha = senha != null ? (String)senha : this.senha;
 	    
 		if(this.anuncianteLogado == null){
-			Anunciante anunciante = this.anuncianteService.buscarPorLoginESenha(this.login,this.senha);
+			Anunciante anunciante = null;
+			
+			try{
+				anunciante = this.anuncianteService.buscarPorLoginESenha(this.login,this.senha);
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+			}
 			
 			if(anunciante != null){
 				this.anuncianteLogado = anunciante;
@@ -106,6 +113,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	public String deslogar(){
+		this.navegador.redirecionarPara("index.xhtml");
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		 try {
 			  contexto.getExternalContext().getSessionMap().remove("anuncianteLogado");
@@ -131,8 +139,16 @@ public class LoginBean implements Serializable {
 			contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Erro ao encerar a sessão",""));
 		}
-		 this.navegador.redirecionarPara("index.xhtml");
-		  return "index.xhtml";
+		return "index.xhtml"; 		 
+	}
+	
+	public String getUsuarioLogado(){
+		if(this.anuncianteLogado != null){
+			return "";
+		}else{
+			this.navegador.redirecionarPara("index.xhtml");
+			return "";
+		}
 	}
 	
 	public void recuperarSenha(){		
