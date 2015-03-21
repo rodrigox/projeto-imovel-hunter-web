@@ -1,5 +1,6 @@
 package br.com.imovelhunterweb.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
+import br.com.imovelhunterweb.entitys.PontoGeografico;
 import br.com.imovelhunterweb.service.AnuncianteService;
+import br.com.imovelhunterweb.util.LocalizacaoUtil;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
@@ -46,8 +49,10 @@ public class LoginBean implements Serializable {
 	
 	private String cadastroImovel;
 	
+	
+	
 	@PostConstruct
-	public void init(){		
+	public void init(){			
 		
 		this.primeUtil = new PrimeUtil();
 		this.navegador = new Navegador();
