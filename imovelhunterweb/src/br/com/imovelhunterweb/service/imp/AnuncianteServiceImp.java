@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.imovelhunterweb.dao.AnuncianteDAO;
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Usuario;
+import br.com.imovelhunterweb.enums.TipoContato;
+import br.com.imovelhunterweb.enums.TipoUsuario;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.util.Criptografar;
 import br.com.imovelhunterweb.util.Email;
@@ -209,6 +211,27 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 		parametros.put("cpf",cpf);		
 		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.cpf = :cpf",parametros,0,1);
 		return anuncs != null && anuncs.size() > 0 ? true : false;
+	}
+
+	@Override
+	@Transactional
+	@Rollback
+	public void instalarSuperUsuario() {
+		Map<String,Object> parametros = new HashMap<String,Object>();
+		parametros.put("tipoUsuario",TipoUsuario.SUPER_USUARIO);		
+		List<Anunciante> anuncs = this.anuncianteDAO.useQuery("FROM Anunciante a WHERE a.tipoUsuario = :tipoUsuario",parametros,0,1);	
+		
+		if(anuncs == null || anuncs.size() == 0){
+			Anunciante anuncianteSuper = new Anunciante();
+			anuncianteSuper.setTipoUsuario(TipoUsuario.SUPER_USUARIO);
+			anuncianteSuper.setNome("Super");
+			anuncianteSuper.setSobreNome("Usuário");
+			anuncianteSuper.setSenha(br.com.imovelhunterweb.util.Criptografar.gerarMd5("SUPER"));
+			anuncianteSuper.setLogin("SUPER");
+			anuncianteSuper.setEmail("imovelhunter@gmail.com");
+			this.anuncianteDAO.insert(anuncianteSuper);
+		}
+		
 	}
 
 	

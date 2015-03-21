@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.imovelhunterweb.enums.TipoUsuario;
 
 @Entity
 public class Anunciante implements Serializable {
@@ -54,6 +58,13 @@ public class Anunciante implements Serializable {
 	
 	@Column
 	private String senha;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoUsuario tipoUsuario;
+	
+	public Anunciante(){
+		this.tipoUsuario = TipoUsuario.USUARIO;
+	}
 
 	public long getIdAnunciante() {
 		return idAnunciante;
@@ -141,6 +152,14 @@ public class Anunciante implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}	
 	
 	

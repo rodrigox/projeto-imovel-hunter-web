@@ -35,5 +35,7 @@ public interface AnuncianteService {
 	boolean existeCpf(String cpf);
 
 	Object[] enviarMensagem(String assunto, String mensagem);
+
+	void instalarSuperUsuario();
 	
 }
