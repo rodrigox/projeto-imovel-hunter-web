@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.PontoGeografico;
+import br.com.imovelhunterweb.enums.TipoUsuario;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.util.LocalizacaoUtil;
 import br.com.imovelhunterweb.util.Navegador;
@@ -52,7 +53,9 @@ public class LoginBean implements Serializable {
 	
 	
 	@PostConstruct
-	public void init(){			
+	public void init(){		
+		
+		this.anuncianteService.instalarSuperUsuario();
 		
 		this.primeUtil = new PrimeUtil();
 		this.navegador = new Navegador();
@@ -149,6 +152,18 @@ public class LoginBean implements Serializable {
 			this.navegador.redirecionarPara("index.xhtml");
 			return "";
 		}
+	}
+	
+	public String getMinhaPermissao(){
+		
+		//Se de erro aqui, verifique se no banco o campo tipoUsuario está preenchido, se ele estiver nulo, vai bugar aqui
+		if(this.anuncianteLogado != null && this.anuncianteLogado.getTipoUsuario().equals(TipoUsuario.USUARIO)){
+			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a href=\"cadastroGrupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}else if(this.anuncianteLogado != null){
+			return "<li><a href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a href=\"cadastroGrupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}
+		
+		return "";
 	}
 	
 	public void recuperarSenha(){		
