@@ -92,28 +92,38 @@
 				        <p:tab id="imovelEndereco" title="Dados Gerais">
 				            <p:panel header="Endereço">
 				                
-				                <h:panelGrid columns="2" columnClasses="label, value">
+				                <h:panelGrid id="dadosGeral" columns="2" columnClasses="label, value">
 				                    <h:outputText value="Proprietário: " />
 				                    <p:inputText  value="#{imovelBean.imovel.nomeDoProprietario}" required="false" label="Proprietário"/>
 				 
 				                    <h:outputText value="CEP: *" />
-				                    <p:inputText value="#{imovelBean.imovel.cep}" required="false" label="CEP"/>
-				 
+				                    <p:inputText value="#{imovelBean.cep}" required="false" label="CEP">
+				                    	<p:ajax event="blur" update="dadosGeral" />
+				                    </p:inputText>
+				                    
 				                    <h:outputText value="Logradouro: *" />
 				                    <p:inputText value="#{imovelBean.imovel.logradouro}" required="false" label="logradouro"/>
 				 
 				                    <h:outputText value="Bairro: *" />
-				                    <p:inputText value="#{imovelBean.imovel.bairro}" required="false" label="Bairro"/>
+				                    <p:inputText  value="#{imovelBean.imovel.bairro}" required="false" label="Bairro"/>
 				                    
 				                    <h:outputText value="Cidade: *" />
 				                    <p:inputText value="#{imovelBean.imovel.cidade}" required="false" label="Cidade"/>		
 				                    		                    
 				                    <h:outputText value="Estado: *" />
 				                    <p:inputText value="#{imovelBean.imovel.estado}" required="false" label="Estado"/>
-
-				                    <h:outputText value="País: *" />
-				                    <p:inputText value="#{imovelBean.imovel.pais}" required="false" label="País"/>			                    
-					                    
+		                    
+				 				    <h:outputText value="Número: *" />
+				                    <p:inputText value="#{imovelBean.imovel.numeroDoImovel}" required="false" label="Numero"/>					                  
+					                
+				 				    <h:outputText value="Complemento: " />
+				                    <p:inputText value="#{imovelBean.imovel.complemento}" required="false" label="Complemento"/>						                
+					                  
+							    	<h:outputText value="Situação: " />
+				                	<h:selectOneMenu  value="#{imovelBean.imovel.situacaoImovel}">
+				                   		<f:selectItems value="#{imovelBean.situacao}" var="a"  
+                            						itemValue="#{a}" itemLabel="#{a.nome}"/>  			                
+				                	</h:selectOneMenu>  
 				                </h:panelGrid>
 				            </p:panel>
 				        </p:tab>
@@ -121,17 +131,27 @@
 				        <p:tab id="imovelCaracteristica" title="Características">
 				            <p:panel header="Informe as características do imóvel">	
 				           	  <h:panelGrid columns="4">	 	
-				                <h:outputText 	value="Numero de quartos: " />
+				                <h:outputText 	value="Número de quartos: " />
 				                <p:inputText id="sfs_numeroQuartos" value="#{imovelBean.imovel.numeroDeQuartos}"></p:inputText>
+				                
+				                <h:outputText value="número de Salas: " />
+				                <p:inputText id="sfs_salas" value="#{imovelBean.imovel.numeroDeSalas}"></p:inputText>	
+				                
+				                <h:outputText value="Ambientes: " />
+				                <p:inputText id="sfs_ambientes" value="#{imovelBean.imovel.ambientes}"></p:inputText>				                			                
 				              
 								<h:outputText value="Banheiros: " />
 				                <p:inputText id="sfs_numeroBanheiros" value="#{imovelBean.imovel.numeroDeBanheiros}"></p:inputText>
+				                
+				                <h:outputText value="número de Suítes: " />
+				                <p:inputText id="sfs_suites" value="#{imovelBean.imovel.numeroDeSuites}"></p:inputText>				                
 				                
 				                <h:outputText value="Área util m²: " />
 				                <p:inputText id="sfs_areaUtil" value="#{imovelBean.imovel.areaTotal}"></p:inputText>
 				              
 				                <h:outputText value="Valor R$: " />
 				                <p:inputText id="sfs_valorVenda" value="#{imovelBean.imovel.preco}"></p:inputText>
+				                
 				              </h:panelGrid>  
 				                <!-- 
 				                <h:outputText value="Valor do condominio R$: " />
@@ -157,7 +177,7 @@
 				        </p:tab>
 
 				        <p:tab title="Galeria">
-				        	<p:panel header="galeria">
+				        	<p:panel header="Galeria">
 				            <h:panelGrid id="painelGrid" columns="2" cellpadding="10">
 						        <!--  <h:form id="formUpload" enctype="multipart/form-data">    -->
 								    

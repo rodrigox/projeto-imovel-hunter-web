@@ -84,6 +84,9 @@ public class Imovel implements Serializable{
 	
 	@Column
 	private String pais;
+	
+	@Column
+	private String complemento;
 
 	@ManyToOne
 	private Anunciante anunciante;
@@ -249,6 +252,15 @@ public class Imovel implements Serializable{
 		this.pais = pais;
 	}
 	
+	
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}	
+	
 	public Anunciante getAnunciante() {
 		return anunciante;
 	}
@@ -280,7 +292,6 @@ public class Imovel implements Serializable{
 	public void setCobertura(List<PontoGeografico> cobertura) {
 		this.cobertura = cobertura;
 	}
-	
-	
+
 	
 }

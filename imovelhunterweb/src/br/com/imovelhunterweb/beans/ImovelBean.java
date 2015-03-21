@@ -31,6 +31,7 @@ import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.service.ImagemService;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.util.ConsultaCEP;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
@@ -54,7 +55,9 @@ public class ImovelBean implements Serializable{
 	private Caracteristica caracteristica;
 	private List<Caracteristica> allCacaracteristicas;
 	private boolean skip;
+	private String cep;
 	
+
 
 	@ManagedProperty("#{imovelService}")
 	private ImovelService imovelService;
@@ -222,6 +225,20 @@ public class ImovelBean implements Serializable{
         this.skip = skip;
     }
      	
+	public String getCep() {
+		return cep;
+	}
+
+
+	public void setCep(String cep) {		
+		this.cep = cep;
+		ConsultaCEP endereco = new ConsultaCEP(cep);
+		this.imovel.setEstado(endereco.getEstado());
+		this.imovel.setLogradouro(endereco.getLogradouro());
+		this.imovel.setCidade(endereco.getCidade());
+		this.imovel.setBairro(endereco.getBairro());	
+	}
+
 	
 	
 	// MÉTODOS PARA EXECUÇÃO:
@@ -306,7 +323,7 @@ public class ImovelBean implements Serializable{
         checked.clear(); 
 
         this.imovel.setAnunciante(this.anunciante);
-        this.imovel.setSituacaoImovel(SituacaoImovel.VENDA);
+        //this.imovel.setSituacaoImovel(SituacaoImovel.VENDA);
 
 		Imovel im = this.imovelService.inserir(this.imovel);
 		if (im != null){
@@ -392,5 +409,9 @@ public class ImovelBean implements Serializable{
             return event.getNewStep();
         }
     }
+    
+    public SituacaoImovel[] getSituacao() {
+        return SituacaoImovel.values();
+      }
 	
 }
