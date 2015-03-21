@@ -76,6 +76,13 @@ public class ImovelBean implements Serializable{
 	@PostConstruct
 	public void init(){	
 		this.navegador = new Navegador();
+		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
+		if(this.anunciante == null){
+			this.navegador.redirecionarPara("login.xhtml");
+			return;
+		}
+		
+		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
 		this.imovelImagens = new ArrayList<Imagem>();
 		this.imovel = new Imovel();
@@ -83,11 +90,7 @@ public class ImovelBean implements Serializable{
 		this.allCacaracteristicas = this.caracteristicaService.listarTodos();
 		deletarTemp(new File(retornaCaminho("")));
 
-		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
-		if(this.anunciante == null){
-			this.navegador.redirecionarPara("login.xhtml");
-			return;
-		}
+		
 	}
 
 	

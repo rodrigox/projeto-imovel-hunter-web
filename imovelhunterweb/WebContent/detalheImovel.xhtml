@@ -15,38 +15,36 @@
 		rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
-
 	
-	<script>
-		/* function logar(){
-			
-			var login = document.getElementById('idInputLogin').value;
-			var senha = document.getElementById('idInputPassword').value;
-			
-			var map = new Map();
-			
-			map.set("name",login);
-			
-			
+	<style type="text/css">
 		
-			
-			var params  = new Array();  
-			params [0] = "{name:'"+login+"',value:'"+senha+"'}";  
-			  
-			
-			
-			rc(params);
-			
-		} */
-	</script>
+		.ui-widget-header {
+		  border: 1px solid #eeeeee;
+		  background: #1f3c58;
+	/* 	  color: #FFFFFF; */
+		  font-weight: bold;
+		}
+	
+		.ui-widget-header span {	  
+		  color: #FFFFFF;	
+		}
+	
+		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+		  padding: 9px 15px;
+		  border-bottom: 1px solid #eee;
+	 	  background-color: #1f3c58; 
+		}
+	
+	</style>
+	
 
 </h:head>
 <h:body> 
-
+#{loginBean.usuarioLogado}
 	<!-- 	primefaces -->
 
 	<h:form>
-		<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
 	</h:form>
 
 
@@ -86,11 +84,9 @@
 			<div class="coluna col8">
 				<nav>
 				<ul class="menu inline sem-marcador">
-					<li><a href="index.xhtml">Home</a></li>
-					<li><a class="selecionado" href="login.xhtml">Logar</a></li>
-					<li><a href="">Sobre</a></li>
-					<li><a href="">Fale conosco</a></li>
-					<li><a href="">Serviços</a></li>
+					<li><a href="cadastroImovel.xhtml" >Cadastrar imóvel</a></li>
+					<li><a class="selecionado" href="detalheImovel.xhtml">Imoveis cadastrados</a></li>							
+					<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 				</ul>
 				</nav>
 			</div>

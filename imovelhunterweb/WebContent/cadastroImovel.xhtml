@@ -22,6 +22,78 @@
 		padding: 2px 5px;
 	}
 	
+	.ui-widget-header {
+	  border: 1px solid #eeeeee;
+	  background: #1f3c58;
+/* 	  color: #FFFFFF; */
+	  font-weight: bold;
+	}
+	
+	.ui-widget-header span {	  
+	  color: #FFFFFF;	
+	}
+	
+	.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	  padding: 9px 15px;
+	  border-bottom: 1px solid #eee;
+ 	  background-color: #1f3c58; 
+	}
+	
+	.ui-button .ui-button-text {
+	  display: block;
+	  line-height: 1.4;
+	  background-color: #1f3c58;
+	  color: #FFFFFF;
+	}
+	
+	.ui-button .ui-button-text:hover {
+		background: #315e8a !important;
+		text-decoration: none !important;	
+	}
+	
+	
+/* 	menuzinho de cima selecionado */
+	
+	.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	  color: #ffffff;
+	  text-decoration: none;
+	  background-color: #0088cc;
+	  background-color: #1f3c58;
+	  background-position: 0px;
+	  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+	  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+	  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+	  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+	  background-image: linear-gradient(to bottom, #315e8a, #1f3c58) !important;
+	  background-repeat: repeat-x;
+	  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+	}
+	
+	
+	/* menuzinho de cima não selecionado*/
+	
+	.ui-wizard ul li{
+	  color: #FFFFFF;	  
+	  background-image: -webkit-linear-gradient(top, #1f3c58, #1f3c58);	 
+	}
+	
+	input[type=submit]{
+		background: #1f3c58 !important;
+		padding: 5px 10px !important;
+		border-radius:3px !important;
+		color: #ebebeb !important;
+		cursor: pointer !important;
+		margin: 5px 0 !important;
+		display: inline-block !important;
+		border: none !important;
+	}
+	
+	input[type=submit]:hover{
+		background: #315e8a !important;
+		text-decoration: none !important;
+	}
+	
+	
 	</style>
 	
 </h:head>
@@ -64,12 +136,9 @@
 				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
-							<li><a href="index.xhtml"  >Home</a></li>
-							<li><a class="selecionado" href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
-							<li><a href="">Sobre</a></li>
-							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
-							<li><a href="">Serviços</a></li>
-							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
+							<li><a class="selecionado" href="cadastroImovel.xhtml" >Cadastrar imóvel</a></li>
+							<li><a href="detalheImovel.xhtml">Imoveis cadastrados</a></li>							
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>	
 						</ul>
 					</nav>
 				</div>
@@ -212,10 +281,11 @@
 						                    label="Procurar" 
 						                    update="galeria"    
 						                    sizeLimit="5000000" 
-						                    style="width:800px;"						                        
+						                    style="width:800px;"	
+						                    id="idFileUpload"					                        
 						                    allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>    
 						  			
-					            	<h:commandButton value="Finalizar"  actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
+					            	<h:commandButton value="Finalizar" id="idBotaoFinalizar"  actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
 									
 									
 									<p:growl autoUpdate="false" showDetail="true" life="3000" />
