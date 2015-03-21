@@ -74,8 +74,8 @@ public class FaleConoscoBean implements Serializable {
 				//Nessa parte exibe a mensagem de erro
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Erro",mensagem);				
 			}
-			this.primeUtil.update(":idFormFaleConosco");
-			this.primeUtil.update(":idFormMensagem");			
+			this.primeUtil.update("idFormFaleConosco");
+			this.primeUtil.update("idFormMensagem");			
 		}
 	}
 	
