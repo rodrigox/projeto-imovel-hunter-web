@@ -32,7 +32,7 @@ public class Email {
 	
 	private String login = "imovelhunter";
 	private String nossogmail = "imovelhunter@gmail.com";
-	private String nossaSenha = "imovelhunter123";
+	private String nossaSenha = "imovelhunter1234";
 
 	public Email(String nomeRemetente) {
 		this.nomeRemetente = nomeRemetente;

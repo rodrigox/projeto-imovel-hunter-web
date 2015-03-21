@@ -9,6 +9,74 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Imovel Hunter Web</title>
 <!-- 	<link rel="shortcut icon" href="images/imagi.gif" /> -->
+	
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	
+	<style type="text/css">
+	
+	.ui-widget-header {
+	  border: 1px solid #eeeeee;
+	  background: #1f3c58;
+	  color: #FFFFFF;
+	  font-weight: bold;
+	}
+	
+	.ui-panelgrid td{
+		
+		padding: 2px 5px;
+	
+	}
+	
+	.ui-panel .ui-panel-content table{	 
+	   margin-left: auto;
+	   margin-right: auto;
+	}
+	
+	.ui-panel .ui-panel-content td{	 
+	  padding: 2px 5px;
+	}
+	
+	
+	.ui-panel .ui-panel-titlebar {
+  		padding: 0.5em 1em 0.3em;
+  		text-align:center;
+	}
+	
+	.botaoazul{
+		background: #1f3c58 !important;
+		padding: 1px 1px 1px 1px !important;
+		border-radius:3px !important;
+		color: #ebebeb !important;
+		cursor: pointer !important;
+		margin: 5px 0 !important;
+		display: inline-block !important;
+		border: none !important;
+	}
+	
+	.botaoazuldireita{
+		background: #1f3c58 !important;
+		padding: 1px 1px 1px 1px !important;
+		left: 5px;
+		border-radius:3px !important;
+		color: #ebebeb !important;
+		cursor: pointer !important;
+		margin: 5px 0 !important;
+		display: inline-block !important;
+		border: none !important;
+	}
+	
+	.botaoazuldireita:hover{
+		background: #315e8a !important;
+		text-decoration: none !important;	
+	}
+	
+	
+	</style>
+
+
 </h:head>
 <h:body>
 
@@ -26,63 +94,133 @@
 	<h:form id="idFormMensagem">
 		<p:growl autoUpdate="false" showDetail="true" life="3000" />
 	</h:form>
- 
-  <div id ="cadastro_anunciante" title= "Anunciantes">
-  	<p:dialog header ="Editar perfil" id= "dialogLogin" minWidth = "500" width="450" 
-  		      modal = "false" closable ="false" position ="center"
-  		      showEffect="slide" draggable="true" resizable="false" visible="true">
-  		<h:form id="cadastroAnunciantes">
-  		
-  		
-  			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-		        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-		        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-		    </p:confirmDialog>
-  		
-  		
-  			<h:panelGrid columns="2">
-  				
-  				<h:outputLabel value="nome*"> </h:outputLabel>
-  				<p:inputText id="jsf_nome" requerid="false" value="#{editarAnuncianteBean.anunciante.nome}"> </p:inputText>
-  				
-  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
-  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{editarAnuncianteBean.anunciante.sobreNome}"> </p:inputText>
-  				
-  				<h:outputLabel value="email*"> </h:outputLabel>
-  				<p:inputText id="jsf_email" requerid="false" value="#{editarAnuncianteBean.email}"> </p:inputText>
-  				
-  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
-  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{editarAnuncianteBean.dataDeNascimento}"> </p:inputText>
-  				
-  				<h:outputLabel value="CRECI"> </h:outputLabel>
-  				<p:inputText id="jsf_creci" requerid="false" value="#{editarAnuncianteBean.anunciante.creci}"> </p:inputText>  				
-  			
-  				<h:outputLabel value="Senha*"> </h:outputLabel>
-  				<p:password id="jsf_senha" requerid="false" value="#{editarAnuncianteBean.senha}"> </p:password>
-  			
-  				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
-  				<p:password id="jsf_conf_senha" requerid="false" value="#{editarAnuncianteBean.confirmarSenha}"> </p:password>
-  								 	
-  			 	<f:facet name="footer">
-  			 		<p:row>
-  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
-  			 				
-  			 				
-  			 				
-  			 				<p:commandButton value="Atualizar" actionListener="#{editarAnuncianteBean.atualizarAnunciante}">
-						        <p:confirm header="Confirmação" message="Deseja atualizar?" icon="ui-icon-alert" />
-						    </p:commandButton>
-  			 				
-  			 				<p:commandButton value="Remover" actionListener="#{editarAnuncianteBean.remover}">
-						        <p:confirm header="Confirmação" message="Deseja remover?" icon="ui-icon-alert" />
-						    </p:commandButton>
-  			 				
-  			 			</p:outputPanel>
-  			 		</p:row> 			 	
-  			 	</f:facet>		 	  			 
-  			</h:panelGrid>			
-  		</h:form>	    
-  	</p:dialog>
+	
+	
+	
+	
+	<!-- 	cabeçalho -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
+			
+				<div class="coluna col4">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col8">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li><a href="index.xhtml" >Home</a></li>
+							<li><a href="">Sobre</a></li>
+							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
+							<li><a href="">Serviços</a></li>
+							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		 
+		</div>
+	
+	</div>
+	
+<!-- 	cabeçalho fim -->
+
+	<div class="linha" style="height:100px;" />
+	
+	
+ 	<div class="linha">
+ 	
+ 		<div class="coluna col12">
+  
+		  	<p:panel header ="Editar perfil" id= "dialogLogin"
+		  		     position ="center"
+		  		      showEffect="slide" draggable="true" resizable="false" visible="true">
+		  		<h:form id="cadastroAnunciantes">
+		  		
+		  		
+		  			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				    </p:confirmDialog>
+		  		
+		  		
+		  			<h:panelGrid columns="2">
+		  				
+		  				<h:outputLabel value="nome*"> </h:outputLabel>
+		  				<p:inputText id="jsf_nome" requerid="false" value="#{editarAnuncianteBean.anunciante.nome}"> </p:inputText>
+		  				
+		  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
+		  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{editarAnuncianteBean.anunciante.sobreNome}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="email*"> </h:outputLabel>
+		  				<p:inputText id="jsf_email" requerid="false" value="#{editarAnuncianteBean.email}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
+		  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{editarAnuncianteBean.dataDeNascimento}"> </p:inputText>
+		  				
+		  				<h:outputLabel value="CRECI"> </h:outputLabel>
+		  				<p:inputText id="jsf_creci" requerid="false" value="#{editarAnuncianteBean.anunciante.creci}"> </p:inputText>  				
+		  			
+		  				<h:outputLabel value="Senha*"> </h:outputLabel>
+		  				<p:password id="jsf_senha" requerid="false" value="#{editarAnuncianteBean.senha}"> </p:password>
+		  			
+		  				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
+		  				<p:password id="jsf_conf_senha" requerid="false" value="#{editarAnuncianteBean.confirmarSenha}"> </p:password>
+		  								 	
+		  			 	<f:facet name="footer">
+		  			 		<p:row>
+		  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
+		  			 				
+		  			 				
+		  			 				
+		  			 				<p:commandButton value="Atualizar" styleClass="botaoazul" actionListener="#{editarAnuncianteBean.atualizarAnunciante}">
+								        <p:confirm header="Confirmação" message="Deseja atualizar?" icon="ui-icon-alert" />
+								    </p:commandButton>
+		  			 				
+		  			 				<p:commandButton styleClass="botaoazuldireita" value="Remover" actionListener="#{editarAnuncianteBean.remover}">
+								        <p:confirm header="Confirmação" message="Deseja remover?" icon="ui-icon-alert" />
+								    </p:commandButton>
+		  			 				
+		  			 			</p:outputPanel>
+		  			 		</p:row> 			 	
+		  			 	</f:facet>		 	  			 
+		  			</h:panelGrid>			
+		  		</h:form>	    
+		  	</p:panel>
+  		</div>
+  	
   	</div>
+  	
+  	<div class="linha" style="height:100px;" />
+  	
+  	<!-- 	Rodapé -->
+	
+	<div class="footer">
+		
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+<!-- 	Rodapé fim -->
+  	
 </h:body>
 </html>
