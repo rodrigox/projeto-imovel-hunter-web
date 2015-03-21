@@ -15,16 +15,26 @@
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
 	
-	<style>
+	<style type="text/css">
 	
 	.ui-widget-header {
 	  border: 1px solid #eeeeee;
 	  background: #1f3c58;
-	  color: #FFFFFF;
+/* 	  color: #FFFFFF; */
 	  font-weight: bold;
-	}
+	}	
 	
-	.ui-panelgrid td{
+		.ui-widget-header span {	  
+		  color: #FFFFFF;	
+		}
+		
+		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+		  padding: 9px 15px;
+		  border-bottom: 1px solid #eee;
+	 	  background-color: #1f3c58; 
+		}
+		
+		.ui-panelgrid td{
 		
 		padding: 2px 5px;
 	
@@ -140,7 +150,7 @@
 		  			 	<f:facet name="footer">
 		  			 		<p:row>
 		  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
-		  			 				<p:commandButton actionListener="#{anuncianteBean.cadastrarAnunciante}" value="Cadastrar"></p:commandButton>
+		  			 				<p:commandButton actionListener="#{anuncianteBean.cadastrarAnunciante}" styleClass="botaoazul" value="Cadastrar"></p:commandButton>
 		  			 			</p:outputPanel>
 		  			 		</p:row> 			 	
 		  			 	</f:facet>		 	  			 

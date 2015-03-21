@@ -74,7 +74,7 @@ public class ImovelBean implements Serializable{
 
 
 	@PostConstruct
-	public void init(){
+	public void init(){	
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
 		this.imovelImagens = new ArrayList<Imagem>();
