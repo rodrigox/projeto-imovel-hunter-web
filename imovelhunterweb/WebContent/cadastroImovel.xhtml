@@ -98,20 +98,20 @@
 				 
 				                    <h:outputText value="CEP: *" />
 				                    <p:inputText value="#{imovelBean.cep}" required="false" label="CEP">
-				                    	<p:ajax event="blur" update="dadosGeral" />
+				                    	<p:ajax event="blur" update="jsf_logradouro, jsf_bairro, jsf_cidade, jsf_estado" />
 				                    </p:inputText>
 				                    
 				                    <h:outputText value="Logradouro: *" />
-				                    <p:inputText value="#{imovelBean.imovel.logradouro}" required="false" label="logradouro"/>
+				                    <p:inputText id="jsf_logradouro" value="#{imovelBean.imovel.logradouro}" required="false" label="logradouro"/>
 				 
 				                    <h:outputText value="Bairro: *" />
-				                    <p:inputText  value="#{imovelBean.imovel.bairro}" required="false" label="Bairro"/>
+				                    <p:inputText id="jsf_bairro" value="#{imovelBean.imovel.bairro}" required="false" label="Bairro"/>
 				                    
 				                    <h:outputText value="Cidade: *" />
-				                    <p:inputText value="#{imovelBean.imovel.cidade}" required="false" label="Cidade"/>		
+				                    <p:inputText id="jsf_cidade" value="#{imovelBean.imovel.cidade}" required="false" label="Cidade"/>		
 				                    		                    
 				                    <h:outputText value="Estado: *" />
-				                    <p:inputText value="#{imovelBean.imovel.estado}" required="false" label="Estado"/>
+				                    <p:inputText id="jsf_estado" value="#{imovelBean.imovel.estado}" required="false" label="Estado"/>
 		                    
 				 				    <h:outputText value="Número: *" />
 				                    <p:inputText value="#{imovelBean.imovel.numeroDoImovel}" required="false" label="Numero"/>					                  
