@@ -1,8 +1,14 @@
 package br.com.imovelhunterweb.util;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 
-public class ValidaCPF {
+public class ValidaCPF implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2100443784818601951L;
 
 	public boolean isCPF(String CPF) { 
 		// considera-se erro CPF's formados por uma sequencia de numeros iguais

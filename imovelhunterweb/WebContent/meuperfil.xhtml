@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>	
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	
+	
+	<script>
+	
+	
+	
+	</script>
+	
+</h:head>
+<h:body>
+
+
+<!-- 	primefaces -->
+	
+	<h:form>
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+	</h:form>
+	
+	
+	<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+		
+		
+		
+	
+	
+<!-- 	primefaces fim -->
+
+
+<!-- 	cabeçalho -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
+			
+				<div class="coluna col2">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col10">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li><a href="" >Imoveis</a></li>
+							<li><a href="editarAnunciante.xhtml">Editar meu perfil</a></li>							
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		 
+		</div>
+	
+	</div>
+	
+<!-- 	cabeçalho fim -->
+
+
+<!-- container -->
+
+	<div class="linha" style="height:500px;" />
+
+
+<!-- container fim -->
+
+
+<!-- 	Rodapé -->
+	
+	<div class="footer">
+		
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+<!-- 	Rodapé fim -->
+
+
+</h:body>
+
+
+</html>

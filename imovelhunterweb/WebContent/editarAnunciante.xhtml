@@ -20,8 +20,30 @@
 	.ui-widget-header {
 	  border: 1px solid #eeeeee;
 	  background: #1f3c58;
-	  color: #FFFFFF;
+/* 	  color: #FFFFFF; */
 	  font-weight: bold;
+	}
+	
+	.ui-widget-header span {	  
+	  color: #FFFFFF;	
+	}
+	
+	.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	  padding: 9px 15px;
+	  border-bottom: 1px solid #eee;
+ 	  background-color: #1f3c58; 
+	}
+	
+	.ui-button .ui-button-text {
+	  display: block;
+	  line-height: 1.4;
+	  background-color: #1f3c58;
+	  color: #FFFFFF;
+	}
+	
+	.ui-button .ui-button-text:hover {
+		background: #315e8a;
+		text-decoration: none;	
 	}
 	
 	.ui-panelgrid td{
@@ -85,7 +107,7 @@
 	<p:ajaxStatus onstart="processandoDialog.show();"
 		onsuccess="processandoDialog.hide();" />
 		
-	<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+	<p:dialog modal="true"  widgetVar="processandoDialog" resizable="false"
 		header="#{msg['ajax.processando']}" draggable="false" closable="false"
 		style="font-size:8pt;">
 		<p:graphicImage value="/images/ajax_loader.gif" />
@@ -95,7 +117,9 @@
 		<p:growl autoUpdate="false" showDetail="true" life="3000" />
 	</h:form>
 	
-	
+	<h:form>
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+	</h:form>
 	
 	
 	<!-- 	cabeçalho -->
@@ -112,12 +136,11 @@
 				
 				<div class="coluna col8">
 					<nav>
-						<ul class="menu inline sem-marcador">
-							<li><a href="index.xhtml" >Home</a></li>
-							<li><a href="">Sobre</a></li>
-							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
-							<li><a href="">Serviços</a></li>
-							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
+						<ul class="menu inline sem-marcador">						
+							
+							<li><a href="" >Imoveis</a></li>
+							<li><a class="selecionado" href="editarAnunciante.xhtml">Editar meu perfil</a></li>							
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>			
 							
 						</ul>
 					</nav>

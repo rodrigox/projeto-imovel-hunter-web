@@ -65,7 +65,7 @@ public class LoginBean implements Serializable {
 		this.anuncianteLogado = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anuncianteLogado != null){
 			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
-			this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
+			this.cadastroImovel = "<li><a href=\"meuperfil.xhtml\">Meu perfil</a></li>";
 		}else{
 			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
 			this.cadastroImovel = "";
@@ -98,7 +98,7 @@ public class LoginBean implements Serializable {
 		
 		if(this.anuncianteLogado != null){
 			this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
-			this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
+			this.cadastroImovel = "<li><a href=\"meuperfil.xhtml\">Meu perfil</a></li>";
 		}else{
 			this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
 			this.cadastroImovel = "";
@@ -120,7 +120,7 @@ public class LoginBean implements Serializable {
 			  
 			  if(this.anuncianteLogado != null){
 					this.logado = "<li><a onclick=\"rc();\" href=\"\"  >Deslogar</a></li>";
-					this.cadastroImovel = "<li><a href=\"cadastroImovel.xhtml\">Cadastrar imóvel</a></li>";
+					this.cadastroImovel = "<li><a href=\"meuperfil.xhtml\">Meu perfil</a></li>";
 				}else{
 					this.logado = "<li><a href=\"login.xhtml\"  >Logar</a></li>";
 					this.cadastroImovel = "";
