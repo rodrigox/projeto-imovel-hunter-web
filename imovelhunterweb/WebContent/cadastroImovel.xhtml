@@ -155,74 +155,98 @@
 					
 			
 			<div class="coluna col14">
-					<h:form>
-								    
-				    <p:wizard flowListener="#{imovelBean.onFlowProcess}" nextLabel="Proxímo" backLabel="Voltar" >
-				        <p:tab id="imovelEndereco" title="Dados Gerais">
-				            <p:panel header="Endereço">
-				                
-				                <h:panelGrid id="dadosGeral" columns="2" columnClasses="label, value">
-				                    <h:outputText value="Proprietário: " />
-				                    <p:inputText  value="#{imovelBean.imovel.nomeDoProprietario}" required="false" label="Proprietário"/>
-				 
-				                    <h:outputText value="CEP: *" />
-				                    <p:inputText value="#{imovelBean.cep}" required="false" label="CEP">
-				                    	<p:ajax event="blur" update="jsf_logradouro, jsf_bairro, jsf_cidade, jsf_estado" />
-				                    </p:inputText>
-				                    
-				                    <h:outputText value="Logradouro: *" />
-				                    <p:inputText id="jsf_logradouro" value="#{imovelBean.imovel.logradouro}" required="false" label="logradouro"/>
-				 
-				                    <h:outputText value="Bairro: *" />
-				                    <p:inputText id="jsf_bairro" value="#{imovelBean.imovel.bairro}" required="false" label="Bairro"/>
-				                    
-				                    <h:outputText value="Cidade: *" />
-				                    <p:inputText id="jsf_cidade" value="#{imovelBean.imovel.cidade}" required="false" label="Cidade"/>		
-				                    		                    
-				                    <h:outputText value="Estado: *" />
-				                    <p:inputText id="jsf_estado" value="#{imovelBean.imovel.estado}" required="false" label="Estado"/>
-		                    
-				 				    <h:outputText value="Número: *" />
-				                    <p:inputText value="#{imovelBean.imovel.numeroDoImovel}" required="false" label="Numero"/>					                  
-					                
-				 				    <h:outputText value="Complemento: " />
-				                    <p:inputText value="#{imovelBean.imovel.complemento}" required="false" label="Complemento"/>						                
-					                  
-							    	<h:outputText value="Situação: " />
-				                	<h:selectOneMenu  value="#{imovelBean.imovel.situacaoImovel}">
-				                   		<f:selectItems value="#{imovelBean.situacao}" var="a"  
-                            						itemValue="#{a}" itemLabel="#{a.nome}"/>  			                
-				                	</h:selectOneMenu>  
-				                </h:panelGrid>
-				            </p:panel>
-				        </p:tab>
-				          
-				        <p:tab id="imovelCaracteristica" title="Características">
-				            <p:panel header="Informe as características do imóvel">	
-				           	  <h:panelGrid columns="4">	 	
-				                <h:outputText 	value="Número de quartos: " />
-				                <p:inputText id="sfs_numeroQuartos" value="#{imovelBean.imovel.numeroDeQuartos}"></p:inputText>
-				                
-				                <h:outputText value="número de Salas: " />
-				                <p:inputText id="sfs_salas" value="#{imovelBean.imovel.numeroDeSalas}"></p:inputText>	
-				                
-				                <h:outputText value="Ambientes: " />
-				                <p:inputText id="sfs_ambientes" value="#{imovelBean.imovel.ambientes}"></p:inputText>				                			                
-				              
+			<h:form>
+				<p:wizard flowListener="#{imovelBean.onFlowProcess}"
+					nextLabel="Proxímo" backLabel="Voltar">
+					<p:tab id="imovelEndereco" title="Dados Gerais">
+						<p:panel header="Geral">
+							<h:panelGrid id="dadosGeral" columns="4"
+								columnClasses="label, value">
+								<h:outputText value="Proprietário:*" />
+								<p:inputText value="#{imovelBean.imovel.nomeDoProprietario}"
+									required="false" label="Proprietário" />
+
+								<h:outputText value="CEP:*" />
+								<p:inputText immediate="true" value="#{imovelBean.cep}" required="false"
+									label="CEP">
+									<p:ajax event="blur" 
+										update="jsf_logradouro, jsf_bairro, jsf_cidade, jsf_estado" />
+								</p:inputText>
+
+								<h:outputText value="Logradouro:*" />
+								<p:inputText id="jsf_logradouro"
+									value="#{imovelBean.imovel.logradouro}" required="false"
+									label="logradouro" />
+
+								<h:outputText value="Bairro:*" />
+								<p:inputText id="jsf_bairro" value="#{imovelBean.imovel.bairro}"
+									required="false" label="Bairro" />
+
+								<h:outputText value="Cidade:*" />
+								<p:inputText id="jsf_cidade" value="#{imovelBean.imovel.cidade}"
+									required="false" label="Cidade" />
+
+								<h:outputText value="Estado:*" />
+								<p:inputText id="jsf_estado" value="#{imovelBean.imovel.estado}"
+									required="false" label="Estado" />
+
+								<h:outputText value="Número:*" />
+								<p:inputText value="#{imovelBean.imovel.numeroDoImovel}"
+									required="false" label="Numero" />
+
+								<h:outputText value="Complemento: " />
+								<p:inputText value="#{imovelBean.imovel.complemento}"
+									required="false" label="Complemento" />
+	
+								<h:outputText value="Tipo do Imóvel: " />
+								<h:selectOneMenu value="#{imovelBean.imovel.tipoImovel}">
+									<f:selectItems value="#{imovelBean.tipoImovel}" var="b"
+										itemValue="#{b}" itemLabel="#{b.nome}" />
+								</h:selectOneMenu>
+									
+								<h:outputText value="Valor R$:*" />
+								<p:inputText id="sfs_valorVenda"
+									value="#{imovelBean.valorImovel}"></p:inputText>									
+
+								<h:outputText value="Situação: " />
+								<h:selectOneMenu value="#{imovelBean.imovel.situacaoImovel}">
+									<f:selectItems value="#{imovelBean.situacao}" var="a"
+										itemValue="#{a}" itemLabel="#{a.nome}" />
+								</h:selectOneMenu>
+							</h:panelGrid>
+							<h5>(*) Campos de preenchimento obrigatório.</h5>	
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="imovelCaracteristica" title="Características">
+						<p:panel header="Informe as características do imóvel">
+							<h:panelGrid columns="4">
+								<h:outputText value="Número de quartos: " />
+								<p:inputText id="sfs_numeroQuartos"
+									value="#{imovelBean.imovel.numeroDeQuartos}"></p:inputText>
+
+								<h:outputText value="número de Salas: " />
+								<p:inputText id="sfs_salas"
+									value="#{imovelBean.imovel.numeroDeSalas}"></p:inputText>
+
+								<h:outputText value="Ambientes: " />
+								<p:inputText id="sfs_ambientes"
+									value="#{imovelBean.imovel.ambientes}"></p:inputText>
+
 								<h:outputText value="Banheiros: " />
-				                <p:inputText id="sfs_numeroBanheiros" value="#{imovelBean.imovel.numeroDeBanheiros}"></p:inputText>
-				                
-				                <h:outputText value="número de Suítes: " />
-				                <p:inputText id="sfs_suites" value="#{imovelBean.imovel.numeroDeSuites}"></p:inputText>				                
-				                
-				                <h:outputText value="Área util m²: " />
-				                <p:inputText id="sfs_areaUtil" value="#{imovelBean.imovel.areaTotal}"></p:inputText>
-				              
-				                <h:outputText value="Valor R$: " />
-				                <p:inputText id="sfs_valorVenda" value="#{imovelBean.imovel.preco}"></p:inputText>
-				                
-				              </h:panelGrid>  
-				                <!-- 
+								<p:inputText id="sfs_numeroBanheiros"
+									value="#{imovelBean.imovel.numeroDeBanheiros}"></p:inputText>
+
+								<h:outputText value="número de Suítes: " />
+								<p:inputText id="sfs_suites"
+									value="#{imovelBean.imovel.numeroDeSuites}"></p:inputText>
+
+								<h:outputText value="Área util m²: " />
+								<p:inputText id="sfs_areaUtil"
+									value="#{imovelBean.imovel.areaTotal}"></p:inputText>
+
+							</h:panelGrid>
+							<!-- 
 				                <h:outputText value="Valor do condominio R$: " />
 				                <p:inputText id="sfs_valorCondominio" value=""></p:inputText>
 				              
@@ -234,68 +258,77 @@
 								<br/><br/>
 							  	
 		 						-->
-				                <h:panelGrid columns="2" rowClasses="linha"  columnClasses="label, value">									    
-								    <p:dataGrid style="width:100%; border:none;"  id="checks" columns="8" value="#{imovelBean.allCacaracteristicas}"  var="item" emptyMessage="Nenhuma Caracteristica cadastrada no momento.">								    	 
-								    	<p:column headerText="Características">						                             
-							            	<p:selectBooleanCheckbox value="#{imovelBean.checked[item.idCaracteristica]}"/> 
-							            	<h:outputLabel value="#{item.nome}"/>
-							            </p:column>    
-								    </p:dataGrid> <br/><br/>
-				                </h:panelGrid>
-				            </p:panel>
-				        </p:tab>
+							<h:panelGrid columns="2" rowClasses="linha"
+								columnClasses="label, value">
+								<p:dataGrid style="width:100%; border:none;" id="checks"
+									columns="8" value="#{imovelBean.allCacaracteristicas}"
+									var="item"
+									emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
+									<p:column headerText="Características">
+										<p:selectBooleanCheckbox
+											value="#{imovelBean.checked[item.idCaracteristica]}" />
+										<h:outputLabel value="#{item.nome}" />
+									</p:column>
+								</p:dataGrid>
+								<br />
+								<br />
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
 
-				        <p:tab title="Galeria">
-				        	<p:panel header="Galeria">
-				            <h:panelGrid id="painelGrid" columns="2" cellpadding="10">
-						        <!--  <h:form id="formUpload" enctype="multipart/form-data">    -->
-								    
-								    <p:dataTable style="width:800px;" id="galeria" value="#{imovelBean.imagens}" var="item" rows="1" emptyMessage="Nenhuma imagem cadastrada no momento."
-								   								 paginator="true" paginatorTemplate="{CurrentPageReport}
-								   								 								     {FirstPageLink} 
-								   								 								     {PreviousPageLink} 
-								   								 								     {PageLinks} 
-								   								 								     {NextPageLink} 
-								   								 								     {LastPageLink} 
-								   								 								     {RowsPerPageDropdown}">  
-								     	<p:column>  						                            
-								            <f:facet name="header">  
-								                <h:outputText value="Imagens Selecionadas" />  
-								            </f:facet>  
-								            <h:panelGrid columns="2">
-								            	
-								            	<p:graphicImage value="/uploads/imagens/#{item.caminhoImagem}"/>  
-								                
-								                <p:inputTextarea rows="10" cols="50"  value="#{item.descricao}"></p:inputTextarea>
-				            
-												 <f:facet name="footer"> 
-										 			<h:commandButton actionListener="#{imovelBean.removerImagem(item.caminhoImagem)}" value="Remover" style="float: right;" />	
-									 			 </f:facet> 
-								            </h:panelGrid>
-								        </p:column>  
-								    </p:dataTable> <br/>
-								    							    
-						            <p:fileUpload fileUploadListener="#{imovelBean.upload}"    
-						                    mode="advanced" 
-						                    auto = "true"   
-						                    label="Procurar" 
-						                    update="galeria"    
-						                    sizeLimit="5000000" 
-						                    style="width:800px;"	
-						                    id="idFileUpload"					                        
-						                    allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>    
-						  			
-					            	<h:commandButton value="Finalizar" id="idBotaoFinalizar"  actionListener="#{imovelBean.cadastrarImovel}" style="float: right;"/>
-									
-									
-									<p:growl autoUpdate="false" showDetail="true" life="3000" />
-									
-						        <!--  </h:form>  -->
-				            </h:panelGrid>
-				        </p:panel>
-				        </p:tab>	        			        		        		    
-				    </p:wizard>
-				    </h:form>
+					<p:tab id="imovelGaleria" title="Galeria">
+						<p:panel header="Galeria">
+							<h:panelGrid id="painelGrid" columns="2" cellpadding="10">
+								<!--  <h:form id="formUpload" enctype="multipart/form-data">    -->
+
+								<p:dataTable style="width:800px;" id="galeria"
+									value="#{imovelBean.imagens}" var="item" rows="1"
+									emptyMessage="Nenhuma imagem cadastrada no momento."
+									paginator="true"
+									paginatorTemplate="{CurrentPageReport}
+													   {FirstPageLink}
+													   {PreviousPageLink} 
+								   					   {PageLinks}
+								   					   {NextPageLink}
+								   					   {LastPageLink}
+								   					   {RowsPerPageDropdown}">
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Imagens Selecionadas" />
+										</f:facet>
+										<h:panelGrid columns="2">
+
+											<p:graphicImage
+												value="/uploads/imagens/#{item.caminhoImagem}" />
+
+											<p:inputTextarea rows="10" cols="50"
+												value="#{item.descricao}"></p:inputTextarea>
+
+											<f:facet name="footer">
+												<h:commandButton
+													actionListener="#{imovelBean.removerImagem(item.caminhoImagem)}"
+													value="Remover" style="float: right;" />
+											</f:facet>
+										</h:panelGrid>
+									</p:column>
+								</p:dataTable>
+								<br />
+
+								<p:fileUpload fileUploadListener="#{imovelBean.upload}"
+									mode="advanced" auto="true" label="Procurar" update="galeria"
+									sizeLimit="5000000" style="width:800px;"
+									allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+
+								<h:commandButton value="Finalizar"
+									actionListener="#{imovelBean.cadastrarImovel}"
+									style="float: right;" />
+
+								<!--  </h:form>  -->
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+				</p:wizard>
+			</h:form>
 			</div>
 		
 		

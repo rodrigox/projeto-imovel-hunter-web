@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.com.imovelhunterweb.enums.SituacaoImovel;
+import br.com.imovelhunterweb.enums.TipoImovel;
 
 
 
@@ -87,6 +89,9 @@ public class Imovel implements Serializable{
 	
 	@Column
 	private String complemento;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoImovel tipoImovel;
 
 	@ManyToOne
 	private Anunciante anunciante;
@@ -100,6 +105,9 @@ public class Imovel implements Serializable{
 	@OneToMany
 	private List<PontoGeografico> cobertura;
 
+	@OneToMany(mappedBy="imovel", fetch=FetchType.EAGER)
+	private List<Imagem> imagens;
+	
 	public long getIdImovel() {
 		return idImovel;
 	}
@@ -292,6 +300,22 @@ public class Imovel implements Serializable{
 	public void setCobertura(List<PontoGeografico> cobertura) {
 		this.cobertura = cobertura;
 	}
+	
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
 
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
+	
+	public TipoImovel getTipoImovel() {
+		return tipoImovel;
+	}
+
+	public void setTipoImovel(TipoImovel tipoImovel) {
+		this.tipoImovel = tipoImovel;
+	}
+	
 	
 }
