@@ -249,7 +249,7 @@ public class ImovelBean implements Serializable {
 
 	// MÉTODOS PARA EXECUÇÃO:
 
-	public List<Imagem> getImagens() {
+	public List<Imagem> imagensNoTemp() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext
 				.getExternalContext().getContext();
@@ -302,6 +302,7 @@ public class ImovelBean implements Serializable {
 			fos.write(foto);
 			fos.flush();
 			fos.close();
+			this.imovelImagens = imagensNoTemp();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
