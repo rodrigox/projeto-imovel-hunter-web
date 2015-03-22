@@ -26,20 +26,24 @@ import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
+import br.com.imovelhunterweb.entitys.PontoGeografico;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
+import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.service.ImagemService;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.service.PontoGeograficoService;
 import br.com.imovelhunterweb.util.ConsultaCEP;
+import br.com.imovelhunterweb.util.LocalizacaoUtil;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
 @ManagedBean(name = "imovelBean")
 @ViewScoped
-public class ImovelBean implements Serializable{
-	
+public class ImovelBean implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -55,23 +59,24 @@ public class ImovelBean implements Serializable{
 	private Caracteristica caracteristica;
 	private List<Caracteristica> allCacaracteristicas;
 	private boolean skip;
-	private String cep;
-	
+	private String valorImovel;
 
+	private String cep;
 
 	@ManagedProperty("#{imovelService}")
 	private ImovelService imovelService;
-	
+
+	@ManagedProperty("#{pontoGeograficoService}")
+	private PontoGeograficoService pontoGeograficoService;
+
 	@ManagedProperty("#{imagemService}")
 	private ImagemService imagemService;
-	
+
 	@ManagedProperty("#{anuncianteService}")
 	private AnuncianteService anuncianteService;
-	
+
 	@ManagedProperty("#{caracteristicaService}")
 	private CaracteristicaService caracteristicaService;
-	
-
 
 	@PostConstruct
 	public void init(){	
@@ -93,69 +98,67 @@ public class ImovelBean implements Serializable{
 		
 	}
 
-	
 	public List<Imagem> getImovelImagens() {
 		return imovelImagens;
 	}
 
-
 	public void setImovelImagens(List<Imagem> imovelImagens) {
 		this.imovelImagens = imovelImagens;
 	}
-	
+
 	public Imovel getImovel() {
 		return imovel;
 	}
-
 
 	public void setImovel(Imovel imovel) {
 		this.imovel = imovel;
 	}
 
-
 	public Anunciante getAnunciante() {
 		return anunciante;
 	}
-
 
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
 
-
 	public ImovelService getImovelService() {
 		return imovelService;
 	}
-
 
 	public void setImovelService(ImovelService imovelService) {
 		this.imovelService = imovelService;
 	}
 
-
 	public AnuncianteService getAnuncianteService() {
 		return anuncianteService;
 	}
 
-
 	public void setAnuncianteService(AnuncianteService anuncianteService) {
 		this.anuncianteService = anuncianteService;
 	}
-	
-	
+
 	public CaracteristicaService getCaracteristicaService() {
 		return caracteristicaService;
 	}
 
-
-	public void setCaracteristicaService(CaracteristicaService caracteristicaService) {
+	public void setCaracteristicaService(
+			CaracteristicaService caracteristicaService) {
 		this.caracteristicaService = caracteristicaService;
 	}
+	
+	public PontoGeograficoService getPontoGeograficoService() {
+		return pontoGeograficoService;
+	}
+
+	public void setPontoGeograficoService(
+			PontoGeograficoService pontoGeograficoService) {
+		this.pontoGeograficoService = pontoGeograficoService;
+	}	
 
 	public ImagemService getImagemService() {
 		return imagemService;
 	}
-
 
 	public void setImagemService(ImagemService imagemService) {
 		this.imagemService = imagemService;
@@ -165,256 +168,347 @@ public class ImovelBean implements Serializable{
 		return navegador;
 	}
 
-
 	public void setNavegador(Navegador navegador) {
 		this.navegador = navegador;
 	}
-
 
 	public PrimeUtil getPrimeUtil() {
 		return primeUtil;
 	}
 
-
 	public void setPrimeUtil(PrimeUtil primeUtil) {
 		this.primeUtil = primeUtil;
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	public String getSelectedItem() {
-	    return selectedItem;
+		return selectedItem;
 	}
 
 	public void setSelectedItem(String selectedItem) {
-	    this.selectedItem = selectedItem;
+		this.selectedItem = selectedItem;
 	}
-	
+
 	public Map<Long, Boolean> getChecked() {
 		return checked;
 	}
 
 	public void setChecked(Map<Long, Boolean> checked) {
 		this.checked = checked;
-	}		
-	
+	}
+
 	public Caracteristica getCaracteristica() {
 		return caracteristica;
 	}
 
-
 	public void setCaracteristica(Caracteristica caracteristica) {
 		this.caracteristica = caracteristica;
-	}	
-	
+	}
+
 	public List<Caracteristica> getAllCacaracteristicas() {
 		return allCacaracteristicas;
 	}
 
-
-	public void setAllCacaracteristicas(List<Caracteristica> allCacaracteristicas) {
+	public void setAllCacaracteristicas(
+			List<Caracteristica> allCacaracteristicas) {
 		this.allCacaracteristicas = allCacaracteristicas;
-	}	
-	
-	
-    public boolean isSkip() {
-        return skip;
-    }
- 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-     	
+	}
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
 	public String getCep() {
 		return cep;
 	}
 
-
-	public void setCep(String cep) {		
+	public void setCep(String cep) {
 		this.cep = cep;
+		this.imovel.setCep(cep);
 		ConsultaCEP endereco = new ConsultaCEP(cep);
 		this.imovel.setEstado(endereco.getEstado());
 		this.imovel.setLogradouro(endereco.getLogradouro());
 		this.imovel.setCidade(endereco.getCidade());
-		this.imovel.setBairro(endereco.getBairro());	
+		this.imovel.setBairro(endereco.getBairro());
+	}
+	
+	public String getValorImovel() {
+		return valorImovel;
 	}
 
-	
-	
+	public void setValorImovel(String valorImovel) {
+		this.valorImovel = valorImovel;
+	}
+
 	// MÉTODOS PARA EXECUÇÃO:
-	
-	
-	public List<Imagem> getImagens(){  
-		FacesContext facesContext = FacesContext.getCurrentInstance();  
-        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-          
-        File pastaImagens = new File(scontext.getRealPath("/uploads/imagens/"));  
-        if(!pastaImagens.exists())pastaImagens.mkdirs();  
-        File[] arquivos = pastaImagens.listFiles();  
 
-        for(File arquivo : arquivos){  
-            if(arquivo.isFile()){  
+	public List<Imagem> getImagens() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
 
-            	String ext=arquivo.getName().substring(arquivo.getName().lastIndexOf(".")).toLowerCase();  
-                if(ext.equals(".jpg")||ext.equals(".jpeg")||ext.equals(".bmp")||ext.equals(".gif")||ext.equals(".png")){  
-                	boolean registro = false;
-            		for(Imagem im : this.imovelImagens){
-            			if(im.getCaminhoImagem().equals(arquivo.getName())){
-            				registro = true;
-            				break;
-            			}
-            		}  
-            		if(!registro){
-                    	Imagem img = new Imagem(null, null, arquivo.getName(), null);
-                    	this.imovelImagens.add(img);
-            		}
-                }  
-            }  
-        }  
-        return imovelImagens;  
-    } 
-	
-	
-    public void upload(FileUploadEvent event) {         
-        try {  
-            byte[] foto = event.getFile().getContents();  
-            String nomeArquivo = event.getFile().getFileName();    
-            
-            File f = new File(retornaCaminho(nomeArquivo));  
-            if(!f.getParentFile().exists())f.getParentFile().mkdirs();  
-            if(!f.exists())f.createNewFile();  
-            //System.out.println(f.getAbsolutePath());  
-            FileOutputStream fos = new FileOutputStream(retornaCaminho(nomeArquivo));  
-            fos.write(foto);  
-            fos.flush();  
-            fos.close();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-    }  
-	
-	public void removerImagem(String imagem){
-		for(Imagem im : this.imovelImagens){
-			if(im.getCaminhoImagem().equals(imagem)){
+		File pastaImagens = new File(scontext.getRealPath("/uploads/imagens/"));
+		if (!pastaImagens.exists())
+			pastaImagens.mkdirs();
+		File[] arquivos = pastaImagens.listFiles();
+
+		for (File arquivo : arquivos) {
+			if (arquivo.isFile()) {
+
+				String ext = arquivo.getName()
+						.substring(arquivo.getName().lastIndexOf("."))
+						.toLowerCase();
+				if (ext.equals(".jpg") || ext.equals(".jpeg")
+						|| ext.equals(".bmp") || ext.equals(".gif")
+						|| ext.equals(".png")) {
+					boolean registro = false;
+					for (Imagem im : this.imovelImagens) {
+						if (im.getCaminhoImagem().equals(arquivo.getName())) {
+							registro = true;
+							break;
+						}
+					}
+					if (!registro) {
+						Imagem img = new Imagem(null, null, arquivo.getName(),
+								null);
+						this.imovelImagens.add(img);
+					}
+				}
+			}
+		}
+		return imovelImagens;
+	}
+
+	public void upload(FileUploadEvent event) {
+		try {
+			byte[] foto = event.getFile().getContents();
+			String nomeArquivo = event.getFile().getFileName();
+
+			File f = new File(retornaCaminho(nomeArquivo));
+			if (!f.getParentFile().exists())
+				f.getParentFile().mkdirs();
+			if (!f.exists())
+				f.createNewFile();
+			// System.out.println(f.getAbsolutePath());
+			FileOutputStream fos = new FileOutputStream(
+					retornaCaminho(nomeArquivo));
+			fos.write(foto);
+			fos.flush();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removerImagem(String imagem) {
+		for (Imagem im : this.imovelImagens) {
+			if (im.getCaminhoImagem().equals(imagem)) {
 				this.imovelImagens.remove(im);
 				break;
 			}
 		}
-		File f = new File(retornaCaminho(imagem));  
-        f.delete();
+		File f = new File(retornaCaminho(imagem));
+		f.delete();
 	}
-	
-	public String retornaCaminho(String nomeImagem){
-        FacesContext facesContext = FacesContext.getCurrentInstance();    
-        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();    
-        return scontext.getRealPath("/uploads/imagens/"+ nomeImagem); 
+
+	public String retornaCaminho(String nomeImagem) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		return scontext.getRealPath("/uploads/imagens/" + nomeImagem);
 	}
-	
 
-	
-	public void cadastrarImovel(){
-    	this.imovel.setCaracteristicas(new ArrayList<Caracteristica>());	
-        for (Caracteristica caract : this.allCacaracteristicas) {
-            if (checked.get(caract.getIdCaracteristica())) {
-            	this.imovel.getCaracteristicas().add(caract);
+	public void cadastrarImovel() {
+		this.imovel.setCaracteristicas(new ArrayList<Caracteristica>());
+		for (Caracteristica caract : this.allCacaracteristicas) {
+			if (checked.get(caract.getIdCaracteristica())) {
+				this.imovel.getCaracteristicas().add(caract);
 
-            }
-        }
-        checked.clear(); 
-
-        this.imovel.setAnunciante(this.anunciante);
-        //this.imovel.setSituacaoImovel(SituacaoImovel.VENDA);
-
-		Imovel im = this.imovelService.inserir(this.imovel);
-		if (im != null){
-		for(int i = 0; i < this.imovelImagens.size(); i++){
-			this.imovelImagens.get(i).setImovel(im);
-			Imagem img = this.imagemService.inserir(this.imovelImagens.get(i));
-			if (img != null){
-				String nomeImagemServidor = img.getIdImagem() + "_" + img.getCaminhoImagem(); 
-				enviarImagemAoServidor(nomeImagemServidor, img.getCaminhoImagem());
 			}
 		}
-		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Cadastro","Imóvel cadastrado com sucesso.");
-		this.primeUtil.update("cadastroImovel.xhtml");
-        this.navegador.redirecionarPara("cadastroImovel.xhtml");
+		checked.clear();
 
-		}else{
-			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Erro","Não fui possível cadastrar o imóvel.");
+		LocalizacaoUtil localizacao = new LocalizacaoUtil();
+		try {
+			PontoGeografico pg = pontoGeograficoService.inserir(localizacao
+					.getPontoGeografico(this.imovel.getLogradouro() + ", "
+							+ this.imovel.getNumeroDoImovel() + ", "
+							+ this.imovel.getBairro() + ", "
+							+ this.imovel.getCidade()));
+
+			this.imovel.setPontoGeografico(pg);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		this.imovel.setAnunciante(this.anunciante);
+
+		Imovel im = this.imovelService.inserir(this.imovel);
+		if (im != null) {
+			for (int i = 0; i < this.imovelImagens.size(); i++) {
+				this.imovelImagens.get(i).setImovel(im);
+				Imagem img = this.imagemService.inserir(this.imovelImagens
+						.get(i));
+				if (img != null) {
+					String nomeImagemServidor = img.getIdImagem() + "_"
+							+ img.getCaminhoImagem();
+					enviarImagemAoServidor(nomeImagemServidor,
+							img.getCaminhoImagem());
+				}
+			}
+
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Cadastro",
+					"Imóvel cadastrado com sucesso.");
 			this.primeUtil.update("cadastroImovel.xhtml");
-			
+			this.navegador.redirecionarPara("cadastroImovel.xhtml");
+
+		} else {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Erro",
+					"Não fui possível cadastrar o imóvel.");
+			this.primeUtil.update("cadastroImovel.xhtml");
+
 		}
 	}
-	
 
-	public void enviarImagemAoServidor(String nomeImagemServidor, String nomeImagemTemp){
-    	String caminhoServidor = "C:/Users/Developers/Desktop/apache/apache-tomcat-7.0.59/webapps/imagens/";
-        File destino = new File(caminhoServidor + nomeImagemServidor);  
-        File origem = new File(retornaCaminho(nomeImagemTemp));  
-        if(!destino.getParentFile().exists())destino.getParentFile().mkdirs();  
-        if(!destino.exists())
+	public void enviarImagemAoServidor(String nomeImagemServidor,
+			String nomeImagemTemp) {
+		String caminhoServidor = "C:/Users/Developers/Desktop/apache/apache-tomcat-7.0.59/webapps/imagens/";
+		File destino = new File(caminhoServidor + nomeImagemServidor);
+		File origem = new File(retornaCaminho(nomeImagemTemp));
+		if (!destino.getParentFile().exists())
+			destino.getParentFile().mkdirs();
+		if (!destino.exists())
 			try {
 				destino.createNewFile();
 				copiaImagem(origem, destino);
-								
+
 			} catch (IOException e) {
 				e.printStackTrace();
-			}  
+			}
+	}
+
+	public static void copiaImagem(File origem, File destino)
+			throws IOException {
+		if (destino.exists())
+			destino.delete();
+
+		FileChannel origemChannel = null;
+		FileChannel destinoChannel = null;
+
+		try {
+			origemChannel = new FileInputStream(origem).getChannel();
+			destinoChannel = new FileOutputStream(destino).getChannel();
+			origemChannel.transferTo(0, origemChannel.size(), destinoChannel);
+
+		} finally {
+			if (origemChannel != null && origemChannel.isOpen())
+				origemChannel.close();
+			if (destinoChannel != null && destinoChannel.isOpen())
+				destinoChannel.close();
+		}
+	}
+
+	public boolean deletarTemp(File diretorio) {
+		if (diretorio.isDirectory()) {
+			String[] registros = diretorio.list();
+			for (int i = 0; i < registros.length; i++) {
+				boolean deletado = deletarTemp(new File(diretorio, registros[i]));
+				if (!deletado) {
+					return false;
+				}
+			}
+		}
+
+		return diretorio.delete();
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+
+		if (event.getOldStep().equals("imovelEndereco")) {
+			if (!validarCamposGerais()) {
+				return event.getOldStep();
+			}	
+		}
+		return event.getNewStep();
+
+	}
+
+	public SituacaoImovel[] getSituacao() {
+		return SituacaoImovel.values();
 	}
 	
-	
-	public static void copiaImagem(File origem, File destino) throws IOException {  
-	     if (destino.exists())  
-	    	 destino.delete();  
-	  
-	     FileChannel origemChannel = null;  
-	     FileChannel destinoChannel = null;  
-	  
-	     try {  
-	    	 origemChannel = new FileInputStream(origem).getChannel();  
-	    	 destinoChannel = new FileOutputStream(destino).getChannel();  
-	         origemChannel.transferTo(0, origemChannel.size(),  
-	        		 destinoChannel); 
-	         
+	public TipoImovel[] getTipoImovel() {
+		return TipoImovel.values();
+	}
 
-	         	
-	     } finally {  
-	         if (origemChannel != null && origemChannel.isOpen())  
-	        	 origemChannel.close();  
-	         if (destinoChannel != null && destinoChannel.isOpen())  
-	        	 destinoChannel.close();  
-	    }  
-	}  
-	
-    public boolean deletarTemp(File diretorio) {
-        if (diretorio.isDirectory()) {
-            String[] registros = diretorio.list();
-            for (int i=0; i<registros.length; i++) { 
-               boolean deletado = deletarTemp(new File(diretorio, registros[i]));
-                if (!deletado) {
-                    return false;
-                }
-            }
-        }
-
-        return diretorio.delete();
-    }	
-	
-    public String onFlowProcess(FlowEvent event) {
-        if(skip) {
-            skip = false;   
-            return "galeria";
-        }
-        else {
-            return event.getNewStep();
-        }
-    }
-    
-    public SituacaoImovel[] getSituacao() {
-        return SituacaoImovel.values();
-      }
-	
+	public boolean validarCamposGerais() {
+		if (this.imovel.getNomeDoProprietario() == null || this.imovel.getNomeDoProprietario().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O nome do proprietário do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		if (this.imovel.getCep() == null || this.imovel.getCep().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O CEP do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		if (this.imovel.getLogradouro() == null || this.imovel.getLogradouro().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O Logradouro do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		if (this.imovel.getBairro() == null || this.imovel.getBairro().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O Bairro do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		if (this.imovel.getCidade() == null || this.imovel.getCidade().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "A Cidade do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}	
+		if (this.imovel.getEstado() == null || this.imovel.getEstado().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O Estado do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		if (this.imovel.getNumeroDoImovel() == null || this.imovel.getNumeroDoImovel().trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O Número do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}	
+		
+		if (this.valorImovel == null || valorImovel.trim().equals("")) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Campo inválido", "O valor do imóvel deve ser informado.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}else{
+			try {
+				this.imovel.setPreco(Double.parseDouble(this.valorImovel));
+			} catch (NumberFormatException e) {
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+						"Campo inválido",
+						"O valor do imóvel deve ser informado corretamente.");
+				this.primeUtil.update("idFormMensagem");
+				return false;
+			}
+		}
+		return true;
+	}
 }
