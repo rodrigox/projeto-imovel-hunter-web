@@ -17,26 +17,24 @@
 
 
 	<style type="text/css">
-		
-		.ui-widget-header {
-		  border: 1px solid #eeeeee;
-		  background: #1f3c58;
+.ui-widget-header {
+	border: 1px solid #eeeeee;
+	background: #1f3c58;
 	/* 	  color: #FFFFFF; */
-		  font-weight: bold;
-		}
-	
-		.ui-widget-header span {	  
-		  color: #FFFFFF;	
-		}
-	
-		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
-		  padding: 9px 15px;
-		  border-bottom: 1px solid #eee;
-	 	  background-color: #1f3c58; 
-		}
-	
-	</style>
-	
+	font-weight: bold;
+}
+
+.ui-widget-header span {
+	color: #FFFFFF;
+}
+
+.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	padding: 9px 15px;
+	border-bottom: 1px solid #eee;
+	background-color: #1f3c58;
+}
+</style>
+
 
 	<style>
 .ui-widget-header {
@@ -58,7 +56,7 @@
 	<!-- 	primefaces -->
 
 	<h:form>
-    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+		<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />
 	</h:form>
 
 
@@ -98,8 +96,9 @@
 			<div class="coluna col8">
 				<nav>
 				<ul class="menu inline sem-marcador">
-					<li><a href="cadastroImovel.xhtml" >Cadastrar imóvel</a></li>
-					<li><a class="selecionado" href="detalheImovel.xhtml">Imoveis cadastrados</a></li>							
+					<li><a href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
+					<li><a class="selecionado" href="detalheImovel.xhtml">Imoveis
+							cadastrados</a></li>
 					<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 				</ul>
 				</nav>
@@ -153,18 +152,18 @@
 
 		</div>
 
-</div>
+	</div>
 
 
-		<!-- Imagens do Imovel -->
-		<p:galleria
-			style="margin-left: auto;
+	<!-- Imagens do Imovel -->
+	<p:galleria
+		style="margin-left: auto;
     margin-right: auto;
     width: 70%;"
-			value="#{detalheImovelBean.imagens}" var="image" panelWidth="937"
-			panelHeight="500" showCaption="true">
+		value="#{detalheImovelBean.imagens}" var="image" panelWidth="937"
+		panelHeight="500" showCaption="true">
 
-<!--  
+		<!--  
 			<p:graphicImage value="/images/imagem2/#{image}"
 				alt="Image Description for #{image}" title="#{image}" />
 
@@ -173,63 +172,95 @@
 
  -->
 
-<!-- teste diego 	-->
-			<p:graphicImage value="#{image}"
-				alt="Image Description for #{image}" title="#{image}" />
+		<!-- teste diego 	-->
+		<p:graphicImage value="C:/tomcat/webapps/imagens/#{image}"
+			alt="Image Description for #{image}" title="#{image}" />
 
 
-		</p:galleria>
-<!--fim teste diego -->
+	</p:galleria>
+	<!--fim teste diego -->
 
 
 
 
-		<!-- informações detalhadas do imovel -->
- 
+	<!-- informações detalhadas do imovel -->
 
-		<div>
 
-			<p:panel style="margin-left: 174px; margin-right: 174px">
+	<div>
 
-				<div>
+		<p:panel style="margin-left: 174px; margin-right: 174px">
 
-					<div style="margin-top: 50px">
-						<p:outputLabel value="Apartamento A Venda" style="font-size:100%"></p:outputLabel>
-						<br />
-						<p:outputLabel value="Rua da Ladeira"
-							style="font-size:180%;color:#1F3C58"></p:outputLabel>
-						,
+			<div>
 
-						<p:outputLabel value="#{detalheImovelBean.numeroDoImovel}" style="font-size:180%"></p:outputLabel>
-						<br />
+				<div style="margin-top: 50px">
+				
+				<p:outputLabel value="Situação: " style="font-size:100%"></p:outputLabel>
+				
+					<p:outputLabel value="#{detalheImovelBean.situacao}" style="font-size:100%"></p:outputLabel>
+					<br />
+					
+					<p:outputLabel  value="Rua: "
+						style="font-size:180%;color:#1F3C58"></p:outputLabel >
+					
+					<p:outputLabel  value="#{detalheImovelBean.logradouro}"
+						style="font-size:180%;color:#1F3C58"></p:outputLabel >
+					,
 
-						<p:outputLabel value="#{detalheImovelBean.cidade}" style="font-size:180%"></p:outputLabel>
-						,
-						<p:outputLabel value="Pernambuco" style="font-size:180%"></p:outputLabel>
+					<p:outputLabel  value="#{detalheImovelBean.numeroDoImovel}"
+						style="font-size:180%;color:#1F3C58"></p:outputLabel>
+					
+					,
+					<p:outputLabel value="#{detalheImovelBean.bairro}"
+						style="font-size:180%;color:#1F3C58"></p:outputLabel> <br />
 
-						<br />
+					<p:outputLabel value="#{detalheImovelBean.cidade}"
+						style="font-size:180%;color:#1F3C58"></p:outputLabel>
+					,
+					<p:outputLabel value="#{detalheImovelBean.estado}" style="font-size:180%;color:#1F3C58"></p:outputLabel>
 
-						<p:outputLabel value="4 Quartos"></p:outputLabel>
-						|
-						<p:outputLabel value=" 1 Suite"></p:outputLabel>
-						|
-						<p:outputLabel value="#{detalheImovelBean.areaTotal}">m²</p:outputLabel>
+					<br />
+					
+					
+					<p:outputLabel value="Tipo de Imovel:" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
+					
+					<p:outputLabel value="#{detalheImovelBean.tipoDeImovel}" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
 
-					</div>
-
+					<br />
+					
+					<p:outputLabel value="Complemento: "> </p:outputLabel>
+					
+				<p:outputLabel value="#{detalheImovelBean.complemento}"> </p:outputLabel><br/>
+							
+					<p:outputLabel value="#{detalheImovelBean.numerodeQuartos}"> Quartos</p:outputLabel>
+					|
+					<p:outputLabel value="#{detalheImovelBean.numeroDeSuites}"> Suite(s)</p:outputLabel>
+					|
+					<p:outputLabel value="#{detalheImovelBean.areaTotal}">m²</p:outputLabel> <br />
+					
+					
+					<p:outputLabel value="#{detalheImovelBean.ambientes}"> Ambientes </p:outputLabel>|
+					
+					<p:outputLabel value="#{detalheImovelBean.numerodeQuartos}"> Quarto(s) </p:outputLabel>|
+					<p:outputLabel value="#{detalheImovelBean.numeroDeBanheiros}"> Banheiro(s)</p:outputLabel>|
+					<p:outputLabel value="#{detalheImovelBean.numeroDeSalas}"> Sala(s) </p:outputLabel><br />
+					
+					
+					<p:outputLabel value="Descrição: ">  </p:outputLabel>
+					<p:outputLabel value="#{detalheImovelBean.descricao}">  </p:outputLabel>
+					
+					
+					
+					
 
 				</div>
 
-			</p:panel>
+
+			</div>
+
+		</p:panel>
 
 
-		</div>
-
- 
-
-
-
-
+	</div>
 
 
 
@@ -237,7 +268,13 @@
 
 
 
-		<!-- 	Corpo do meio fim -->
+
+
+
+
+
+
+	<!-- 	Corpo do meio fim -->
 
 	<!-- 	Rodapé -->
 
