@@ -1,7 +1,11 @@
 package br.com.imovelhunterweb.beans;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +13,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 import com.sun.faces.facelets.PrivateApiFaceletCacheAdapter;
 
@@ -35,7 +41,6 @@ public class DetalheImovelBean implements Serializable {
 	@ManagedProperty("#{imovelService}")
 	public ImovelService imovelService;
 	private Imovel imovel;
-	
 	
 	private String cidade;
 	private double areaTotal;
@@ -96,12 +101,28 @@ public class DetalheImovelBean implements Serializable {
 			return;
 
 		}
-*/
+*/	
 		List<Imagem> imgs = this.imovel.getImagems();
+		String caminhoServidor = "C:/tomcat/webapps/imagens/";
 		for (Imagem mg : imgs) {
+			String origem = caminhoServidor + mg.getIdImagem() +"_"+ mg.getCaminhoImagem();
+			String destino = retornaCaminho(mg.getCaminhoImagem());
+			File fileOrigem = new File(origem);
+			File fileDestino = new File(destino);
+				 
+			if (!fileDestino.getParentFile().exists())
+				fileDestino.getParentFile().mkdirs();
+			if (!fileDestino.exists())
+				try {
+					fileDestino.createNewFile();
+					copiaImagem(fileOrigem, fileDestino);
 
+				} catch (IOException e) {
+					e.printStackTrace();
+				}				
+			
 			//this.imagens.add("C:/tomcat/webapps/imagens/"+mg.getIdImagem()+"_"+mg.getCaminhoImagem());
-			this.imagens.add(mg.getIdImagem()+"_"+mg.getCaminhoImagem());
+			this.imagens.add(retornaCaminho("") + mg.getIdImagem()+"_"+mg.getCaminhoImagem());
 			
 			
 		}
@@ -130,8 +151,81 @@ public class DetalheImovelBean implements Serializable {
 		
 	}
 
+	public void imagensNoTemp() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+
+		File pastaImagens = new File(scontext.getRealPath("/uploads/visualizacao/"));
+		if (!pastaImagens.exists())
+			pastaImagens.mkdirs();
+		File[] arquivos = pastaImagens.listFiles();
+
+		for (File arquivo : arquivos) {
+			if (arquivo.isFile()) {
+
+				String ext = arquivo.getName()
+						.substring(arquivo.getName().lastIndexOf("."))
+						.toLowerCase();
+				if (ext.equals(".jpg") || ext.equals(".jpeg")
+						|| ext.equals(".bmp") || ext.equals(".gif")
+						|| ext.equals(".png")) {
+					this.imagens.add(arquivo.getName());
+				}
+			}
+		}
+	}
 	
 	
+	
+	
+	
+	public boolean deletarTemp(File diretorio) {
+		if (diretorio.isDirectory()) {
+			String[] registros = diretorio.list();
+			for (int i = 0; i < registros.length; i++) {
+				boolean deletado = deletarTemp(new File(diretorio, registros[i]));
+				if (!deletado) {
+					return false;
+				}
+			}
+		}
+
+		return diretorio.delete();
+	}
+	
+	public String retornaCaminho(String nomeImagem) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		return scontext.getRealPath("/uploads/visualizacao/" + nomeImagem);
+	}
+	
+	public static void copiaImagem(File origem, File destino)
+			throws IOException {
+		if (destino.exists())
+			destino.delete();
+
+		FileChannel origemChannel = null;
+		FileChannel destinoChannel = null;
+
+		try {
+			origemChannel = new FileInputStream(origem).getChannel();
+			destinoChannel = new FileOutputStream(destino).getChannel();
+			origemChannel.transferTo(0, origemChannel.size(), destinoChannel);
+
+		} finally {
+			if (origemChannel != null && origemChannel.isOpen())
+				origemChannel.close();
+			if (destinoChannel != null && destinoChannel.isOpen())
+				destinoChannel.close();
+		}
+	}
+	
+	
+	
+	
+
 	
 	
 	
