@@ -28,7 +28,9 @@ public class Imagem implements Serializable {
 	@ManyToOne
 	private Imovel imovel;
 
-
+	public Imagem(){
+		
+	}
 
 	public Imagem(String nome, String descricao, String caminhoImagem,
 			Imovel imovel) {

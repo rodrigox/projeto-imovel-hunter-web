@@ -14,8 +14,8 @@
 		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
 		rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
-	
-	
+
+
 	<style type="text/css">
 		
 		.ui-widget-header {
@@ -38,8 +38,22 @@
 	</style>
 	
 
+	<style>
+.ui-widget-header {
+	border: 1px solid #eeeeee;
+	background: #1f3c58;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.ui-panelgrid td {
+	padding: 2px 5px;
+}
+</style>
+
+
 </h:head>
-<h:body> 
+<h:body>
 #{loginBean.usuarioLogado}
 	<!-- 	primefaces -->
 
@@ -121,27 +135,109 @@
 
 
 
-	
-<div style="display:block; text-align:center;">
-<p:galleria
-			style="margin-left: auto;
-    margin-right: auto;
-    width: 70%;"
-			value="#{imagesView.images}" var="image" panelWidth="1000"
-			panelHeight="500" showCaption="true">
-
-	
-				<p:graphicImage value="/images/imagem2/#{image}"
-					alt="Image Description for #{image}" title="#{image}" />
-
-		
-		</p:galleria>
 
 
+
+
+	<div style="display: block; text-align: center;">
+		<div class="linha">
+			<div class="coluna col12">
+
+				<p:panel header="INFORMAÇÕES DETALHADAS DO IMOVEL">
+
+
+
+				</p:panel>
+
+			</div>
+
+		</div>
 
 </div>
 
-	<!-- 	Corpo do meio fim -->
+
+		<!-- Imagens do Imovel -->
+		<p:galleria
+			style="margin-left: auto;
+    margin-right: auto;
+    width: 70%;"
+			value="#{detalheImovelBean.imagens}" var="image" panelWidth="937"
+			panelHeight="500" showCaption="true">
+
+<!--  
+			<p:graphicImage value="/images/imagem2/#{image}"
+				alt="Image Description for #{image}" title="#{image}" />
+
+
+		</p:galleria>
+
+ -->
+
+<!-- teste diego 	-->
+			<p:graphicImage value="#{image}"
+				alt="Image Description for #{image}" title="#{image}" />
+
+
+		</p:galleria>
+<!--fim teste diego -->
+
+
+
+
+		<!-- informações detalhadas do imovel -->
+ 
+
+		<div>
+
+			<p:panel style="margin-left: 174px; margin-right: 174px">
+
+				<div>
+
+					<div style="margin-top: 50px">
+						<p:outputLabel value="Apartamento A Venda" style="font-size:100%"></p:outputLabel>
+						<br />
+						<p:outputLabel value="Rua da Ladeira"
+							style="font-size:180%;color:#1F3C58"></p:outputLabel>
+						,
+
+						<p:outputLabel value="#{detalheImovelBean.numeroDoImovel}" style="font-size:180%"></p:outputLabel>
+						<br />
+
+						<p:outputLabel value="#{detalheImovelBean.cidade}" style="font-size:180%"></p:outputLabel>
+						,
+						<p:outputLabel value="Pernambuco" style="font-size:180%"></p:outputLabel>
+
+						<br />
+
+						<p:outputLabel value="4 Quartos"></p:outputLabel>
+						|
+						<p:outputLabel value=" 1 Suite"></p:outputLabel>
+						|
+						<p:outputLabel value="#{detalheImovelBean.areaTotal}">m²</p:outputLabel>
+
+					</div>
+
+
+				</div>
+
+			</p:panel>
+
+
+		</div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+		<!-- 	Corpo do meio fim -->
 
 	<!-- 	Rodapé -->
 

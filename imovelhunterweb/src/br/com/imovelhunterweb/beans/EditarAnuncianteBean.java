@@ -52,7 +52,7 @@ public class EditarAnuncianteBean implements Serializable{
 	@PostConstruct
 	public void init(){
 		this.navegador = new Navegador();
-		this.primeUtil = new PrimeUtil();
+		this.primeUtil = new PrimeUtil();		
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
 			this.navegador.redirecionarPara("login.xhtml");
@@ -66,7 +66,6 @@ public class EditarAnuncianteBean implements Serializable{
 		this.email = this.anunciante.getEmail();
 		
 		this.validadorDeEmail = new EmailValidator();
-
 
 	}
 
