@@ -97,8 +97,7 @@
 				<nav>
 				<ul class="menu inline sem-marcador">
 					<li><a href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
-					<li><a class="selecionado" href="detalheImovel.xhtml">Imoveis
-							cadastrados</a></li>
+					<li><a class="selecionado" href="detalheImovel.xhtml">Detalhes Do Imovel</a></li>
 					<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 				</ul>
 				</nav>
@@ -156,6 +155,8 @@
 
 
 	<!-- Imagens do Imovel -->
+	
+	
 	<p:galleria
 		style="margin-left: auto;
     margin-right: auto;
@@ -189,15 +190,20 @@
 	<div>
 
 		<p:panel style="margin-left: 174px; margin-right: 174px">
-
+			
+			
+			
 			<div>
 
 				<div style="margin-top: 50px">
 				
 				<p:outputLabel value="Situação: " style="font-size:100%"></p:outputLabel>
 				
-					<p:outputLabel value="#{detalheImovelBean.situacao}" style="font-size:100%"></p:outputLabel>
-					<br />
+				
+					<p:outputLabel value="#{detalheImovelBean.situacao}" style="font-size:100%"></p:outputLabel> | 
+					
+					<p:outputLabel value="Preço: R$ " style="font-size:100%"></p:outputLabel>
+					<p:outputLabel value="#{detalheImovelBean.preco}" style="font-size:100%;color:#1F3C58"></p:outputLabel><br/>
 					
 					<p:outputLabel  value="Rua: "
 						style="font-size:180%;color:#1F3C58"></p:outputLabel >
@@ -245,17 +251,27 @@
 					<p:outputLabel value="#{detalheImovelBean.numeroDeSalas}"> Sala(s) </p:outputLabel><br />
 					
 					
+					
+					
+					
+					<p:outputLabel value="Anunciante: ">  </p:outputLabel>
+					
+				<p:outputLabel value="#{detalheImovelBean.nomeAnunciante}">  </p:outputLabel><br/>
+				
+				<p:outputLabel value="Proprietário: ">  </p:outputLabel>
+				
+				<p:outputLabel value="#{detalheImovelBean.nomedoProprietario}">  </p:outputLabel><br />
+					
+					
 					<p:outputLabel value="Descrição: ">  </p:outputLabel>
-					<p:outputLabel value="#{detalheImovelBean.descricao}">  </p:outputLabel>
-					
-					
-					
+					<p:outputLabel value="#{detalheImovelBean.descricao}">  </p:outputLabel><br/>
 					
 
 				</div>
 
 
 			</div>
+			
 
 		</p:panel>
 
