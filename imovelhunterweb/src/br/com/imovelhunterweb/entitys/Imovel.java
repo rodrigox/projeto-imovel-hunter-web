@@ -33,9 +33,22 @@ public class Imovel implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idImovel;
 	
+	
+	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER)
+	
+	private List<Imagem> imagems;
+	
 	@Column
 	private String numeroDoImovel;
 	
+	public List<Imagem> getImagems() {
+		return imagems;
+	}
+
+	public void setImagems(List<Imagem> imagems) {
+		this.imagems = imagems;
+	}
+
 	@Column
 	private int numeroDeBanheiros;
 	
