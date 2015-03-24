@@ -81,7 +81,7 @@ public class DetalheImovelBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		
-		this.imovel= imovelService.listarTodos().get(2);
+		this.imovel= imovelService.listarTodos().get(0);
 		imagens = new ArrayList<String>();
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
@@ -102,11 +102,14 @@ public class DetalheImovelBean implements Serializable {
 
 		}
 */	
-		List<Imagem> imgs = this.imovel.getImagems();
+		deletarTemp(new File(retornaCaminho("")));
+		List<Imagem> imgs = this.imovel.getImagens();
+		
+
 		String caminhoServidor = "C:/tomcat/webapps/imagens/";
 		for (Imagem mg : imgs) {
 			String origem = caminhoServidor + mg.getIdImagem() +"_"+ mg.getCaminhoImagem();
-			String destino = retornaCaminho(mg.getCaminhoImagem());
+			String destino = retornaCaminho(mg.getIdImagem() +"_"+ mg.getCaminhoImagem());
 			File fileOrigem = new File(origem);
 			File fileDestino = new File(destino);
 				 
@@ -122,7 +125,7 @@ public class DetalheImovelBean implements Serializable {
 				}				
 			
 			//this.imagens.add("C:/tomcat/webapps/imagens/"+mg.getIdImagem()+"_"+mg.getCaminhoImagem());
-			this.imagens.add(retornaCaminho("") + mg.getIdImagem()+"_"+mg.getCaminhoImagem());
+			this.imagens.add(mg.getIdImagem() +"_"+ mg.getCaminhoImagem());
 			
 			
 		}
@@ -151,34 +154,6 @@ public class DetalheImovelBean implements Serializable {
 		
 	}
 
-	public void imagensNoTemp() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ServletContext scontext = (ServletContext) facesContext
-				.getExternalContext().getContext();
-
-		File pastaImagens = new File(scontext.getRealPath("/uploads/visualizacao/"));
-		if (!pastaImagens.exists())
-			pastaImagens.mkdirs();
-		File[] arquivos = pastaImagens.listFiles();
-
-		for (File arquivo : arquivos) {
-			if (arquivo.isFile()) {
-
-				String ext = arquivo.getName()
-						.substring(arquivo.getName().lastIndexOf("."))
-						.toLowerCase();
-				if (ext.equals(".jpg") || ext.equals(".jpeg")
-						|| ext.equals(".bmp") || ext.equals(".gif")
-						|| ext.equals(".png")) {
-					this.imagens.add(arquivo.getName());
-				}
-			}
-		}
-	}
-	
-	
-	
-	
 	
 	public boolean deletarTemp(File diretorio) {
 		if (diretorio.isDirectory()) {
