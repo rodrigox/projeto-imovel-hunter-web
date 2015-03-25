@@ -154,9 +154,9 @@ public class LoginBean implements Serializable {
 		
 		//Se de erro aqui, verifique se no banco o campo tipoUsuario está preenchido, se ele estiver nulo, vai bugar aqui
 		if(this.anuncianteLogado != null && this.anuncianteLogado.getTipoUsuario().equals(TipoUsuario.USUARIO)){
-			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a href=\"cadastroGrupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
 		}else if(this.anuncianteLogado != null){
-			return "<li><a href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a href=\"cadastroGrupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+			return "<li><a href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
 		}
 		
 		return "";

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>	
+	<link rel="stylesheet" href="css/personalizado/normalize.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	
+	
+	<style type="text/css">
+	
+	.ui-widget-header {
+	  border: 1px solid #eeeeee;
+	  background: #1f3c58;
+/* 	  color: #FFFFFF; */
+	  font-weight: bold;
+	}	
+	
+		.ui-widget-header span {	  
+		  color: #FFFFFF;	
+		}
+		
+		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+		  padding: 9px 15px;
+		  border-bottom: 1px solid #eee;
+	 	  background-color: #1f3c58; 
+		}
+		
+		.ui-panelgrid td{
+		
+		padding: 2px 5px;
+	
+	}
+	
+	.ui-datatable .ui-datatable-header {
+  		border-bottom: 0px none;
+  		color: #FFFFFF;
+	}
+	
+	</style>
+	
+</h:head>
+<h:body>
+
+	<!-- 	primefaces -->
+	
+	<h:form>
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+	</h:form>
+	
+	
+	<!-- dialog de processo -->
+		<p:ajaxStatus onstart="processandoDialog.show();"
+			onsuccess="processandoDialog.hide();" />
+			
+		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+			header="#{msg['ajax.processando']}" draggable="false" closable="false"
+			style="font-size:8pt;">
+			<p:graphicImage value="/images/ajax_loader.gif" />
+		</p:dialog>
+		
+		<h:form id="idFormMensagem">
+			<p:growl autoUpdate="false" showDetail="true" life="3000" />
+		</h:form>
+		
+		
+		
+	
+	
+<!-- 	primefaces fim -->
+
+
+<!-- 	cabeçalho -->
+
+	<div class="header">
+		
+		<div class="linha">
+		
+			<header>
+			
+				<div class="coluna col2">
+					<h1 class="logo">Imovel Hunter</h1>
+				</div>
+				
+				<div class="coluna col10">
+					<nav>
+						<ul class="menu inline sem-marcador">
+							<li><a href="cadastroCaracteristica.xhtml" >Cadastro característica</a></li>
+							<li><a class="selecionado" href="cadastroGrupoCaracteristica.xhtml">Cadastro grupo de características</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
+						</ul>
+					</nav>
+				</div>
+				
+			</header>
+		 
+		</div>
+	
+	</div>
+	
+<!-- 	cabeçalho fim -->
+
+<div class="linha" style="height:100px;" />
+
+	<div class="linha">
+	
+		
+
+		<div class="coluna col12">
+			<h:form id="idFormGrupoCaracteristicas">
+				<p:panel  header="Grupo de Características dos Imóveis" resizable="false"
+					closable="false" modal="false" draggable="false">
+					
+					
+						<h:panelGrid styleClass="ui-panelgrid" columns="2" cellpadding="5">
+						
+							<h:panelGrid styleClass="ui-panelgrid" columns="2" cellpadding="5">
+								<h:outputLabel for="nome" value="Nome:" />
+								<p:inputText id="nome" value="#{grupoCaracteristicaBean.grupoCaracteristica.nome}"	required="false"/>	
+								<h:outputLabel for="descricao" value="Descrição:" />
+								<p:inputTextarea id="descricao" cols="22" value="#{grupoCaracteristicaBean.grupoCaracteristica.descricao}" required="false"/>	
+							
+							</h:panelGrid>
+							
+							<p:dataTable emptyMessage="Nenhum grupo de característica cadastrado" id="idDataTableCaracteristicas" var="grupoCaracteristica"
+							value="#{grupoCaracteristicaBean.listaGrupoCaracteristica}"
+							selectionMode="single"
+							selection="#{grupoCaracteristicaBean.grupoCaracteristicaSelecionado}"
+							rowKey="#{grupoCaracteristica.idGrupoCaracteristica}">
+							
+       							 <f:facet name="header">	
+       							 	 Grupo de características cadastradas
+								 </f:facet>
+								 
+								 <p:ajax event="rowSelect" listener="#{grupoCaracteristicaBean.onRowSelect}" update=":idFormGrupoCaracteristicas" />
+       							 <p:ajax event="rowUnselect" listener="#{grupoCaracteristicaBean.onRowUnselect}" update=":idFormGrupoCaracteristicas" />
+   
+								 
+								 <p:column headerText="Nome">
+						            <h:outputText value="#{grupoCaracteristica.nome}" />
+						        </p:column>
+       							 
+       						</p:dataTable>					
+							
+						
+						</h:panelGrid>
+					
+						
+							   
+					<f:facet name="footer">
+								
+			
+								<h:panelGrid  columns="3" >
+								
+								<p:commandButton styleClass="botaoazul" value="Salvar"
+									actionListener="#{grupoCaracteristicaBean.salvar}" />
+									
+								<p:commandButton styleClass="botaoazul" style="left:2px;" rendered="#{grupoCaracteristicaBean.renderSelectedGrupo}" value="Novo"
+									actionListener="#{grupoCaracteristicaBean.novo}" />	
+									
+								<p:commandButton styleClass="botaoazul" style="left:5px;" rendered="#{grupoCaracteristicaBean.renderSelectedGrupo}" value="Remover"
+									actionListener="#{grupoCaracteristicaBean.remover}" />	
+			
+								</h:panelGrid>
+			
+			
+					</f:facet>
+				</p:panel>
+			</h:form>
+		
+			</div>
+		
+		</div>
+		
+		<div class="linha" style="height:100px;" />
+	
+	<!-- 	Corpo do meio fim -->
+	
+<!-- 	Rodapé -->
+	
+	<div class="footer">
+	
+		<div class="linha">
+		
+			<footer>
+			
+				<div class="coluna col12">
+					
+					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+					
+				</div>
+			
+			</footer>
+		
+		</div>
+	
+	
+	</div>
+	
+<!-- 	Rodapé fim -->
+
+	
+</h:body>
+</html>
