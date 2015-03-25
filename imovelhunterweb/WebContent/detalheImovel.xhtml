@@ -52,7 +52,7 @@
 
 </h:head>
 <h:body>
-#{loginBean.usuarioLogado}
+<!-- #{loginBean.usuarioLogado} -->
 	<!-- 	primefaces -->
 
 	<h:form>
@@ -260,6 +260,14 @@
 				<p:outputLabel value="Proprietário: ">  </p:outputLabel>
 				
 				<p:outputLabel value="#{detalheImovelBean.nomedoProprietario}">  </p:outputLabel><br />
+					
+					<!-- //////////////////////////////////////////////////////////////// -->
+					<!-- <p:dataGrid value="#{detalheImovelBean.caracteristicas}" var="3{caracteristicas}"> 
+					<p:column>
+						<p:outputLabel value="#{caracteristicas.nome}"> </p:outputLabel>
+					</p:column>
+					
+					</p:dataGrid> -->
 					
 					
 					<p:outputLabel value="Descrição: ">  </p:outputLabel>
