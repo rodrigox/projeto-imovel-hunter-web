@@ -24,5 +24,6 @@ public interface ImovelService {
 	List<Imovel> listarTodos(int index,int quantidade);
 	
 	List<Imovel> listarImoveisDoAnunciante(Anunciante anunciante);
+
 	
 }

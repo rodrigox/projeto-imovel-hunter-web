@@ -29,7 +29,6 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	 * 
 	 */
 	
-	
 	@Resource(name = "imovelDAO")
 	private ImovelDAO imovelDAO;
 
