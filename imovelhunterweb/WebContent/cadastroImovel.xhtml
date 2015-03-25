@@ -167,11 +167,11 @@
 									required="false" label="Proprietário" />
 
 								<h:outputText value="CEP:*" />
-								<p:inputText immediate="true" value="#{imovelBean.cep}" required="false"
+								<p:inputMask mask="99999-999" immediate="true" value="#{imovelBean.cep}" required="false"
 									label="CEP">
 									<p:ajax event="blur" 
 										update="jsf_logradouro, jsf_bairro, jsf_cidade, jsf_estado" />
-								</p:inputText>
+								</p:inputMask>
 
 								<h:outputText value="Logradouro:*" />
 								<p:inputText id="jsf_logradouro"
@@ -261,7 +261,7 @@
 							<h:panelGrid columns="2" rowClasses="linha"
 								columnClasses="label, value">
 								<p:dataGrid style="width:100%; border:none;" id="checks"
-									columns="8" value="#{imovelBean.allCacaracteristicas}"
+									columns="5" value="#{imovelBean.allCacaracteristicas}"
 									var="item"
 									emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
 									<p:column headerText="Características">
