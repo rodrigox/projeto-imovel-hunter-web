@@ -19,8 +19,7 @@ import javax.faces.bean.ManagedProperty;
 
 @ManagedBean(name = "listarImovelBean")
 @ViewScoped
-public class ListarImovelBean implements Serializable{
-	
+public class ListarImovelBean implements Serializable{	
 	/**
 	 * 
 	 */
