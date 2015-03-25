@@ -18,7 +18,6 @@ import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.ValidaCPF;
 
-
 @ManagedBean(name ="anuncianteBean")
 @ViewScoped
 public class AnuncianteBean implements Serializable {
