@@ -1,5 +1,6 @@
 package br.com.imovelhunterweb.beans;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,6 +22,8 @@ import javax.servlet.ServletContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
@@ -289,6 +292,9 @@ public class ImovelBean implements Serializable {
 	public void upload(FileUploadEvent event) {
 		try {
 			byte[] foto = event.getFile().getContents();
+			
+			StreamedContent stream = this.getStreamedConten(foto);
+			
 			String nomeArquivo = event.getFile().getFileName();
 
 			File f = new File(retornaCaminho(nomeArquivo));
@@ -415,6 +421,12 @@ public class ImovelBean implements Serializable {
 			if (destinoChannel != null && destinoChannel.isOpen())
 				destinoChannel.close();
 		}
+	}
+	
+	
+	public StreamedContent getStreamedConten(byte[] bytes){
+		StreamedContent stream = new DefaultStreamedContent(new ByteArrayInputStream(bytes), "image/png");        
+		return stream;
 	}
 
 	public boolean deletarTemp(File diretorio) {

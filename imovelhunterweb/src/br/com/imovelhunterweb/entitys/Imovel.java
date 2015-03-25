@@ -31,23 +31,13 @@ public class Imovel implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idImovel;
+	private long idImovel;	
 	
-	
-	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER)
-	
+	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER)	
 	private List<Imagem> imagems;
 	
 	@Column
 	private String numeroDoImovel;
-	
-	public List<Imagem> getImagems() {
-		return imagems;
-	}
-
-	public void setImagems(List<Imagem> imagems) {
-		this.imagems = imagems;
-	}
 
 	@Column
 	private int numeroDeBanheiros;
@@ -116,10 +106,7 @@ public class Imovel implements Serializable{
 	private PontoGeografico pontoGeografico;
 	
 	@OneToMany
-	private List<PontoGeografico> cobertura;
-
-	@OneToMany(mappedBy="imovel", fetch=FetchType.EAGER)
-	private List<Imagem> imagens;
+	private List<PontoGeografico> cobertura;	
 	
 	public long getIdImovel() {
 		return idImovel;
@@ -312,15 +299,7 @@ public class Imovel implements Serializable{
 
 	public void setCobertura(List<PontoGeografico> cobertura) {
 		this.cobertura = cobertura;
-	}
-	
-	public List<Imagem> getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(List<Imagem> imagens) {
-		this.imagens = imagens;
-	}
+	}	
 	
 	public TipoImovel getTipoImovel() {
 		return tipoImovel;
@@ -328,6 +307,14 @@ public class Imovel implements Serializable{
 
 	public void setTipoImovel(TipoImovel tipoImovel) {
 		this.tipoImovel = tipoImovel;
+	}
+
+	public List<Imagem> getImagems() {
+		return imagems;
+	}
+
+	public void setImagems(List<Imagem> imagems) {
+		this.imagems = imagems;
 	}
 	
 	
