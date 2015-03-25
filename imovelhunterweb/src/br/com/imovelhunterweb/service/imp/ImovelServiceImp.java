@@ -1,7 +1,9 @@
 package br.com.imovelhunterweb.service.imp;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,6 +12,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.imovelhunterweb.dao.ImovelDAO;
+import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.service.ImovelService;
 
@@ -18,6 +21,10 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 @Service("imovelService")
 public class ImovelServiceImp implements ImovelService,Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1646179337352925215L;
 	/**
 	 * 
 	 */
@@ -82,6 +89,17 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	public List<Imovel> listarTodos(int index, int quantidade) {
 		return this.imovelDAO.findAll(index,quantidade);
 	}
+
+	@Override
+	public List<Imovel> listarImoveisDoAnunciante(Anunciante anunciante) {
+		// TODO Auto-generated method stub
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("idAnunciante", anunciante.getIdAnunciante());
+		
+		return this.imovelDAO.useQuery("FROM Imovel i WHERE i.anunciante.idAnunciante=:idAnunciante", param);
+	}
+	
+	
 	
 	
 }
