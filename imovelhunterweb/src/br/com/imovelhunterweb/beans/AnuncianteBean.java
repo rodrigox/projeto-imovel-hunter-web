@@ -23,7 +23,6 @@ import br.com.imovelhunterweb.util.ValidaCPF;
 @ViewScoped
 public class AnuncianteBean implements Serializable {
 	
-	
 	/**
 	 * 
 	 */
