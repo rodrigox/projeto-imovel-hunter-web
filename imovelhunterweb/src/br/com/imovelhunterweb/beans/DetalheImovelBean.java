@@ -81,11 +81,12 @@ public class DetalheImovelBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		
-		this.imovel= imovelService.listarTodos().get(0);
-		imagens = new ArrayList<String>();
+		
+		this.imagens = new ArrayList<String>();
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
-		/*
+	
+		
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
 		if (this.anunciante == null) {
@@ -93,17 +94,19 @@ public class DetalheImovelBean implements Serializable {
 			return;
 
 		}
-
+		
 		this.imovel = (Imovel) UtilSession
 				.getHttpSessionObject("imovelSelecionado");
 		if (this.imovel == null) {
 			this.navegador.redirecionarPara("login.xhtml");
 			return;
 
-		}
-*/	
+		}	
+
+		
+	
 		deletarTemp(new File(retornaCaminho("")));
-		List<Imagem> imgs = this.imovel.getImagens();
+		List<Imagem> imgs = this.imovel.getImagems() != null ? this.imovel.getImagems() : new ArrayList<Imagem>();
 		
 
 		String caminhoServidor = "C:/tomcat/webapps/imagens/";

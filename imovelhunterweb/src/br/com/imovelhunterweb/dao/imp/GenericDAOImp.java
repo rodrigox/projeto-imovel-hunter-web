@@ -206,7 +206,7 @@ public class GenericDAOImp<Type, ID extends Serializable> implements GenericDAO<
 	@SuppressWarnings("unchecked")
 	public List<Type> findParameter(String query) {
 		if (objetoManager == null) {
-			System.out.println("EntityManager e nulo");	//FIXME: o que fazer quando objetoManger for nulo?
+			System.out.println("EntityManager e nulo");
 			return null;
 		}
 		
@@ -219,7 +219,7 @@ public class GenericDAOImp<Type, ID extends Serializable> implements GenericDAO<
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findParameterNative(String query, Integer parametro) {
 		if (objetoManager == null) {
-			System.out.println("EntityManager e nulo");	//FIXME: o que fazer quando objetoManger for nulo?
+			System.out.println("EntityManager e nulo");
 			return null;
 		}
 		
@@ -321,7 +321,7 @@ public class GenericDAOImp<Type, ID extends Serializable> implements GenericDAO<
 	public List<Type> findParameter(String query, int indiceInicial,
 			int indiceFinal) {
 		if (objetoManager == null) {
-			System.out.println("EntityManager e nulo");	//FIXME: o que fazer quando objetoManger for nulo?
+			System.out.println("EntityManager e nulo");
 			return null;
 		}
 		

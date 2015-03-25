@@ -48,7 +48,7 @@
 	<!-- 	primefaces -->
 	
 	<h:form>
-    	<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
 	</h:form>
 	
 	
@@ -81,19 +81,16 @@
 		
 			<header>
 			
-				<div class="coluna col4">
+				<div class="coluna col2">
 					<h1 class="logo">Imovel Hunter</h1>
 				</div>
 				
-				<div class="coluna col8">
+				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
-							<li><a href="index.xhtml" >Home</a></li>
-							<li><a href="">Sobre</a></li>
-							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
-							<li><a href="">Serviços</a></li>
-							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
-							
+							<li><a class="selecionado" href="cadastroCaracteristica.xhtml" >Cadastro característica</a></li>
+							<li><a href="cadastroGrupoCaracteristica.xhtml">Cadastro grupo de características</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
 						</ul>
 					</nav>
 				</div>
