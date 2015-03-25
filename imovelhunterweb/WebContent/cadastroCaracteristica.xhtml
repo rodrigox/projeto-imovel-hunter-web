@@ -40,6 +40,11 @@
 	
 	}
 	
+	.ui-datatable .ui-datatable-header {
+  		border-bottom: 0px none;
+  		color: #FFFFFF;
+	}
+	
 	</style>
 	
 </h:head>
@@ -116,25 +121,53 @@
 					
 					
 						<h:panelGrid styleClass="ui-panelgrid" columns="2" cellpadding="5">
-							<h:outputLabel for="nome" value="Nome:" />
-							<p:inputText id="nome" value="#{caracteristicaBean.caracteristica.nome}"	required="false"/>	
-							<h:outputLabel for="descricao" value="Descrição:" />
-							<p:inputTextarea id="descricao" cols="22" value="#{caracteristicaBean.caracteristica.descricao}" required="false"/>	
+						
+							<h:panelGrid styleClass="ui-panelgrid" columns="2" cellpadding="5">
+								<h:outputLabel for="nome" value="Nome:" />
+								<p:inputText id="nome" value="#{caracteristicaBean.caracteristica.nome}"	required="false"/>	
+								<h:outputLabel for="descricao" value="Descrição:" />
+								<p:inputTextarea id="descricao" cols="22" value="#{caracteristicaBean.caracteristica.descricao}" required="false"/>	
 							
+							</h:panelGrid>
+							
+							<p:dataTable emptyMessage="Nenhuma característica cadastrada" id="idDataTableCaracteristicas" var="caracteristica" value="#{caracteristicaBean.listaCaracteristica}" selectionMode="single" selection="#{caracteristicaBean.caracteristicaSelecionada}" rowKey="#{caracteristica.idCaracteristica}">
+       							 <f:facet name="header">	
+       							 	 Características cadastradas
+								 </f:facet>
+								 
+								 <p:ajax event="rowSelect" listener="#{caracteristicaBean.onRowSelect}" update=":idFormCaracteristicas" />
+       							 <p:ajax event="rowUnselect" listener="#{caracteristicaBean.onRowUnselect}" update=":idFormCaracteristicas" />
+   
+								 
+								 <p:column headerText="Nome">
+						            <h:outputText value="#{caracteristica.nome}" />
+						        </p:column>
+       							 
+       						</p:dataTable>					
+							
+						
 						</h:panelGrid>
+					
+						
 							   
 					<f:facet name="footer">
 								
 			
-								<h:panelGrid  columns="2" >
+								<h:panelGrid  columns="3" >
 								
 								<p:commandButton styleClass="botaoazul" value="Salvar"
 									actionListener="#{caracteristicaBean.salvarCaracteristica}" />
+									
+								<p:commandButton styleClass="botaoazul" style="left:2px;" rendered="#{caracteristicaBean.renderButtonDelete}" value="Novo"
+									actionListener="#{caracteristicaBean.novo}" />	
+									
+								<p:commandButton styleClass="botaoazul" style="left:5px;" rendered="#{caracteristicaBean.renderButtonDelete}" value="Remover"
+									actionListener="#{caracteristicaBean.remover}" />	
 			
 								</h:panelGrid>
 			
 			
-							</f:facet>
+					</f:facet>
 				</p:panel>
 			</h:form>
 		
