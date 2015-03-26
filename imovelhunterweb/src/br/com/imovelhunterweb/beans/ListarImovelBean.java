@@ -49,7 +49,7 @@ public class ListarImovelBean implements Serializable{
 		return meusImoveis;
 	}
 
-	public void setMeusimoveis(List<Imovel> meusImoveis) {
+	public void setMeusImoveis(List<Imovel> meusImoveis) {
 		this.meusImoveis = meusImoveis;
 	}
 
@@ -65,7 +65,7 @@ public class ListarImovelBean implements Serializable{
 		this.imovelService = imovelService;
 	}
 	
-	/*
+	
 	public void imovelSelecionado(){	
 		
 		Map params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();  
@@ -73,6 +73,6 @@ public class ListarImovelBean implements Serializable{
 		
 		UtilSession.setHttpSessionObject("imovelSelecionado",imovel);	
 	}
-	*/
+	
 	
 }

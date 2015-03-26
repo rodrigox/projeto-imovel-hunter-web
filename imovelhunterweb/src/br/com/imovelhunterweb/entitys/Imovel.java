@@ -34,7 +34,7 @@ public class Imovel implements Serializable{
 	private long idImovel;	
 	
 	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER)	
-	private List<Imagem> imagems;
+	private List<Imagem> imagens;
 	
 	@Column
 	private String numeroDoImovel;
@@ -309,12 +309,12 @@ public class Imovel implements Serializable{
 		this.tipoImovel = tipoImovel;
 	}
 
-	public List<Imagem> getImagems() {
-		return imagems;
+	public List<Imagem> getImagens() {
+		return imagens;
 	}
 
-	public void setImagems(List<Imagem> imagems) {
-		this.imagems = imagems;
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
 	}
 	
 	
