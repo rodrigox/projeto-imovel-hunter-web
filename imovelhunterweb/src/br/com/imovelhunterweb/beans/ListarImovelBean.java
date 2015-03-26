@@ -3,11 +3,13 @@ package br.com.imovelhunterweb.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Imovel;
@@ -43,7 +45,7 @@ public class ListarImovelBean implements Serializable{
 
 	}
 
-	public List<Imovel> getMeusimoveis() {
+	public List<Imovel> getMeusImoveis() {
 		return meusImoveis;
 	}
 
@@ -62,5 +64,15 @@ public class ListarImovelBean implements Serializable{
 	public void setImovelService(ImovelService imovelService) {
 		this.imovelService = imovelService;
 	}
+	
+	/*
+	public void imovelSelecionado(){	
+		
+		Map params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();  
+		Imovel imovel = (Imovel) params.get("param"); 
+		
+		UtilSession.setHttpSessionObject("imovelSelecionado",imovel);	
+	}
+	*/
 	
 }
