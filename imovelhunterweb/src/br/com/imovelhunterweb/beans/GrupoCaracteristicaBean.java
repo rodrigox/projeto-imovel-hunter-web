@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -61,7 +62,7 @@ public class GrupoCaracteristicaBean {
 		this.navegador = new Navegador();
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
-			this.navegador.redirecionarPara("login.xhtml");
+			this.navegador.redirecionarPara("index.xhtml");
 			return;
 		}
 		
@@ -94,6 +95,7 @@ public class GrupoCaracteristicaBean {
 			//Atualiza
 			if(this.renderSelectedGrupo){
 				this.grupoCaracteristicaService.atualizar(this.grupoCaracteristica);
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Atualização","Grupo de características atualizado com sucesso.");
 			}
 			//Salva
 			else{
@@ -101,15 +103,27 @@ public class GrupoCaracteristicaBean {
 				this.listaGrupoCaracteristica.add(this.grupoCaracteristica);
 				this.grupoCaracteristica = new GrupoCaracteristica();
 				this.mapaCaracteristica.clear();
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Salvar","Grupo de características salvo com sucesso.");
 			}		
 			
-		}
-		
+		}		
+		this.primeUtil.update("idFormMensagem");	
+		this.primeUtil.update("idFormGrupoCaracteristicas");		
 	}
 	
 	public void remover(){
 		this.grupoCaracteristica = this.grupoCaracteristicaSelecionado != null ? this.grupoCaracteristicaSelecionado : this.grupoCaracteristica;
-	
+		if(this.grupoCaracteristicaService.remover(this.grupoCaracteristica)){
+			this.listaGrupoCaracteristica.remove(this.grupoCaracteristica);
+			this.grupoCaracteristica = new GrupoCaracteristica();
+			this.renderSelectedGrupo = false;
+			this.mapaCaracteristica.clear();
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Remover","Grupo de características removido com sucesso.");
+		}else{
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_ERROR,"Erro","Não foi possível remover o grupo de característica.");
+		}
+		this.primeUtil.update("idFormMensagem");	
+		this.primeUtil.update("idFormGrupoCaracteristicas");	
 	}	
 	
 	
@@ -117,16 +131,28 @@ public class GrupoCaracteristicaBean {
 		this.mapaCaracteristica.clear();
 		this.grupoCaracteristica = new GrupoCaracteristica();
 		this.renderSelectedGrupo = false;
+		this.primeUtil.update("idFormMensagem");	
+		this.primeUtil.update("idFormGrupoCaracteristicas");	
 	}
 	
 	
 	private boolean validarCampos(){
+		if(this.grupoCaracteristica.getNome().length() == 0){
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Campo inválido","O nome do grupo deve ser informado");
+			return false;
+		}
+		if(this.grupoCaracteristica.getDescricao().length() == 0){
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Campo inválido","O grupo deve ter uma descrição");
+			return false;
+		}
+		
 		return true;
 	}
 		
 	
 	public void onRowSelect(SelectEvent event){		
 		this.grupoCaracteristica = this.grupoCaracteristicaSelecionado != null ? this.grupoCaracteristicaSelecionado : this.grupoCaracteristica;
+		this.mapaCaracteristica.clear();
 		this.setarCaracteristicasDoGrupoSelecionado();
 		this.renderSelectedGrupo = true;
 	}

@@ -71,6 +71,13 @@ public class LoginBean implements Serializable {
 		}
 	}
 	
+	public String getRestringeLogado(){
+		if(this.anuncianteLogado != null){
+			this.navegador.redirecionarPara("index.xhtml");
+		}
+		return "";
+	}
+	
 	public void logar(){
 		
 	    Object login = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
@@ -157,6 +164,31 @@ public class LoginBean implements Serializable {
 			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
 		}else if(this.anuncianteLogado != null){
 			return "<li><a href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}
+		
+		return "";
+	}
+	
+	public String getMinhaPermissaoGrupo(){
+		
+		//Se de erro aqui, verifique se no banco o campo tipoUsuario está preenchido, se ele estiver nulo, vai bugar aqui
+		if(this.anuncianteLogado != null && this.anuncianteLogado.getTipoUsuario().equals(TipoUsuario.USUARIO)){
+			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a class=\"selecionado\" href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}else if(this.anuncianteLogado != null){
+			return "<li><a href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a class=\"selecionado\"  href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}
+		
+		return "";
+	}
+	
+	
+	public String getMinhaPermissaoCaracteristica(){
+		
+		//Se de erro aqui, verifique se no banco o campo tipoUsuario está preenchido, se ele estiver nulo, vai bugar aqui
+		if(this.anuncianteLogado != null && this.anuncianteLogado.getTipoUsuario().equals(TipoUsuario.USUARIO)){
+			return "<li><a href=\"imoveis.xhtml\" >Imoveis</a></li> \r\n <li><a href=\"editarAnunciante.xhtml\">Editar meu perfil</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
+		}else if(this.anuncianteLogado != null){
+			return "<li><a class=\"selecionado\" href=\"cadastroCaracteristica.xhtml\" >Cadastro característica</a></li> \r\n <li><a href=\"grupoCaracteristica.xhtml\">Cadastro grupo de características</a></li>";
 		}
 		
 		return "";
