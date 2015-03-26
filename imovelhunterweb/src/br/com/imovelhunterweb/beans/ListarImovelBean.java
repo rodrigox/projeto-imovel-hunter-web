@@ -15,6 +15,7 @@ import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.service.ImovelService;
 import br.com.imovelhunterweb.util.Navegador;
+import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
 @ManagedBean(name = "listarImovelBean")
@@ -26,6 +27,7 @@ public class ListarImovelBean implements Serializable{
 	private static final long serialVersionUID = -2072699815347138448L;
 	private List<Imovel> meusImoveis;
 	private Navegador navegador;	
+	private PrimeUtil primeUtil;
 	private Anunciante anunciante;
 
 	@ManagedProperty("#{imovelService}")
@@ -35,6 +37,8 @@ public class ListarImovelBean implements Serializable{
 	public void init(){
 		this.meusImoveis = new ArrayList<Imovel>();
 		this.navegador = new Navegador();
+		this.primeUtil = new PrimeUtil();
+		
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
 			this.navegador.redirecionarPara("login.xhtml");
@@ -66,12 +70,12 @@ public class ListarImovelBean implements Serializable{
 	}
 	
 	
-	public void imovelSelecionado(){	
-		
-		Map params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();  
-		Imovel imovel = (Imovel) params.get("param"); 
-		
+	public void imovelSelecionado(Imovel imovel){	
 		UtilSession.setHttpSessionObject("imovelSelecionado",imovel);	
+		if(!imovel.equals(null)){
+			this.navegador.redirecionarPara("detalheImovel.xhtml");
+	
+		}
 	}
 	
 	

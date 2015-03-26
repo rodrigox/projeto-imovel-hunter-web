@@ -125,6 +125,7 @@
 	
 	<div class="linha">
 	<div class="coluna col16">		
+	<h:form>
 	<p:dataGrid columns="1" value="#{listarImovelBean.meusImoveis}" var="imovel">
 		<f:facet name="header">
             Lista de Anúncios
@@ -150,8 +151,8 @@
 					<h:outputText value="Cidade:#{imovel.cidade}" />
 					<h:outputText value="Preço:#{imovel.preco}" />
 					<h:panelGrid columns="3">
-						<h:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado}">
-							<f:param name="param" value="#{imovel}" />  
+						<h:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}">
+<!-- 							<f:param name="param" value="#{imovel}" />   -->
 						</h:commandButton>
 						<h:commandButton value="Remover"></h:commandButton>
 					
@@ -161,6 +162,7 @@
 			</h:panelGrid>
 		</p:panel>
 	</p:dataGrid>
+	</h:form>
 	</div>
 	</div>
 	<!-- informações detalhadas do imovel -->
