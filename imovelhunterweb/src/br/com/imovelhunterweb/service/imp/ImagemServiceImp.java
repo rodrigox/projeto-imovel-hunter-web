@@ -18,6 +18,7 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 @Service("imagemService")
 public class ImagemServiceImp implements ImagemService,Serializable {
 
+	private static final long serialVersionUID = -2131183340262591355L;
 	/**
 	 * 
 	 */

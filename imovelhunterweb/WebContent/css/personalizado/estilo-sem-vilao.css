@@ -13,7 +13,7 @@ a:hover{
 /*Grid de 960px*/
 
 .linha{
-	width: 960px;
+	width: 1050px;
 	margin: 0 auto;
 	overflow: auto;
 	padding: 5px 0;
@@ -90,6 +90,9 @@ a:hover{
 	height: 480px;	
 }
 
+.col16{
+	width: 1000px;		
+}
 
 
 /*Estilos reutilizaveis*/
@@ -139,11 +142,6 @@ a.botao:hover, input.botao:hover{
 	text-decoration: none;	
 }
 
-
-img{
-	max-width: 100%;
-	height: auto;
-}
 
 /*Layout do site*/
 .header{

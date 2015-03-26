@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Imovel Hunter Web</title>
+	<link rel="stylesheet" href="css/personalizado/normalize-sem-vilao.css" />
+	<link rel="shortcut icon" href="imovelhunterlogo.png" />
+	<link
+		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+		rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/personalizado/estilo-sem-vilao.css" />
+
+
+	<style type="text/css">
+.ui-widget-header {
+	border: 1px solid #eeeeee;
+	background: #1f3c58;
+	/* 	  color: #FFFFFF; */
+	font-weight: bold;
+}
+
+.ui-widget-header span {
+	color: #FFFFFF;
+}
+
+.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	padding: 9px 15px;
+	border-bottom: 1px solid #eee;
+	background-color: #1f3c58;
+}
+</style>
+
+
+	<style>
+.ui-widget-header {
+	border: 1px solid #eeeeee;
+	background: #1f3c58;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.ui-panelgrid td {
+	padding: 2px 5px;
+}
+</style>
+
+
+</h:head>
+<h:body>
+#{loginBean.usuarioLogado}
+	<!-- 	primefaces -->
+
+	<h:form>
+		<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />
+	</h:form>
+
+
+	<!-- dialog de processo -->
+	<p:ajaxStatus onstart="processandoDialog.show();"
+		onsuccess="processandoDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+		header="#{msg['ajax.processando']}" draggable="false" closable="false"
+		style="font-size:8pt;">
+		<p:graphicImage value="/images/ajax_loader.gif" />
+	</p:dialog>
+
+	<h:form id="idFormMensagem">
+		<p:growl autoUpdate="false" showDetail="true" life="3000" />
+	</h:form>
+
+
+
+
+
+	<!-- 	primefaces fim -->
+
+
+	<!-- 	cabeçalho -->
+
+	<div class="header">
+
+		<div class="linha">
+
+			<header>
+
+			<div class="coluna col4">
+				<h1 class="logo">Imovel Hunter</h1>
+			</div>
+
+			<div class="coluna col8">
+				<nav>
+				<ul class="menu inline sem-marcador">
+					<li><a href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
+					<li><a class="selecionado" href="detalheImovel.xhtml">Detalhes Do Imovel</a></li>
+					<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
+				</ul>
+				</nav>
+			</div>
+
+			</header>
+
+		</div>
+
+	</div>
+	<!-- 	cabeçalho fim -->
+
+	<!-- 	Corpo do meio -->
+	<div style="display: block; text-align: center;">
+		<div class="linha">
+			<div class="coluna col16">
+				<p:panel header="Visualização dos imóveis cadastrados">
+				</p:panel>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Imagens do Imovel -->
+	
+	<div class="linha">
+	<div class="coluna col16">		
+	<p:dataGrid columns="1" value="#{listarImovelBean.meusImoveis}" var="imovel">
+		<f:facet name="header">
+            Lista de Anúncios
+        </f:facet>
+<!--         height:280px; -->
+		<p:panel >			
+			<h:panelGrid columns="2">	
+				<p:imageSwitch effect="fade" slideshowAuto="true" >
+					<ui:repeat value="#{imovel.imagens}" var="image">								
+						<p:panelGrid columns="1">
+							<p:graphicImage value="/servidor/imagens/#{image.caminhoImagem}" style="width:400px; height:250px;"  />
+						</p:panelGrid>
+					</ui:repeat>
+				</p:imageSwitch>
+				<p:panelGrid columns = "1">	
+<!-- 					<div style="width:422px; height:1px;">								 -->
+<!-- 					<div style="width:500px;">	 -->
+					<h:outputText value="Proprietário:#{imovel.nomeDoProprietario}" />
+					<h:outputText value="Cep:#{imovel.cep}" />
+					<h:outputText value="Endereço: #{imovel.logradouro}" />
+					<h:outputText value="Número:#{imovel.cidade}" />
+					<h:outputText value="Bairro:#{imovel.bairro}" />
+					<h:outputText value="Cidade:#{imovel.cidade}" />
+					<h:outputText value="Preço:#{imovel.preco}" />
+					<h:panelGrid columns="3">
+						<h:commandButton value="Mais Detalhes"></h:commandButton>
+						<h:commandButton value="Remover"></h:commandButton>
+					
+					</h:panelGrid>
+<!-- 					</div>	 -->
+				</p:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</p:dataGrid>
+	</div>
+	</div>
+	<!-- informações detalhadas do imovel -->
+
+
+
+
+
+	<!-- 	Corpo do meio fim -->
+
+	<!-- 	Rodapé -->
+
+	<div class="footer">
+
+		<div class="linha">
+
+			<footer>
+
+			<div class="coluna col12">
+
+				<span>&copy; 2015 - Imovel Hunter</span>
+
+			</div>
+
+			</footer>
+
+		</div>
+
+
+	</div>
+
+	<!-- 	Rodapé fim -->
+
+
+</h:body>
+</html>
