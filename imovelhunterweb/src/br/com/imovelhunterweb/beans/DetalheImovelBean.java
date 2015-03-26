@@ -16,8 +16,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import com.sun.faces.facelets.PrivateApiFaceletCacheAdapter;
-
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
@@ -25,6 +23,7 @@ import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.util.EnderecoImagens;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
@@ -41,6 +40,7 @@ public class DetalheImovelBean implements Serializable {
 	@ManagedProperty("#{imovelService}")
 	public ImovelService imovelService;
 	private Imovel imovel;
+	private EnderecoImagens enderecoImagens;
 	
 	private String cidade;
 	private double areaTotal;
@@ -71,21 +71,13 @@ public class DetalheImovelBean implements Serializable {
 	List<String> imagens;
 	
 	private Navegador navegador;
-
-	private PrimeUtil primeUtil;
-
-
-	
-	
 	
 	@PostConstruct
 	public void init() {
-		
-		
+
 		this.imagens = new ArrayList<String>();
 		this.navegador = new Navegador();
-		this.primeUtil = new PrimeUtil();
-	
+		this.enderecoImagens = new EnderecoImagens(); 
 		
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
@@ -103,10 +95,9 @@ public class DetalheImovelBean implements Serializable {
 
 		}	
 
-		
-	
+
 		deletarTemp(new File(retornaCaminho("")));
-		List<Imagem> imgs = this.imovel.getImagems() != null ? this.imovel.getImagems() : new ArrayList<Imagem>();
+		List<Imagem> imgs = this.imovel.getImagens() != null ? this.imovel.getImagens() : new ArrayList<Imagem>();
 		
 
 		String caminhoServidor = "C:/tomcat/webapps/imagens/";
@@ -128,7 +119,7 @@ public class DetalheImovelBean implements Serializable {
 				}				
 			
 			//this.imagens.add("C:/tomcat/webapps/imagens/"+mg.getIdImagem()+"_"+mg.getCaminhoImagem());
-			this.imagens.add(mg.getIdImagem() +"_"+ mg.getCaminhoImagem());
+			this.imagens.add(mg.getCaminhoImagem());
 			
 			
 		}
