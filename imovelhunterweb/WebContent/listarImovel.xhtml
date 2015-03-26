@@ -140,7 +140,7 @@
 						</p:panelGrid>
 					</ui:repeat>
 				</p:imageSwitch>
-				<p:panelGrid columns = "1">	
+				<h:panelGrid columns = "1">	
 <!-- 					<div style="width:422px; height:1px;">								 -->
 <!-- 					<div style="width:500px;">	 -->
 					<h:outputText value="Proprietário:#{imovel.nomeDoProprietario}" />
@@ -152,13 +152,12 @@
 					<h:outputText value="Preço:#{imovel.preco}" />
 					<h:panelGrid columns="3">
 						<h:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}">
-<!-- 							<f:param name="param" value="#{imovel}" />   -->
 						</h:commandButton>
 						<h:commandButton value="Remover"></h:commandButton>
 					
 					</h:panelGrid>
 <!-- 					</div>	 -->
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 	</p:dataGrid>
