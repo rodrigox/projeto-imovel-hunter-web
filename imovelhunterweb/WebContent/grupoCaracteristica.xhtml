@@ -93,8 +93,7 @@
 				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
-							<li><a href="cadastroCaracteristica.xhtml" >Cadastro característica</a></li>
-							<li><a class="selecionado" href="cadastroGrupoCaracteristica.xhtml">Cadastro grupo de características</a></li>
+							<h:outputText escape="false" value="#{loginBean.minhaPermissaoGrupo}"></h:outputText>
 							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
 						</ul>
 					</nav>
@@ -152,8 +151,24 @@
 							
 						
 						</h:panelGrid>
+						
+						
+					<f:facet name="footer">	
+					
+						<p:dataGrid style="width:100%; border:none;" id="checks"
+									columns="5" value="#{grupoCaracteristicaBean.listaCaracteristica}"
+									var="item"
+									emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
+									<p:column headerText="Características">
+										<p:selectBooleanCheckbox
+											value="#{grupoCaracteristicaBean.mapaCaracteristica[item.idCaracteristica]}" />
+										<h:outputLabel value="#{item.nome}" />
+									</p:column>
+						</p:dataGrid>
 					
 						
+					</f:facet>
+					
 							   
 					<f:facet name="footer">
 								
@@ -169,10 +184,12 @@
 								<p:commandButton styleClass="botaoazul" style="left:5px;" rendered="#{grupoCaracteristicaBean.renderSelectedGrupo}" value="Remover"
 									actionListener="#{grupoCaracteristicaBean.remover}" />	
 			
-								</h:panelGrid>
-			
-			
+								</h:panelGrid>		
 					</f:facet>
+					
+					
+					
+					
 				</p:panel>
 			</h:form>
 		

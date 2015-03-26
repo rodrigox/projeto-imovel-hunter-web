@@ -14,6 +14,7 @@ import org.primefaces.event.UnselectEvent;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
+import br.com.imovelhunterweb.enums.TipoUsuario;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
@@ -60,7 +61,10 @@ public class CaracteristicaBean implements Serializable {
 		this.navegador = new Navegador();
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
-			this.navegador.redirecionarPara("login.xhtml");
+			this.navegador.redirecionarPara("index.xhtml");
+			return;
+		}else if(this.anunciante.getTipoUsuario().equals(TipoUsuario.USUARIO)){
+			this.navegador.redirecionarPara("index.xhtml");
 			return;
 		}
 		this.renderButtonDelete = false;
@@ -128,6 +132,16 @@ public class CaracteristicaBean implements Serializable {
 	
 	
 	private boolean validarCampos(){		
+		if(this.caracteristica.getNome().length() == 0){
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Campo inválido","O nome da característica deve ser informado");
+			return false;
+		}
+		if(this.caracteristica.getDescricao().length() == 0){
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Campo inválido","A característica deve ter uma descrição");
+			return false;
+		}
+		
+		
 		return true;
 	}	
 	

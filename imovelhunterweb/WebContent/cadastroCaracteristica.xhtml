@@ -92,9 +92,8 @@
 				
 				<div class="coluna col10">
 					<nav>
-						<ul class="menu inline sem-marcador">
-							<li><a class="selecionado" href="cadastroCaracteristica.xhtml" >Cadastro característica</a></li>
-							<li><a href="cadastroGrupoCaracteristica.xhtml">Cadastro grupo de características</a></li>
+						<ul class="menu inline sem-marcador">							
+							<h:outputText escape="false" value="#{loginBean.minhaPermissaoCaracteristica}"></h:outputText>
 							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
 						</ul>
 					</nav>
