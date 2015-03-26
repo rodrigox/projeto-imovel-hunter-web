@@ -85,26 +85,23 @@ public class DetalheImovelBean implements Serializable {
 		this.imagens = new ArrayList<String>();
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
-	this.imovel = this.imovelService.listarTodos().get(1);
+	
 		
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
-		
 		if (this.anunciante == null) {
-			this.navegador.redirecionarPara("login.xhtml");
+			this.navegador.redirecionarPara("index.xhtml");
 			return;
 
 		}
 		
-		//this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");
-		
-		
-		
+		this.imovel = (Imovel) UtilSession
+				.getHttpSessionObject("imovelSelecionado");
 		if (this.imovel == null) {
-			this.navegador.redirecionarPara("login.xhtml");
+			this.navegador.redirecionarPara("index.xhtml");
 			return;
 
-		}
+		}	
 
 		
 	
