@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.imovelhunterweb.dao.ImovelDAO;
 import br.com.imovelhunterweb.entitys.Anunciante;
+import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.util.EnderecoImagens;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
@@ -52,6 +54,10 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	public Boolean remover(Imovel imovel) {
 		try{
 			this.imovelDAO.remove(imovel);
+			EnderecoImagens enderecoImagens = new EnderecoImagens();
+			for(Imagem img : imovel.getImagens()){
+				enderecoImagens.excluirImagensServidor(img.getCaminhoImagem());
+			}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();

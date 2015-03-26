@@ -3,6 +3,7 @@ package br.com.imovelhunterweb.entitys;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,7 +34,7 @@ public class Imovel implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idImovel;	
 	
-	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER)	
+	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER, cascade=CascadeType.ALL)	
 	private List<Imagem> imagens;
 	
 	@Column
@@ -102,7 +103,7 @@ public class Imovel implements Serializable{
 	@ManyToMany
 	private List<Caracteristica> caracteristicas;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private PontoGeografico pontoGeografico;
 	
 	@OneToMany
