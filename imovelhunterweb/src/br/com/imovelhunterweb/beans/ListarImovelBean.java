@@ -15,8 +15,6 @@ import br.com.imovelhunterweb.service.ImovelService;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.UtilSession;
 
-import javax.faces.bean.ManagedProperty;
-
 @ManagedBean(name = "listarImovelBean")
 @ViewScoped
 public class ListarImovelBean implements Serializable{	
@@ -24,38 +22,33 @@ public class ListarImovelBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2072699815347138448L;
-
-	
-	private List<Imovel> meusimoveis;
-
-
-	private Navegador navegador;
-	
+	private List<Imovel> meusImoveis;
+	private Navegador navegador;	
 	private Anunciante anunciante;
-	
-	
+
 	@ManagedProperty("#{imovelService}")
 	private ImovelService imovelService;
 	
 	@PostConstruct
 	public void init(){
-		this.meusimoveis = new ArrayList<Imovel>();
+		this.meusImoveis = new ArrayList<Imovel>();
 		this.navegador = new Navegador();
 		this.anunciante = (Anunciante)UtilSession.getHttpSessionObject("anuncianteLogado");
 		if(this.anunciante == null){
 			this.navegador.redirecionarPara("login.xhtml");
 			return;
 		}
-		this.anunciante.setIdAnunciante(2);
-		this.meusimoveis = this.imovelService.listarImoveisDoAnunciante(anunciante);
+
+		this.meusImoveis = this.imovelService.listarImoveisDoAnunciante(anunciante);
+
 	}
 
 	public List<Imovel> getMeusimoveis() {
-		return meusimoveis;
+		return meusImoveis;
 	}
 
-	public void setMeusimoveis(List<Imovel> meusimoveis) {
-		this.meusimoveis = meusimoveis;
+	public void setMeusimoveis(List<Imovel> meusImoveis) {
+		this.meusImoveis = meusImoveis;
 	}
 
 	public Anunciante getAnunciante() {
