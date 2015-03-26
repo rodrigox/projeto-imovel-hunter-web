@@ -150,7 +150,9 @@
 					<h:outputText value="Cidade:#{imovel.cidade}" />
 					<h:outputText value="Preço:#{imovel.preco}" />
 					<h:panelGrid columns="3">
-						<h:commandButton value="Mais Detalhes"></h:commandButton>
+						<h:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado}">
+							<f:param name="param" value="#{imovel}" />  
+						</h:commandButton>
 						<h:commandButton value="Remover"></h:commandButton>
 					
 					</h:panelGrid>
