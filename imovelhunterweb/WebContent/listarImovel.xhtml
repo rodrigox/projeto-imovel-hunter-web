@@ -107,7 +107,7 @@
 
 		</div>
 
-	</div>
+	</div>	
 	<!-- 	cabeçalho fim -->
 
 	<!-- 	Corpo do meio -->
@@ -125,8 +125,8 @@
 	
 	<div class="linha">
 	<div class="coluna col16">		
-	<h:form>
-	<p:dataGrid columns="1" value="#{listarImovelBean.meusImoveis}" var="imovel">
+	<h:form id="formConteudo">
+	<p:dataGrid id="gridPrincipal" columns="1" value="#{listarImovelBean.meusImoveis}" var="imovel" emptyMessage="Não existem anúncios cadastrados.">
 		<f:facet name="header">
             Lista de Anúncios
         </f:facet>
@@ -143,18 +143,19 @@
 				<h:panelGrid columns = "1">	
 <!-- 					<div style="width:422px; height:1px;">								 -->
 <!-- 					<div style="width:500px;">	 -->
-					<h:outputText value="Proprietário:#{imovel.nomeDoProprietario}" />
-					<h:outputText value="Cep:#{imovel.cep}" />
+					<h:outputText value="Proprietário: #{imovel.nomeDoProprietario}" />
+					<h:outputText value="Cep: #{imovel.cep}" />
 					<h:outputText value="Endereço: #{imovel.logradouro}" />
-					<h:outputText value="Número:#{imovel.cidade}" />
-					<h:outputText value="Bairro:#{imovel.bairro}" />
-					<h:outputText value="Cidade:#{imovel.cidade}" />
-					<h:outputText value="Preço:#{imovel.preco}" />
+					<h:outputText value="Número: #{imovel.numeroDoImovel}" />
+					<h:outputText value="Bairro: #{imovel.bairro}" />
+					<h:outputText value="Cidade: #{imovel.cidade}" />
+					<h:outputText value="Preço: R$#{imovel.preco}" />
 					<h:panelGrid columns="3">
-						<h:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}">
-						</h:commandButton>
-						<h:commandButton value="Remover"></h:commandButton>
-					
+						<p:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}">
+						</p:commandButton>
+						<p:commandButton value="Remover" actionListener="#{listarImovelBean.excluirImovel(imovel)}">
+<!-- 							<p:confirm header="Confirmação" message="Deseja realmente remover este imóvel?" icon="ui-icon-alert" /> -->
+						</p:commandButton>
 					</h:panelGrid>
 <!-- 					</div>	 -->
 				</h:panelGrid>

@@ -1,7 +1,11 @@
 package br.com.imovelhunterweb.util;
 
+import java.io.File;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+
+import com.sun.org.apache.bcel.internal.classfile.Field;
 
 public class EnderecoImagens {
 
@@ -15,6 +19,11 @@ public class EnderecoImagens {
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
 		this.caminhoServidor = scontext.getRealPath("") + "/servidor/imagens/";
 		this.caminhoTemp = scontext.getRealPath("") + "/uploads/imagens/";
+	}
+	
+	public void excluirImagensServidor(String nome){
+		File f = new File(caminhoServidor + nome);
+		f.delete();
 	}
 	
 	
