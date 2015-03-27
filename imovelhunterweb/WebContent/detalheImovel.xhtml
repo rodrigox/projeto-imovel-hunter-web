@@ -102,7 +102,7 @@
 							
 				</script>
 
-			<div class="coluna col10">
+			<div class="coluna col10	">
 				<nav>
 				<ul class="menu inline sem-marcador">					
 					<li><a href="listarImovel.xhtml">Imoveis cadastrados</a></li>
@@ -147,17 +147,18 @@
 	<p:galleria style="margin-left: auto; margin-right: auto; width: 70%;" 
 	            value="#{detalheImovelBean.imovel.imagens}" var="image" panelWidth="937" panelHeight="500" showCaption="true">
 
-		<p:graphicImage value="/servidor/imagens/#{image.caminhoImagem}"
+		<p:graphicImage value="/servidor/imagens/#{image.caminhoImagem}" style="width:927px; height:490px; text-align:center;"
 			alt="#{image.descricao}" />
 
 	</p:galleria>
 
 	<!-- informações detalhadas do imovel -->
 
-	<div>
-		<p:panel style="margin-left: 174px; margin-right: 174px">
-			<div>
-				<div style="margin-top: 50px">
+	<div style="padding-top:10px;">
+<!-- 	style="margin-left: 174px; margin-right: 174px" -->
+		<p:panel style="margin-left: auto; margin-right: auto; width: 69%;" > 
+<!-- 			<div> -->
+<!-- 				<div style="margin-top: 50px"> -->
 				
 					<p:outputLabel value="Situação: " style="font-size:100%"></p:outputLabel>
 	
@@ -217,8 +218,8 @@
 				
 					<p:outputLabel value="#{detalheImovelBean.imovel.nomeDoProprietario}">  </p:outputLabel><br />
 					
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</p:panel>
 	</div>
 	

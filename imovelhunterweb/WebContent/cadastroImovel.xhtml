@@ -256,29 +256,15 @@
 									value="#{imovelBean.imovel.areaTotal}"></p:inputText>
 
 							</h:panelGrid>
-							<!-- 
-				                <h:outputText value="Valor do condominio R$: " />
-				                <p:inputText id="sfs_valorCondominio" value=""></p:inputText>
-				              
-				                <h:outputText value="Minha casa minha vida: " />
-				                <h:selectOneMenu  value="#{user.favMinhacasa}" >
-				                   	<f:selectItem itemValue="1" itemLabel="Sim" />
-				                   	<f:selectItem itemValue="2" itemLabel="Não" />				                
-				                </h:selectOneMenu><br />				              
-								<br/><br/>
-							  	
-		 						-->
-							<h:panelGrid columns="2" rowClasses="linha"
-								columnClasses="label, value">
-								<p:dataGrid style="width:100%; border:none;" id="checks"
-									columns="5" value="#{imovelBean.allCacaracteristicas}"
-									var="item"
-									emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
-									<p:column headerText="Características">
+		
+							<h:panelGrid columns="2" >								
+								<p:dataGrid style="width:100%;" id="checks"
+											columns="5" value="#{imovelBean.allCacaracteristicas}" var="item"
+											emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
+
 										<p:selectBooleanCheckbox
 											value="#{imovelBean.checked[item.idCaracteristica]}" />
 										<h:outputLabel value="#{item.nome}" />
-									</p:column>
 								</p:dataGrid>
 								<br />
 								<br />
