@@ -38,7 +38,10 @@ public class DetalheImovelBean implements Serializable {
 			return;
 		}
 		
-		this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");		
+		this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");	
+		if(this.imovel == null){
+			this.navegador.redirecionarPara("listarImovel.xhtml");
+		}
 		
 		
 	}
