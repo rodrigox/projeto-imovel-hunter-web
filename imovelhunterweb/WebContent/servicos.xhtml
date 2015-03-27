@@ -13,23 +13,40 @@
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	 
+	 
+	<style type="text/css">
 	
 	
-	<script>
+		.ui-widget-header {
+		  border: 1px solid #eeeeee;
+		  background: #1f3c58;
+	/* 	  color: #FFFFFF; */
+		  font-weight: bold;
+		}
+		
+		.ui-widget-header span {	  
+		  color: #FFFFFF;	
+		}
+		
+		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+		  padding: 9px 15px;
+		  border-bottom: 1px solid #eee;
+	 	  background-color: #1f3c58; 
+		}
 	
 	
-	
-	</script>
-	
+	</style>
+	 
+	 
 </h:head>
 <h:body>
 
 	<!-- 	primefaces -->
 	
 	<h:form>
-    	<p:remoteCommand name="rc" actionListener="#{loginBean.recuperarSenha}" />    
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
 	</h:form>
-	
 	
 	<!-- dialog de processo -->
 		<p:ajaxStatus onstart="processandoDialog.show();"
@@ -44,15 +61,9 @@
 		<h:form id="idFormMensagem">
 			<p:growl autoUpdate="false" showDetail="true" life="3000" />
 		</h:form>
-		
-		
-		
 	
 	
 <!-- 	primefaces fim -->
-
-
-<!-- 	cabeçalho -->
 
 	<div class="header">
 		
@@ -60,123 +71,88 @@
 		
 			<header>
 			
-				<div class="coluna col4">
-					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
+				<div class="coluna col2">
+					<h1 class="logo">Imovel Hunter</h1>
 				</div>
 				
-				<script>				
-					
-					elemento.onClick = "homi()";
-					
-					function homi(){
-					
-						window.location = "http://localhost:8080/imovelhunterweb/index.xhtml"
-						
-					}
-							
-				</script>
-				
-				<div class="coluna col8">
+				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
-							<li><a href="index.xhtml" >Home</a></li>						
+							<li><a href="index.xhtml"  >Home</a></li>
+							<h:outputText escape="false" value="#{loginBean.cadastroImovel}"></h:outputText>							
 							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
-							<li><a href="servicos.xhtml">Serviços</a></li>
-							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
-							
+							<li><a class="selecionado" href="servicos.xhtml">Serviços</a></li>
+							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 						</ul>
 					</nav>
 				</div>
 				
 			</header>
-		 
+		
 		</div>
 	
 	</div>
 	
-<!-- 	cabeçalho fim -->
 	
 	
-<!-- 	Corpo do meio -->
-
-
-	<div class="linha" style="height:100px;" />
 	
-	<div class="linha" style="height:300px;" >
+	<div class="conteudo-extra">
 	
-		<div class ="dialog">
+		<div class="linha" style="height: 10px;" />
+	
+		<div class="linha">
 		
-			<div class="dialog-cabecalho">				
-				<div style="height: 30%;"/>
-				<center><label style="text-transform: uppercase;">Recupera senha</label></center>					
+			
+		
+			<div class="coluna col12" >
+			
+				<h3 style="text-align: center; text-justify: inter-word;">Serviços</h3>
+				
 			</div>
 			
-			<div style="height: 30%;" />
 			
-			<center>
-				<table  cellpadding="10px" cellspacing="10px">
-					<tbody>
-						<tr>
-							<td>
-								<label class="corlabel">
-								E-mail: 
-								</label>
-							</td>
-							<td>
-								<input type="text" id="idInputEmail" class="corlabel"/>
-							</td>
-							
-							
-						</tr>							
-						
-						
-						
-					</tbody>
-				</table>
+			<div class="linha">
+		
+				<div class="coluna col6">
+				
+				
+					<ul class="sem-marcador sem-padding noticias">
+						<li>
+							<img src="images/gmap.png" alt="" />
+							<h4>Sistema de busca pelo mapa</h4>		
+							<p>A Imovel hunter promove uma busca rápida pelos imoveis atraves do mapa</p>			
+						</li>					
+					</ul>
+				
+				
+				</div>	
 				
 				
 				
-				
-			</center>
-			
-			<div style="height:5%;" />
-			
-			<center>
-			
-				
-				<table  cellpadding="10px" cellspacing="10px">
-					<tbody>
-						<tr>
-						
-							<td>
-							
-								<input type="button" onclick="rc([{name:'email',value:document.getElementById('idInputEmail').value}]);" class="botaoazul" value="Enviar" />
-													
-							</td>
-						
-						</tr>
-						
-						
+				<div class="coluna col6" >
 					
-						
-						
-					</tbody>
-				</table>
+					<ul class="sem-marcador sem-padding noticias">
+						<li>
+							<img src="images/chatpng.png" alt="" />
+							<h4>Sistema de chat</h4>		
+							<p>A Imovel hunter tem um eficiente sistema chat, para que os usuários interessados pelo imóvel possa entrar em contato com o anunciante do mesmo</p>			
+						</li>					
+					</ul>
+				
+				</div>	
+			
+			</div>
 			
 			
-			</center>
+			
+			
 		
 		</div>
 	
+		<div class="linha" style="height: 200px;" />
+		
+	
 	</div>
-	
-	<div class="linha" style="height:100px;" />
-	
-	
-	
-<!-- 	Corpo do meio fim -->
-	
-<!-- 	Rodapé -->
 	
 	<div class="footer">
 		
@@ -197,7 +173,7 @@
 	
 	</div>
 	
-<!-- 	Rodapé fim -->
+	
 
 	
 </h:body>
