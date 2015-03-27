@@ -1,6 +1,7 @@
 package br.com.imovelhunterweb.service.imp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.imovelhunterweb.dao.ImovelDAO;
 import br.com.imovelhunterweb.entitys.Anunciante;
+import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.service.ImovelService;
@@ -53,6 +55,8 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	@Rollback
 	public Boolean remover(Imovel imovel) {
 		try{
+			imovel.setCaracteristicas(new ArrayList<Caracteristica>());
+			this.imovelDAO.update(imovel);
 			this.imovelDAO.remove(imovel);
 			EnderecoImagens enderecoImagens = new EnderecoImagens();
 			for(Imagem img : imovel.getImagens()){
