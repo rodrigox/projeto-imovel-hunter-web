@@ -106,7 +106,7 @@ public class Imovel implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL)
 	private PontoGeografico pontoGeografico;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<PontoGeografico> cobertura;	
 	
 	public long getIdImovel() {

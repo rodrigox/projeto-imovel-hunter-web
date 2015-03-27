@@ -12,9 +12,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.imovelhunterweb.dao.AnuncianteDAO;
+import br.com.imovelhunterweb.dao.ImovelDAO;
 import br.com.imovelhunterweb.entitys.Anunciante;
-import br.com.imovelhunterweb.entitys.Usuario;
-import br.com.imovelhunterweb.enums.TipoContato;
+import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.enums.TipoUsuario;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.util.Criptografar;
@@ -26,8 +26,16 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2366746616353186513L;
+
 	@Resource(name = "anuncianteDAO")
 	private AnuncianteDAO anuncianteDAO;
+	
+	@Resource(name = "imovelDAO")
+	private ImovelDAO imovelDAO;
 
 	@Override
 	@Transactional
@@ -50,6 +58,14 @@ public class AnuncianteServiceImp implements AnuncianteService,Serializable {
 	@Rollback
 	public Boolean remover(Anunciante anunciante) {
 		try{
+			Map<String,Object> parametros = new HashMap<String,Object>();
+			parametros.put("idAnunciante",anunciante.getIdAnunciante());
+			List<Imovel> imoveisDoAnunciante = this.imovelDAO.useQuery("FROM Imovel i WHERE i.anunciante.idAnunciante=:idAnunciante", parametros);
+			
+			for(Imovel i : imoveisDoAnunciante){
+				this.imovelDAO.remove(i);
+			}
+			
 			this.anuncianteDAO.remove(anunciante);
 		}
 		catch(Exception ex){
