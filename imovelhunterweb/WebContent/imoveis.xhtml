@@ -36,6 +36,8 @@
 	
 	</style>
 	
+	
+	
 </h:head>
 <h:body>
 #{loginBean.usuarioLogado}
@@ -76,9 +78,23 @@
 		
 			<header>
 			
+				
+			
 				<div class="coluna col2">
-					<h1 class="logo">Imovel Hunter</h1>
+					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
 				</div>
+				
+				<script>				
+					
+					elemento.onClick = "homi()";
+					
+					function homi(){
+					
+						window.location = "http://localhost:8080/imovelhunterweb/index.xhtml"
+						
+					}
+							
+				</script>
 				
 				<div class="coluna col10">
 					<nav>
