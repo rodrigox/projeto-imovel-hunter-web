@@ -25,6 +25,7 @@ public class DetalheImovelBean implements Serializable {
 	private Imovel imovel;
 	private Anunciante anunciante;
 	
+	
 	@PostConstruct
 	public void init() {
 		this.navegador = new Navegador();	
@@ -37,8 +38,7 @@ public class DetalheImovelBean implements Serializable {
 			return;
 		}
 		
-		this.imovel = (Imovel) UtilSession
-				.getHttpSessionObject("imovelSelecionado");		
+		this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");		
 		
 		
 	}
