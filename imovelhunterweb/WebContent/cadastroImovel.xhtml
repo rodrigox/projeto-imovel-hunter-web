@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/personalizado/colunasgrid.css" />
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
-	<link rel="stylesheet" href="css/personalizado/estilo.css" />
+	<link rel="stylesheet" href="css/personalizado/estilo-cadastro-imovel.css" />
 	
 	
 	<style>
@@ -48,7 +48,7 @@
 	
 	.ui-button .ui-button-text:hover {
 		background: #315e8a !important;
-		text-decoration: none !important;	
+		text-decoration: none !important;			
 	}
 	
 	
@@ -148,7 +148,7 @@
 	
 	</div>
 	
-	<div class="linha" style="height:100px;" />
+	<div class="linha" style="height:50px;" />
 	
 	<div class="linha-maior">
 	
@@ -297,7 +297,7 @@
 										<h:panelGrid columns="2">
 
 											<p:graphicImage
-												value="/uploads/imagens/#{item.caminhoImagem}" />	
+												value="/uploads/imagens/#{item.caminhoImagem}" style="width:258px; height:170px;"/>	
 									
 											<p:inputTextarea rows="10" cols="50"
 												value="#{item.descricao}">
@@ -321,7 +321,7 @@
 
 								<h:commandButton value="Finalizar"
 									actionListener="#{imovelBean.cadastrarImovel}"
-									style="float: right;" />
+									style="float: left;" />
 
 								<!--  </h:form>  -->
 							</h:panelGrid>
