@@ -47,6 +47,17 @@
 .ui-panelgrid td {
 	padding: 2px 5px;
 }
+
+
+ 	.ui-widget-content{ 
+ 		border-top-width: 0px !important; 
+ 	    border-left-width: 0px !important; 
+ 	    border-right-width: 0px !important; 
+ 	    border-bottom-width: 0px !important;	 
+ 	} 
+
+
+
 </style>
 
 
@@ -148,7 +159,7 @@
 	            value="#{detalheImovelBean.imovel.imagens}" var="image" panelWidth="937" panelHeight="500" showCaption="true">
 
 		<p:graphicImage value="/servidor/imagens/#{image.caminhoImagem}" style="width:927px; height:490px; text-align:center;"
-			alt="#{image.descricao}" />
+			title="#{image.descricao}" />
 
 	</p:galleria>
 
@@ -157,69 +168,69 @@
 	<div style="padding-top:10px;">
 <!-- 	style="margin-left: 174px; margin-right: 174px" -->
 		<p:panel style="margin-left: auto; margin-right: auto; width: 69%;" > 
-<!-- 			<div> -->
-<!-- 				<div style="margin-top: 50px"> -->
-				
-					<p:outputLabel value="Situação: " style="font-size:100%"></p:outputLabel>
-	
-					<p:outputLabel value="#{detalheImovelBean.imovel.situacaoImovel}" style="font-size:100%"></p:outputLabel> | 
-					
-					<p:outputLabel value="Preço: R$ " style="font-size:100%"></p:outputLabel>
-					<p:outputLabel value="#{detalheImovelBean.imovel.preco}" style="font-size:100%;color:#1F3C58"></p:outputLabel><br/>
-					
-					<p:outputLabel  value="Rua: "
-						style="font-size:180%;color:#1F3C58"></p:outputLabel >
-					
-					<p:outputLabel  value="#{detalheImovelBean.imovel.logradouro}"
-						style="font-size:180%;color:#1F3C58"></p:outputLabel >
-					,
+			<p:outputLabel value="Situação: " style="font-size:100%"></p:outputLabel>
 
-					<p:outputLabel  value="#{detalheImovelBean.imovel.numeroDoImovel}"
-						style="font-size:180%;color:#1F3C58"></p:outputLabel>
-					
-					,
-					<p:outputLabel value="#{detalheImovelBean.imovel.bairro}"
-						style="font-size:180%;color:#1F3C58"></p:outputLabel> <br />
+			<p:outputLabel value="#{detalheImovelBean.imovel.situacaoImovel}" style="font-size:100%"></p:outputLabel> | 
+			
+			<p:outputLabel value="Preço: R$ " style="font-size:100%"></p:outputLabel>
+			<p:outputLabel value="#{detalheImovelBean.imovel.preco}" style="font-size:100%;color:#1F3C58"></p:outputLabel><br/>
+			
+			<p:outputLabel  value="Rua: "
+				style="font-size:180%;color:#1F3C58"></p:outputLabel >
+			
+			<p:outputLabel  value="#{detalheImovelBean.imovel.logradouro}"
+				style="font-size:180%;color:#1F3C58"></p:outputLabel >
+			,
 
-					<p:outputLabel value="#{detalheImovelBean.imovel.cidade}"
-						style="font-size:180%;color:#1F3C58"></p:outputLabel>
-					,
-					<p:outputLabel value="#{detalheImovelBean.imovel.estado}" style="font-size:180%;color:#1F3C58"></p:outputLabel>
+			<p:outputLabel  value="#{detalheImovelBean.imovel.numeroDoImovel}"
+				style="font-size:180%;color:#1F3C58"></p:outputLabel>
+			
+			,
+			<p:outputLabel value="#{detalheImovelBean.imovel.bairro}"
+				style="font-size:180%;color:#1F3C58"></p:outputLabel> <br />
 
-					<br />
-							
-					<p:outputLabel value="Tipo de Imovel:" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
-					
-					<p:outputLabel value="#{detalheImovelBean.imovel.tipoImovel}" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
+			<p:outputLabel value="#{detalheImovelBean.imovel.cidade}"
+				style="font-size:180%;color:#1F3C58"></p:outputLabel>
+			,
+			<p:outputLabel value="#{detalheImovelBean.imovel.estado}" style="font-size:180%;color:#1F3C58"></p:outputLabel>
 
-					<br />
+			<br />
 					
-					<p:outputLabel value="Complemento: "> </p:outputLabel>
+			<p:outputLabel value="Tipo de Imovel:" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
+			
+			<p:outputLabel value="#{detalheImovelBean.imovel.tipoImovel}" style="font-size:180%;color:#1F3C58"> </p:outputLabel>
+
+			<br />
+			
+			<p:outputLabel value="Complemento: "> </p:outputLabel>
+			
+			<p:outputLabel value="#{detalheImovelBean.imovel.complemento}"> </p:outputLabel><br/>
 					
-					<p:outputLabel value="#{detalheImovelBean.imovel.complemento}"> </p:outputLabel><br/>
-							
-					<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeQuartos}"> Quartos</p:outputLabel>
-					|
-					<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeSuites}"> Suite(s)</p:outputLabel>
-					|
-					<p:outputLabel value="#{detalheImovelBean.imovel.areaTotal}">m²</p:outputLabel> <br />
-					
-					<p:outputLabel value="#{detalheImovelBean.imovel.ambientes}"> Ambientes </p:outputLabel>|
-					
-					<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeQuartos}"> Quarto(s) </p:outputLabel>|
-					<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeBanheiros}"> Banheiro(s)</p:outputLabel>|
-					<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeSalas}"> Sala(s) </p:outputLabel><br />
-					
-					<p:outputLabel value="Anunciante: ">  </p:outputLabel>
-					
-					<p:outputLabel value="#{detalheImovelBean.anunciante.nome}">  </p:outputLabel><br/>
-				
-					<p:outputLabel value="Proprietário: ">  </p:outputLabel>
-				
-					<p:outputLabel value="#{detalheImovelBean.imovel.nomeDoProprietario}">  </p:outputLabel><br />
-					
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeQuartos}"> Quartos</p:outputLabel>
+			|
+			<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeSuites}"> Suite(s)</p:outputLabel>
+			|
+			<p:outputLabel value="#{detalheImovelBean.imovel.areaTotal}">m²</p:outputLabel> <br />
+			
+			<p:outputLabel value="#{detalheImovelBean.imovel.ambientes}"> Ambientes </p:outputLabel>|
+			
+			<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeQuartos}"> Quarto(s) </p:outputLabel>|
+			<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeBanheiros}"> Banheiro(s)</p:outputLabel>|
+			<p:outputLabel value="#{detalheImovelBean.imovel.numeroDeSalas}"> Sala(s) </p:outputLabel><br />
+			
+			<p:outputLabel value="Anunciante: ">  </p:outputLabel>
+			
+			<p:outputLabel value="#{detalheImovelBean.anunciante.nome}">  </p:outputLabel><br/>
+		
+			<p:outputLabel value="Proprietário: ">  </p:outputLabel>
+		
+			<p:outputLabel value="#{detalheImovelBean.imovel.nomeDoProprietario}">  </p:outputLabel><br />
+			
+			<p:outputLabel value="Características" style="font-size:180%;color:#1F3C58"> </p:outputLabel>	
+			<p:dataGrid columns="5" value="#{detalheImovelBean.imovel.caracteristicas}"  var="cat"
+						emptyMessage="Nenhuma Caracteristica associada ao imóvel.">							
+				<p:selectBooleanCheckbox value="#{true}" itemLabel="#{cat.nome}" disabled="true"  /> 
+			</p:dataGrid>
 		</p:panel>
 	</div>
 	

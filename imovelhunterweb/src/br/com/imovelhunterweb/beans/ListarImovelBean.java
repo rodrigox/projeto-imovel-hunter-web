@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
+import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imovel;
 import br.com.imovelhunterweb.service.ImovelService;
 import br.com.imovelhunterweb.util.Navegador;
@@ -44,7 +45,6 @@ public class ListarImovelBean implements Serializable{
 		}
 
 		this.meusImoveis = this.imovelService.listarImoveisDoAnunciante(anunciante);
-
 	}
 
 	public List<Imovel> getMeusImoveis() {
