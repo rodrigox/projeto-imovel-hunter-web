@@ -111,14 +111,14 @@
 	<!-- 	cabeçalho fim -->
 
 	<!-- 	Corpo do meio -->
-	<div style="display: block; text-align: center;">
-		<div class="linha">
-			<div class="coluna col16">
-				<p:panel header="Visualização dos imóveis cadastrados">
-				</p:panel>
-			</div>
-		</div>
-	</div>
+<!-- 	<div style="display: block; text-align: center;"> -->
+<!-- 		<div class="linha"> -->
+<!-- 			<div class="coluna col16"> -->
+<!-- 				<p:panel header="Visualização dos imóveis cadastrados"> -->
+<!-- 				</p:panel> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 
 	<!-- Imagens do Imovel -->
@@ -151,9 +151,9 @@
 					<h:outputText value="Cidade: #{imovel.cidade}" />
 					<h:outputText value="Preço: R$#{imovel.preco}" />
 					<h:panelGrid columns="3">
-						<p:commandButton value="Mais Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}">
+						<p:commandButton value="Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}" style="width:100px; height:25px; font-size: 12px">
 						</p:commandButton>
-						<p:commandButton value="Remover" actionListener="#{listarImovelBean.excluirImovel(imovel)}">
+						<p:commandButton value="Remover" actionListener="#{listarImovelBean.excluirImovel(imovel)}" style="width:100px; height:25px; font-size: 12px">
 <!-- 							<p:confirm header="Confirmação" message="Deseja realmente remover este imóvel?" icon="ui-icon-alert" /> -->
 						</p:commandButton>
 					</h:panelGrid>
