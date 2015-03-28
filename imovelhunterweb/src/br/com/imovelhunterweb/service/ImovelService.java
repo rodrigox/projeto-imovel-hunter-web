@@ -17,7 +17,7 @@ public interface ImovelService {
 	
 	Boolean removerPorId(Imovel imovel);
 	
-	Imovel buscarPorId(ID id);
+	Imovel buscarPorId(long l);
 	
 	List<Imovel> listarTodos();
 

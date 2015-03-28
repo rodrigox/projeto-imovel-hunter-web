@@ -85,8 +85,11 @@ public class ImovelServiceImp implements ImovelService,Serializable {
 	}
 
 	@Override
-	public Imovel buscarPorId(ID id) {
-		return this.imovelDAO.findById(id);
+	public Imovel buscarPorId(long id) {
+		Imovel i =  this.imovelDAO.findById(id);
+		if(i != null)
+		i.getCaracteristicas();
+		return i;
 	}
 
 	@Override
