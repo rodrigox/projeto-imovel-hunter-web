@@ -227,7 +227,7 @@
 			<p:outputLabel value="#{detalheImovelBean.imovel.nomeDoProprietario}">  </p:outputLabel><br />
 			
 			<p:outputLabel value="Características" style="font-size:180%;color:#1F3C58"> </p:outputLabel>	
-			<p:dataGrid columns="5" value="#{detalheImovelBean.imovel.caracteristicas}"  var="cat"
+			<p:dataGrid columns="5" value="#{detalheImovelBean.listaCaracteristica}"  var="cat"
 						emptyMessage="Nenhuma Caracteristica associada ao imóvel.">							
 				<p:selectBooleanCheckbox value="#{true}" itemLabel="#{cat.nome}" disabled="true"  /> 
 			</p:dataGrid>
