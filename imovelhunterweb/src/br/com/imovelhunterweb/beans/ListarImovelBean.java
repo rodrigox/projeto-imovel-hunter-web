@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.catalina.startup.Catalina;
+
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imovel;
@@ -43,8 +45,15 @@ public class ListarImovelBean implements Serializable{
 			this.navegador.redirecionarPara("login.xhtml");
 			return;
 		}
-
+		
 		this.meusImoveis = this.imovelService.listarImoveisDoAnunciante(anunciante);
+		// Início - Por favor, não tirar essa rotina bizarra
+		for(Imovel i : this.meusImoveis){
+			for(Caracteristica c : i.getCaracteristicas()){
+				// Única forma de ajeitar o bug escroto de Session.
+			}
+		}
+		// Fim - Por favor, não tirar essa rotina bizarra
 	}
 
 	public List<Imovel> getMeusImoveis() {
@@ -83,4 +92,10 @@ public class ListarImovelBean implements Serializable{
 			primeUtil.update("formConteudo");
 		}
 	}	
+	public void editarImovel(Imovel imovel){	
+		UtilSession.setHttpSessionObject("imovelSelecionado",imovel);	
+		if(!imovel.equals(null)){
+			this.navegador.redirecionarPara("editarImovel.xhtml");
+		}
+	}		
 }

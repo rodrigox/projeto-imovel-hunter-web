@@ -39,15 +39,14 @@ import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
 
-@ManagedBean(name = "imovelBean")
+@ManagedBean(name = "editarImovelBean")
 @ViewScoped
-public class ImovelBean implements Serializable {
+public class EditarImovelBean implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -500703284436109611L;
-
+	private static final long serialVersionUID = 5953013392455530029L;
 	private Imovel imovel;
 	private Anunciante anunciante;
 	private List<Imagem> imovelImagens;
@@ -60,11 +59,6 @@ public class ImovelBean implements Serializable {
 	private boolean skip;
 	private String valorImovel;
 	private EnderecoImagens enderecoImagens;
-
-	public EnderecoImagens getEnderecoImagens() {
-		return enderecoImagens;
-	}
-
 	private String cep;
 
 	@ManagedProperty("#{imovelService}")
@@ -93,14 +87,17 @@ public class ImovelBean implements Serializable {
 		}
 
 		this.enderecoImagens = new EnderecoImagens();
+		System.out.println(getEnderecoImagens().getCaminhoServidor());
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
 		this.imovelImagens = new ArrayList<Imagem>();
-		this.imovel = new Imovel();
-		this.caracteristica = new Caracteristica();
+		this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");
+		this.cep = this.imovel.getCep();
+		this.valorImovel = String.valueOf(this.imovel.getPreco());
 		this.allCacaracteristicas = this.caracteristicaService.listarTodos();
 		deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
-
+		carregarCaracteristicaSelecionadas();
+		carregarImagensSelecionadas();
 	}
 
 	public List<Imagem> getImovelImagens() {
@@ -185,10 +182,6 @@ public class ImovelBean implements Serializable {
 		this.primeUtil = primeUtil;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getSelectedItem() {
 		return selectedItem;
 	}
@@ -234,6 +227,10 @@ public class ImovelBean implements Serializable {
 		return cep;
 	}
 
+	public EnderecoImagens getEnderecoImagens() {
+		return enderecoImagens;
+	}	
+	
 	public void setCep(String cep) {
 		this.cep = cep;
 		this.imovel.setCep(cep);
@@ -286,14 +283,35 @@ public class ImovelBean implements Serializable {
 			}
 		}
 	}
+	
+	public void carregarCaracteristicaSelecionadas(){
+		this.checked.clear();
+		for(Caracteristica allCaract : this.allCacaracteristicas){
+			boolean marcado = false;
+			for(Caracteristica cadCaract : this.imovel.getCaracteristicas()){
+				if(allCaract.getIdCaracteristica() == cadCaract.getIdCaracteristica()){
+					marcado = true;
+					break;
+				}
+			}
+			this.checked.put(allCaract.getIdCaracteristica(), marcado);
+		}
+	}
+	public void carregarImagensSelecionadas(){
+		this.imovelImagens = this.imovel.getImagens();
+	}
 
 	public void upload(FileUploadEvent event) {
+		Imagem img = new Imagem();
 		try {
 			byte[] foto = event.getFile().getContents();
 			
 			String nomeArquivo = event.getFile().getFileName();
-
-			File f = new File(enderecoImagens.getCaminhoTemp() + nomeArquivo);
+			
+			img = this.imagemService.inserir(new Imagem(nomeArquivo, this.imovel));
+			img.setCaminhoImagem(img.getIdImagem()+"_"+img.getCaminhoImagem());
+			this.imovelImagens.add(this.imagemService.atualizar(img));
+			File f = new File(enderecoImagens.getCaminhoServidor() + img.getIdImagem()+"_"+nomeArquivo);
 			if (!f.getParentFile().exists())
 				f.getParentFile().mkdirs();
 
@@ -305,20 +323,23 @@ public class ImovelBean implements Serializable {
 			fos.write(foto);
 			fos.flush();
 			fos.close();
-			imagensNoTemp();
+
+			
 		} catch (IOException e) {
+			this.imagemService.remover(img);
 			e.printStackTrace();
 		}
 	}
 
-	public void removerImagem(String imagem) {
+	public void removerImagem(Imagem imagem) {
 		for (Imagem im : this.imovelImagens) {
-			if (im.getCaminhoImagem().equals(imagem)) {
+			if (im.getIdImagem() == (imagem.getIdImagem())) {
 				this.imovelImagens.remove(im);
+				this.imagemService.removerPorId(imagem);
 				break;
 			}
 		}
-		File f = new File(enderecoImagens.getCaminhoTemp() + imagem);
+		File f = new File(enderecoImagens.getCaminhoServidor() + imagem.getCaminhoImagem());
 		f.delete();
 	}
 
@@ -330,7 +351,7 @@ public class ImovelBean implements Serializable {
 
 			}
 		}
-		checked.clear();
+		///checked.clear();
 
 		LocalizacaoUtil localizacao = new LocalizacaoUtil();
 		try {
@@ -347,23 +368,25 @@ public class ImovelBean implements Serializable {
 		}
 
 		this.imovel.setAnunciante(this.anunciante);
+		this.imovel.setImagens(this.imovelImagens);
 
-		Imovel im = this.imovelService.inserir(this.imovel);
+		Imovel im = this.imovelService.atualizar(this.imovel);
 		if (im != null) {
-			for (int i = 0; i < this.imovelImagens.size(); i++) {
-				this.imovelImagens.get(i).setImovel(im);
-				Imagem img = this.imagemService.inserir(this.imovelImagens
-						.get(i));
-				String nomeTemp = img.getCaminhoImagem();
-				img.setCaminhoImagem(img.getIdImagem() + "_"
-						+ img.getCaminhoImagem());
-				if (img != null) {
-					this.imagemService.atualizar(img);
-					
-					enviarImagemAoServidor(img.getCaminhoImagem(), nomeTemp);
-				}
+			for (Imagem img : this.imovelImagens) {
+				this.imagemService.atualizar(img);
+//				this.imovelImagens.get(i).setImovel(im);
+//				Imagem img = this.imagemService.inserir(this.imovelImagens
+//						.get(i));
+//				String nomeTemp = img.getCaminhoImagem();
+//				img.setCaminhoImagem(img.getIdImagem() + "_"
+//						+ img.getCaminhoImagem());
+//				if (img != null) {
+//					this.imagemService.atualizar(img);
+//					
+//					enviarImagemAoServidor(img.getCaminhoImagem(), nomeTemp);
+//				}
 			}
-			deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
+			//deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
 
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Cadastro",
 					"Imóvel cadastrado com sucesso.");			
