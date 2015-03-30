@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -26,10 +27,16 @@ public class Imagem implements Serializable {
 	private String caminhoImagem;
 	
 	@ManyToOne
+	@JoinColumn(name = "imovel_idImovel")
 	private Imovel imovel;
 
 	public Imagem(){
 		
+	}
+	
+	public Imagem(String caminhoImagem, Imovel imovel){
+		this.caminhoImagem = caminhoImagem;
+		this.imovel = imovel;
 	}
 
 	public Imagem(String nome, String descricao, String caminhoImagem,

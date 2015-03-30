@@ -16,7 +16,7 @@ public interface ImagemService {
 	
 	Boolean removerPorId(Imagem imagem);
 	
-	Imagem buscarPorId(ID id);
+	Imagem buscarPorId(long id);
 	
 	List<Imagem> listarTodos();
 

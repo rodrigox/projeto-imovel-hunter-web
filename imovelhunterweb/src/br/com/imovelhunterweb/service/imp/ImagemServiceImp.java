@@ -70,7 +70,7 @@ public class ImagemServiceImp implements ImagemService,Serializable {
 	}
 
 	@Override
-	public Imagem buscarPorId(ID id) {
+	public Imagem buscarPorId(long id) {
 		return this.imagemDAO.findById(id);
 	}
 

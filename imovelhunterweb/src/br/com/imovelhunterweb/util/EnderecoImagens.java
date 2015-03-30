@@ -5,20 +5,25 @@ import java.io.File;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import com.sun.org.apache.bcel.internal.classfile.Field;
+import br.com.imovelhunterweb.entitys.Anunciante;
 
 public class EnderecoImagens {
 
 
 	private String caminhoServidor;
 	private String caminhoTemp;
+	private String caminhoServidorRedz;
+	private String caminhoTempRedz;
 	
 	
 	public EnderecoImagens(){
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		this.caminhoServidor = scontext.getRealPath("") + "/servidor/imagens/";
-		this.caminhoTemp = scontext.getRealPath("") + "/uploads/imagens/";
+		this.caminhoServidor = scontext.getRealPath("") +"\\servidor\\imagens\\";
+		Anunciante anunciante = (Anunciante) UtilSession.getHttpSessionObject("anuncianteLogado");
+		this.caminhoTemp = scontext.getRealPath("") + "\\uploads"+anunciante.getIdAnunciante()+"\\imagens\\";
+		this.caminhoServidorRedz = "/servidor/imagens/";
+		this.caminhoTempRedz = "/uploads"+anunciante.getIdAnunciante()+"/imagens/";
 	}
 	
 	public void excluirImagensServidor(String nome){
@@ -36,6 +41,14 @@ public class EnderecoImagens {
 	public String getCaminhoTemp() {
 		return caminhoTemp;
 	}
+	
+	public String getCaminhoServidorRedz() {
+		return caminhoServidorRedz;
+	}
 
+	public String getCaminhoTempRedz() {
+		return caminhoTempRedz;
+	}	
+	
 	
 }

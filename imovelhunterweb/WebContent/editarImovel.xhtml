@@ -197,18 +197,18 @@
 	
 			<div class="coluna col14">
 			<h:form>
-				<p:wizard flowListener="#{imovelBean.onFlowProcess}"
+				<p:wizard flowListener="#{editarImovelBean.onFlowProcess}"
 					nextLabel="Proxímo" backLabel="Voltar">
 					<p:tab id="imovelEndereco" title="Dados Gerais">
 						<p:panel header="Geral">
 							<h:panelGrid id="dadosGeral" columns="4"
 								columnClasses="label, value">
 								<h:outputText value="Proprietário:*" />
-								<p:inputText value="#{imovelBean.imovel.nomeDoProprietario}"
+								<p:inputText value="#{editarImovelBean.imovel.nomeDoProprietario}"
 									required="false" label="Proprietário" />
 
 								<h:outputText value="CEP:*" />
-								<p:inputMask mask="99999-999" immediate="true" value="#{imovelBean.cep}" required="false"
+								<p:inputMask mask="99999-999" immediate="true" value="#{editarImovelBean.cep}" required="false"
 									label="CEP">
 									<p:ajax event="blur" 
 										update="jsf_logradouro, jsf_bairro, jsf_cidade, jsf_estado" />
@@ -216,42 +216,42 @@
 
 								<h:outputText value="Logradouro:*" />
 								<p:inputText id="jsf_logradouro"
-									value="#{imovelBean.imovel.logradouro}" required="false"
+									value="#{editarImovelBean.imovel.logradouro}" required="false"
 									label="logradouro" />
 
 								<h:outputText value="Bairro:*" />
-								<p:inputText id="jsf_bairro" value="#{imovelBean.imovel.bairro}"
+								<p:inputText id="jsf_bairro" value="#{editarImovelBean.imovel.bairro}"
 									required="false" label="Bairro" />
 
 								<h:outputText value="Cidade:*" />
-								<p:inputText id="jsf_cidade" value="#{imovelBean.imovel.cidade}"
+								<p:inputText id="jsf_cidade" value="#{editarImovelBean.imovel.cidade}"
 									required="false" label="Cidade" />
 
 								<h:outputText value="Estado:*" />
-								<p:inputText id="jsf_estado" value="#{imovelBean.imovel.estado}"
+								<p:inputText id="jsf_estado" value="#{editarImovelBean.imovel.estado}"
 									required="false" label="Estado" />
 
 								<h:outputText value="Número:*" />
-								<p:inputText value="#{imovelBean.imovel.numeroDoImovel}"
+								<p:inputText value="#{editarImovelBean.imovel.numeroDoImovel}"
 									required="false" label="Numero" />
 
 								<h:outputText value="Complemento: " />
-								<p:inputText value="#{imovelBean.imovel.complemento}"
+								<p:inputText value="#{editarImovelBean.imovel.complemento}"
 									required="false" label="Complemento" />
 	
 								<h:outputText value="Tipo do Imóvel: " />
-								<h:selectOneMenu value="#{imovelBean.imovel.tipoImovel}">
-									<f:selectItems value="#{imovelBean.tipoImovel}" var="b"
+								<h:selectOneMenu value="#{editarImovelBean.imovel.tipoImovel}">
+									<f:selectItems value="#{editarImovelBean.tipoImovel}" var="b"
 										itemValue="#{b}" itemLabel="#{b.nome}" />
 								</h:selectOneMenu>
 									
 								<h:outputText value="Valor R$:*" />
 								<p:inputText id="sfs_valorVenda"
-									value="#{imovelBean.valorImovel}"></p:inputText>									
+									value="#{editarImovelBean.valorImovel}"></p:inputText>									
 
 								<h:outputText value="Situação: " />
-								<h:selectOneMenu value="#{imovelBean.imovel.situacaoImovel}">
-									<f:selectItems value="#{imovelBean.situacao}" var="a"
+								<h:selectOneMenu value="#{editarImovelBean.imovel.situacaoImovel}">
+									<f:selectItems value="#{editarImovelBean.situacao}" var="a"
 										itemValue="#{a}" itemLabel="#{a.nome}" />
 								</h:selectOneMenu>
 							</h:panelGrid>
@@ -264,37 +264,37 @@
 							<h:panelGrid columns="4">
 								<h:outputText value="Número de quartos: " />
 								<p:inputText id="sfs_numeroQuartos"
-									value="#{imovelBean.imovel.numeroDeQuartos}"></p:inputText>
+									value="#{editarImovelBean.imovel.numeroDeQuartos}"></p:inputText>
 
 								<h:outputText value="número de Salas: " />
 								<p:inputText id="sfs_salas"
-									value="#{imovelBean.imovel.numeroDeSalas}"></p:inputText>
+									value="#{editarImovelBean.imovel.numeroDeSalas}"></p:inputText>
 
 								<h:outputText value="Ambientes: " />
 								<p:inputText id="sfs_ambientes"
-									value="#{imovelBean.imovel.ambientes}"></p:inputText>
+									value="#{editarImovelBean.imovel.ambientes}"></p:inputText>
 
 								<h:outputText value="Banheiros: " />
 								<p:inputText id="sfs_numeroBanheiros"
-									value="#{imovelBean.imovel.numeroDeBanheiros}"></p:inputText>
+									value="#{editarImovelBean.imovel.numeroDeBanheiros}"></p:inputText>
 
 								<h:outputText value="número de Suítes: " />
 								<p:inputText id="sfs_suites"
-									value="#{imovelBean.imovel.numeroDeSuites}"></p:inputText>
+									value="#{editarImovelBean.imovel.numeroDeSuites}"></p:inputText>
 
 								<h:outputText value="Área util m²: " />
 								<p:inputText id="sfs_areaUtil"
-									value="#{imovelBean.imovel.areaTotal}"></p:inputText>
+									value="#{editarImovelBean.imovel.areaTotal}"></p:inputText>
 
 							</h:panelGrid>
 		
 							<h:panelGrid columns="2" >								
 								<p:dataGrid style="width:100%;" id="checks"
-											columns="5" value="#{imovelBean.allCacaracteristicas}" var="item"
+											columns="5" value="#{editarImovelBean.allCacaracteristicas}" var="item"
 											emptyMessage="Nenhuma Caracteristica cadastrada no momento.">
 
 										<p:selectBooleanCheckbox
-											value="#{imovelBean.checked[item.idCaracteristica]}" />
+											value="#{editarImovelBean.checked[item.idCaracteristica]}" />
 										<h:outputLabel value="#{item.nome}" />
 								</p:dataGrid>
 								<br />
@@ -309,7 +309,7 @@
 								<!--  <h:form id="formUpload" enctype="multipart/form-data">    -->
 
 								<p:dataTable style="width:800px;" id="galeria"
-									value="#{imovelBean.imovelImagens}" var="item" rows="1"
+									value="#{editarImovelBean.imovelImagens}" var="item" rows="1"
 									emptyMessage="Nenhuma imagem cadastrada no momento."
 									paginator="true"
 									paginatorTemplate="{CurrentPageReport}
@@ -324,15 +324,15 @@
 											<h:outputText value="Imagens Selecionadas" />
 										</f:facet>
 										<h:panelGrid columns="2">
-											<p:graphicImage value="#{imovelBean.enderecoImagens.caminhoTempRedz}#{item.caminhoImagem}" style="width:258px; height:170px;"/>	
+											<p:graphicImage value="#{editarImovelBean.enderecoImagens.caminhoServidorRedz}#{item.caminhoImagem}" style="width:258px; height:170px;"/>	
 											<p:inputTextarea rows="10" cols="50"
 												value="#{item.descricao}">
 												<p:ajax event="blur" ></p:ajax>
 											</p:inputTextarea>
 										
 											<f:facet name="footer">
-												<h:commandButton
-													actionListener="#{imovelBean.removerImagem(item.caminhoImagem)}"
+												<p:commandButton
+													actionListener="#{editarImovelBean.removerImagem(item)}"
 													value="Remover" style="float: right;" />
 											</f:facet>
 										</h:panelGrid>
@@ -340,13 +340,13 @@
 								</p:dataTable>
 								<br />
 
-								<p:fileUpload fileUploadListener="#{imovelBean.upload}"
+								<p:fileUpload fileUploadListener="#{editarImovelBean.upload}"
 									mode="advanced" auto="true" label="Procurar" update="galeria"
 									sizeLimit="5000000" style="width:800px;"
 									allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
 
 								<h:commandButton value="Finalizar"
-									actionListener="#{imovelBean.cadastrarImovel}"
+									actionListener="#{editarImovelBean.cadastrarImovel}"
 									style="float: left;" />
 
 								<!--  </h:form>  -->
