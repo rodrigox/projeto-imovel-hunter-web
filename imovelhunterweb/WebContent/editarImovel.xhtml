@@ -196,7 +196,7 @@
 	<div class="linha-maior">
 	
 			<div class="coluna col14">
-			<h:form>
+			<h:form id="idFormWizard">
 				<p:wizard flowListener="#{editarImovelBean.onFlowProcess}"
 					nextLabel="Proxímo" backLabel="Voltar">
 					<p:tab id="imovelEndereco" title="Dados Gerais">
@@ -346,7 +346,7 @@
 									allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
 
 								<h:commandButton value="Finalizar"
-									actionListener="#{editarImovelBean.cadastrarImovel}"
+									actionListener="#{editarImovelBean.cadastrarImovel}"									
 									style="float: left;" />
 
 								<!--  </h:form>  -->

@@ -335,12 +335,17 @@ public class EditarImovelBean implements Serializable {
 		for (Imagem im : this.imovelImagens) {
 			if (im.getIdImagem() == (imagem.getIdImagem())) {
 				this.imovelImagens.remove(im);
-				this.imagemService.removerPorId(imagem);
+//				this.imagemService.removerPorId(imagem);
+				this.imovel.getImagens().remove(im);
+				this.imovelService.atualizar(this.imovel);
+				im = this.imagemService.buscarPorId(im.getIdImagem());
+				this.imagemService.remover(im);
 				break;
 			}
 		}
 		File f = new File(enderecoImagens.getCaminhoServidor() + imagem.getCaminhoImagem());
 		f.delete();
+		this.primeUtil.update("idFormWizard");
 	}
 
 	public void cadastrarImovel() {
