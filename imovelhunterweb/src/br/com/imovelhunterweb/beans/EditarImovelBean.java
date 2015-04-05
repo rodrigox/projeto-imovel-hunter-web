@@ -379,30 +379,17 @@ public class EditarImovelBean implements Serializable {
 		if (im != null) {
 			for (Imagem img : this.imovelImagens) {
 				this.imagemService.atualizar(img);
-//				this.imovelImagens.get(i).setImovel(im);
-//				Imagem img = this.imagemService.inserir(this.imovelImagens
-//						.get(i));
-//				String nomeTemp = img.getCaminhoImagem();
-//				img.setCaminhoImagem(img.getIdImagem() + "_"
-//						+ img.getCaminhoImagem());
-//				if (img != null) {
-//					this.imagemService.atualizar(img);
-//					
-//					enviarImagemAoServidor(img.getCaminhoImagem(), nomeTemp);
-//				}
 			}
-			//deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
 
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Cadastro",
-					"Imóvel cadastrado com sucesso.");			
+					"Imóvel alterado com sucesso.");			
+			this.navegador.redirecionarPara("listarImovel.xhtml");
 			this.primeUtil.update("idFormMensagem");
-			this.navegador.redirecionarPara("cadastroImovel.xhtml");
 
 		} else {
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Erro",
-					"Não foi possível cadastrar o imóvel.");
+					"Não foi possível alterar o imóvel.");
 			this.primeUtil.update("idFormMensagem");
-
 		}
 	}
 
