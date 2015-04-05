@@ -134,39 +134,25 @@
 	<div class="linha" style="height:100px;" />
 
 	<div class="linha">
-	
-		
-
-		<div class="coluna col12">
+		<div class="coluna col10">
 			<h:form id="idFormFaleConosco">
 				<p:panel  header="Fale Conosco" resizable="false"
 					closable="false" modal="false" draggable="false">
 					
-					
 						<h:panelGrid styleClass="ui-panelgrid" columns="4" cellpadding="5">
-							<h:outputLabel for="nome" value="Nome:" />
+							<h:outputLabel for="nome" value="Nome: *" />
 							<p:inputText id="nome" value="#{faleConoscoBean.nome}"	required="false"/>	
-							<h:outputLabel for="email" value="Email:" />
+							<h:outputLabel for="email" value="Email: *" />
 							<p:inputText id="email" value="#{faleConoscoBean.email}" required="false"/>	
 							<h:outputLabel for="telefoneFixo" value="Telefone Fixo:" />
-							<p:inputText id="telefoneFixo" value="#{faleConoscoBean.telefoneFixo}"	required="false"/>	
+							<p:inputMask id="telefoneFixo" mask="(99)9999-9999" value="#{faleConoscoBean.telefoneFixo}"	required="false"></p:inputMask>							
 							<h:outputLabel for="telefoneCelular" value="Telefone Celular:" />
-							<p:inputText id="telefoneCelular" value="#{faleConoscoBean.telefoneCelular}" required="false" />
-							<h:outputLabel for="assunto" value="Assunto:" />
-							<p:inputText id="assunto" value="#{faleConoscoBean.assunto}" required="false"/>
-							
-				
-							
+							<p:inputMask id="telefoneCelular" mask="(99)9999-9999" value="#{faleConoscoBean.telefoneCelular}"	required="false"></p:inputMask>							
+							<h:outputLabel for="assunto" value="Assunto: *" />
+							<p:inputText id="assunto" value="#{faleConoscoBean.assunto}" required="false"/>							
 						</h:panelGrid>
-							             
-							    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe:</h3>
-						
+							    <h3 style="margin-top: 0">Digite sua mensagem para nossa equipe: *</h3>
 							    <p:inputTextarea value="#{faleConoscoBean.mensagem}" autoResize="true" rows="10" cols="80" />
-							 
-					
-							
-							
-							
 					
 					<f:facet name="footer">
 								
@@ -212,10 +198,5 @@
 	</div>
 	
 <!-- 	Rodapé fim -->
-
-
-	
-
-
 </h:body>
 </html>
