@@ -17,13 +17,15 @@ public class EnderecoImagens {
 	
 	
 	public EnderecoImagens(){
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		this.caminhoServidor = scontext.getRealPath("") +"\\servidor\\imagens\\";
+//		FacesContext facesContext = FacesContext.getCurrentInstance();
+//		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+//		this.caminhoServidor = scontext.getRealPath("") +"\\servidor\\imagens\\";
 		Anunciante anunciante = (Anunciante) UtilSession.getHttpSessionObject("anuncianteLogado");
-		this.caminhoTemp = scontext.getRealPath("") + "\\uploads"+anunciante.getIdAnunciante()+"\\imagens\\";
+//		this.caminhoTemp = scontext.getRealPath("") + "\\uploads"+anunciante.getIdAnunciante()+"\\imagens\\";
 		this.caminhoServidorRedz = "/servidor/imagens/";
 		this.caminhoTempRedz = "/uploads"+anunciante.getIdAnunciante()+"/imagens/";
+		this.caminhoServidor = "\\ec2-54-68-17-181.us-west-2.compute.amazonaws.com\\servidor\\imagens\\";
+		this.caminhoTemp = "\\ec2-54-68-17-181.us-west-2.compute.amazonaws.com\\uploads\\" +anunciante.getIdAnunciante() + "\\imagens\\";
 	}
 	
 	public void excluirImagensServidor(String nome){
