@@ -36,6 +36,8 @@
 	
 	</style>
 	
+	
+	
 </h:head>
 <h:body>
 #{loginBean.usuarioLogado}
@@ -76,15 +78,29 @@
 		
 			<header>
 			
+				
+			
 				<div class="coluna col2">
-					<h1 class="logo">Imovel Hunter</h1>
+					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
 				</div>
+				<h:inputHidden id="gambi" value="#{localServidor.local}"> </h:inputHidden>
+				<script>				
+					
+					elemento.onClick = "homi()";
+					
+					function homi(){
+					
+						window.location = document.getElementById("gambi").value + "index.xhtml"
+						
+					}
+							
+				</script>
 				
 				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
 							<li><a href="cadastroImovel.xhtml" >Cadastrar imóvel</a></li>
-							<li><a href="detalheImovel.xhtml">Imoveis cadastrados</a></li>							
+							<li><a href="listarImovel.xhtml">Imoveis cadastrados</a></li>							
 							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>							
 						</ul>
 					</nav>
@@ -98,16 +114,114 @@
 	
 <!-- 	cabeçalho fim -->
 
+	<div class="linha">
+	
+		<section>				
+			
+			<div class="coluna col12">
+			
+				<h2 style="text-align: center;"><em>Quem somos</em></h2>
+				<p style="text-align: justify; text-justify: inter-word;">No mundo atual, o fenômeno da Internet acarreta um processo de reformulação e modernização do orçamento setorial. As experiências acumuladas demonstram que a revolução dos costumes apresenta tendências no sentido de aprovar a manutenção do processo de comunicação como um todo.
 
-<!-- container -->
-
-	<div class="linha" style="height:500px;" />
-
-
-<!-- container fim -->
-
-
-<!-- 	Rodapé -->
+Por outro lado, a determinação clara de objetivos assume importantes posições no estabelecimento das posturas dos órgãos dirigentes com relação às suas atribuições. Neste sentido, a expansão dos mercados mundiais cumpre um papel essencial na formulação do fluxo de informações. Pensando mais a longo prazo, o desafiador cenário globalizado garante a contribuição de um grupo importante na determinação de alternativas às soluções ortodoxas.
+				</p>
+				
+			</div>
+		
+		</section>
+	
+	</div>
+	
+	
+	<div class="conteudo-extra">
+	
+		<div class="linha">
+		
+			
+		
+			<div class="coluna col12" >
+			
+				<h3 style="text-align: center; text-justify: inter-word;">Equipe</h3>
+				
+			</div>
+			
+			
+		
+		</div>
+	
+	
+		<div class="linha">
+		
+			<div class="coluna col4">
+			
+			
+				<ul class="sem-marcador sem-padding noticias">
+					<li>
+						<img src="images/equipe/fodao.jpg" alt="" />
+						<h4>Analista de sistemas</h4>		
+						<p>Desenvovedor Web,Mobile e Desktop, conhecimento em java, c#, assembly, SQL, padrões de projeto Observer facade <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					<li>
+						<img src="images/equipe/cobol.jpg" alt="" />
+						<h4>Analista de sistemas</h4>		
+						<p>Desenvovedor Web,Mobile e Desktop, programa em cobol <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					<li>
+						<img src="images/equipe/motorista.jpg" alt="" />
+						<h4>Motorista</h4>		
+						<p>Pilota a moto <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					
+				</ul>
+			
+			
+			</div>		
+			
+			<div class="coluna col4" />	
+			
+			
+			<div class="coluna col4">
+				
+				
+				<ul class="sem-marcador sem-padding noticias">
+					<li>
+						<img src="images/equipe/hue.jpg" alt="" />
+						<h4>Comediante</h4>		
+						<p>Conta piadas para alegrar a equipe <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					<li>
+						<img src="images/equipe/viadao.jpg" alt="" />
+						<h4>Documentador</h4>		
+						<p>Documenta os documentos de maneira documentada <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					<li>
+						<img src="images/equipe/carregadoa.jpg" alt="" />
+						<h4>?</h4>		
+						<p>Joga lol <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>
+					
+				</ul>
+			
+			</div>
+			
+			<div class="coluna col4">
+				
+				
+				<ul class="sem-marcador sem-padding noticias">
+					<li>
+						<img src="images/equipe/carregadob.jpg" alt="" />
+						<h4>Fazedor de nada</h4>		
+						<p>Faz nada de maneira exímia <br/><a href="" style="cursor:pointer;">Saiba mais</a></p>			
+					</li>				
+				</ul>
+			
+			</div>
+			
+			
+		
+		</div>
+	
+	</div>
 	
 	<div class="footer">
 		
@@ -128,10 +242,8 @@
 	
 	</div>
 	
-<!-- 	Rodapé fim -->
+	
 
-
+	
 </h:body>
-
-
 </html>
