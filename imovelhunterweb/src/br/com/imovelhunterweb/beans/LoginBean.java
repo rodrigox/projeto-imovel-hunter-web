@@ -50,7 +50,6 @@ public class LoginBean implements Serializable {
 	
 	@PostConstruct
 	public void init(){		
-		
 		this.anuncianteService.instalarSuperUsuario();
 		
 		this.primeUtil = new PrimeUtil();
