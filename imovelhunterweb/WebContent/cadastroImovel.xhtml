@@ -51,6 +51,37 @@
 		text-decoration: none !important;			
 	}
 	
+	.ui-datagrid-content .ui-widget-content {
+	    border-top-width: 0px !important;
+	    border-left-width: 0px !important;
+	    border-right-width: 0px !important;
+	    border-bottom-width: 0px !important;	
+	}
+	
+	.ui-datagrid-content-empty {
+ 		 padding: 4px 10px;
+ 		  border-top-width: 0px !important;
+	    border-left-width: 0px !important;
+	    border-right-width: 0px !important;
+	    border-bottom-width: 0px !important;	
+	}
+	
+/* 	esse safado aqui tira as bordas do wizard */
+/* 	.ui-widget-content{ */
+/* 		border-top-width: 0px !important; */
+/* 	    border-left-width: 0px !important; */
+/* 	    border-right-width: 0px !important; */
+/* 	    border-bottom-width: 0px !important;	 */
+/* 	} */
+
+/* div[id=j_idt18:checks_content]{ */
+/*  		border-top-width: 0px !important;  */
+/*  	    border-left-width: 0px !important;  */
+/*  	    border-right-width: 0px !important;  */
+/*  	    border-bottom-width: 0px !important;	  */
+/* } */
+
+	
 	
 /* 	menuzinho de cima selecionado */
 	
@@ -130,14 +161,26 @@
 			<header>
 			
 				<div class="coluna col2">
-					<h1 class="logo">Imovel Hunter</h1>
+					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
 				</div>
+				<h:inputHidden id="gambi" value="#{localServidor.local}"> </h:inputHidden>
+				<script>				
+					
+					elemento.onClick = "homi()";
+					
+					function homi(){
+					
+						window.location = document.getElementById("gambi").value + "index.xhtml"
+						
+					}
+							
+				</script>
 				
 				<div class="coluna col10">
 					<nav>
 						<ul class="menu inline sem-marcador">
 							<li><a class="selecionado" href="cadastroImovel.xhtml" >Cadastrar imóvel</a></li>
-							<li><a href="detalheImovel.xhtml">Imoveis cadastrados</a></li>							
+							<li><a href="listarImovel.xhtml">Imoveis cadastrados</a></li>							
 							<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>	
 						</ul>
 					</nav>
@@ -281,10 +324,7 @@
 											<h:outputText value="Imagens Selecionadas" />
 										</f:facet>
 										<h:panelGrid columns="2">
-
-											<p:graphicImage
-												value="/uploads/imagens/#{item.caminhoImagem}" style="width:258px; height:170px;"/>	
-									
+											<p:graphicImage value="#{imovelBean.enderecoImagens.caminhoTempRedz}#{item.caminhoImagem}" style="width:258px; height:170px;"/>	
 											<p:inputTextarea rows="10" cols="50"
 												value="#{item.descricao}">
 												<p:ajax event="blur" ></p:ajax>

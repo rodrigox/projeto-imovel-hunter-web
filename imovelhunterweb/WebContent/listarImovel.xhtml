@@ -90,14 +90,26 @@
 			<header>
 
 			<div class="coluna col4">
-				<h1 class="logo">Imovel Hunter</h1>
-			</div>
+					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
+				</div>
+				<h:inputHidden id="gambi" value="#{localServidor.local}"> </h:inputHidden>
+				<script>				
+					
+					elemento.onClick = "homi()";
+					
+					function homi(){
+					
+						window.location = document.getElementById("gambi").value + "index.xhtml"
+						
+					}
+							
+				</script>
 
 			<div class="coluna col8">
 				<nav>
 				<ul class="menu inline sem-marcador">
 					<li><a href="cadastroImovel.xhtml">Cadastrar imóvel</a></li>
-					<li><a class="selecionado" href="detalheImovel.xhtml">Detalhes Do Imovel</a></li>
+					<li><a class="selecionado" href="listarImovel.xhtml">Imoveis cadastrados</a></li>
 					<h:outputText escape="false" value="#{loginBean.logado}"></h:outputText>
 				</ul>
 				</nav>
@@ -155,6 +167,8 @@
 						</p:commandButton>
 						<p:commandButton value="Remover" actionListener="#{listarImovelBean.excluirImovel(imovel)}" style="width:100px; height:25px; font-size: 12px">
 <!-- 							<p:confirm header="Confirmação" message="Deseja realmente remover este imóvel?" icon="ui-icon-alert" /> -->
+						</p:commandButton>
+						<p:commandButton value="Alterar" actionListener="#{listarImovelBean.editarImovel(imovel)}" style="width:100px; height:25px; font-size: 12px">
 						</p:commandButton>
 					</h:panelGrid>
 <!-- 					</div>	 -->

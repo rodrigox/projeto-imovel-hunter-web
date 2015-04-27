@@ -131,8 +131,20 @@
 			<header>
 			
 				<div class="coluna col2">
-					<h1 class="logo">Imovel Hunter</h1>
+					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
 				</div>
+				<h:inputHidden id="gambi" value="#{localServidor.local}"> </h:inputHidden>
+				<script>				
+					
+					elemento.onClick = "homi()";
+					
+					function homi(){
+					
+						window.location = document.getElementById("gambi").value + "index.xhtml"
+						
+					}
+							
+				</script>
 				
 				<div class="coluna col10">
 					<nav>
