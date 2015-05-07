@@ -1,201 +1,259 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="pt-br"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Imovel Hunter Web</title>	
+	<title>Imovel Hunter Web</title>
 	<link rel="stylesheet" href="css/personalizado/normalize.css" />
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+	<link
+		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+		rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
-	
-	
+
+
+
+	<script type="text/javascript">
+/* Máscaras ER */
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mtel(v){
+    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+}
+function id( el ){
+	return document.getElementById( el );
+}
+	</script>
+
+
+
 	<style type="text/css">
-	
-	.ui-widget-header {
-	  border: 1px solid #eeeeee;
-	  background: #1f3c58;
-/* 	  color: #FFFFFF; */
-	  font-weight: bold;
-	}	
-	
-		.ui-widget-header span {	  
-		  color: #FFFFFF;	
-		}
-		
-		.ui-dialog.ui-widget-content .ui-dialog-titlebar {
-		  padding: 9px 15px;
-		  border-bottom: 1px solid #eee;
-	 	  background-color: #1f3c58; 
-		}
-		
-		.ui-panelgrid td{
-		
-		padding: 2px 5px;
-	
-	}
-	
-	</style>
-	
+.ui-widget-header {
+	border: 1px solid #eeeeee;
+	background: #1f3c58;
+	/* 	  color: #FFFFFF; */
+	font-weight: bold;
+}
+
+.ui-widget-header span {
+	color: #FFFFFF;
+}
+
+.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	padding: 9px 15px;
+	border-bottom: 1px solid #eee;
+	background-color: #1f3c58;
+}
+
+.ui-panelgrid td {
+	padding: 2px 5px;
+}
+</style>
+
 </h:head>
 <h:body>
 
 	<!-- 	primefaces -->
-	
+
 	<h:form>
-    	<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />    
+		<p:remoteCommand name="rc" actionListener="#{loginBean.logar}" />
 	</h:form>
-	
-	
+
+
 	<!-- dialog de processo -->
-		<p:ajaxStatus onstart="processandoDialog.show();"
-			onsuccess="processandoDialog.hide();" />
-			
-		<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
-			header="#{msg['ajax.processando']}" draggable="false" closable="false"
-			style="font-size:8pt;">
-			<p:graphicImage value="/images/ajax_loader.gif" />
-		</p:dialog>
-		
-		<h:form id="idFormMensagem">
-			<p:growl autoUpdate="false" showDetail="true" life="3000" />
-		</h:form>
-		
-		
-		
-	
-	
-<!-- 	primefaces fim -->
+	<p:ajaxStatus onstart="processandoDialog.show();"
+		onsuccess="processandoDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="processandoDialog" resizable="false"
+		header="#{msg['ajax.processando']}" draggable="false" closable="false"
+		style="font-size:8pt;">
+		<p:graphicImage value="/images/ajax_loader.gif" />
+	</p:dialog>
+
+	<h:form id="idFormMensagem">
+		<p:growl autoUpdate="false" showDetail="true" life="3000" />
+	</h:form>
 
 
-<!-- 	cabeçalho -->
+
+
+
+	<!-- 	primefaces fim -->
+
+
+	<!-- 	cabeçalho -->
 
 	<div class="header">
-		
-		<div class="linha">
-			<header>			    
-				<div class="coluna col4">
-					<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel Hunter</h1>
-				</div>
-				<h:inputHidden id="gambi" value="#{localServidor.local}"> </h:inputHidden>
-				<script>									
-					elemento.onClick = "homi()";					
-					function homi(){					
-						//window.location = "http://localhost:8080/imovelhunterweb/index.xhtml"
-						window.location = document.getElementById("gambi").value + "index.xhtml"; 
-					}
-							
-				</script>
-				
-				<div class="coluna col8">
-					<nav>
-						<ul class="menu inline sem-marcador">
-							<li><a href="index.xhtml" >Home</a></li>						
-							<li><a href="faleConosco.xhtml">Fale conosco</a></li>
-							<li><a href="servicos.xhtml">Serviços</a></li>
-							<li><a class="selecionado" href="login.xhtml" >Logar</a></li>
-							
-						</ul>
-					</nav>
-				</div>
-				
-			</header>
-		 
-		</div>
-	
-	</div>
-	
-<!-- 	cabeçalho fim -->
-	
-	
-<!-- 	Corpo do meio -->
 
-	<div class="linha" style="height:100px;" />
+		<div class="linha">
+			<header>
+			<div class="coluna col4">
+				<h1 style="cursor: pointer;" onclick="homi()" class="logo">Imovel
+					Hunter</h1>
+			</div>
+			<h:inputHidden id="gambi" value="#{localServidor.local}">
+			</h:inputHidden> <script>
+				elemento.onClick = "homi()";
+				function homi() {
+					//window.location = "http://localhost:8080/imovelhunterweb/index.xhtml"
+					window.location = document.getElementById("gambi").value
+							+ "index.xhtml";
+				}
+			</script>
+
+			<div class="coluna col8">
+				<nav>
+				<ul class="menu inline sem-marcador">
+					<li><a href="index.xhtml">Home</a></li>
+					<li><a href="faleConosco.xhtml">Fale conosco</a></li>
+					<li><a href="servicos.xhtml">Serviços</a></li>
+					<li><a class="selecionado" href="login.xhtml">Logar</a></li>
+
+				</ul>
+				</nav>
+			</div>
+
+			</header>
+
+		</div>
+
+	</div>
+
+	<!-- 	cabeçalho fim -->
+
+
+	<!-- 	Corpo do meio -->
+
+	<div class="linha" style="height: 100px;" />
 
 	<div class="linha">
-	
-		<div class="coluna col12">
-		
-			<h:form id="cadastroAnunciantes">
-			<center>
-				<p:panel header="CADASTRO">
-		  			<h:panelGrid styleClass="ui-panelgrid" columns="2">
-		  				
-		  				<h:outputLabel value="nome*"> </h:outputLabel>
-		  				<p:inputText id="jsf_nome" requerid="false" value="#{anuncianteBean.anunciante.nome}"> </p:inputText>
-		  				
-		  				<h:outputLabel  value="Sobrenome*"> </h:outputLabel>
-		  				<p:inputText id="jsf_sobrenome" requerid="false" value="#{anuncianteBean.anunciante.sobreNome}"> </p:inputText>
-		  				
-		  				<h:outputLabel value="email*"> </h:outputLabel>
-		  				<p:inputText id="jsf_email" requerid="false" value="#{anuncianteBean.anunciante.email}"> </p:inputText>
-		  				
-		  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
-		  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{anuncianteBean.dataDeNascimento}"> </p:inputText>
-		  				
-		  				<h:outputLabel value="CRECI"> </h:outputLabel>
-		  				<p:inputText id="jsf_creci" requerid="false" value="#{anuncianteBean.anunciante.creci}"> </p:inputText>
-		  				
-		  				<h:outputLabel  value="CPF*"> </h:outputLabel>
-		  				<p:inputMask id="jsf_cpf" mask="999.999.999-99"  requerid="false" value="#{anuncianteBean.anunciante.cpf}"> </p:inputMask>
-		  				
-		  				<h:outputLabel value="Login*"> </h:outputLabel>
-		  				<p:inputText id="jsf_login" requerid="false" value="#{anuncianteBean.anunciante.login}"> </p:inputText>
-		  				
-		  				<h:outputLabel value="Senha*"> </h:outputLabel>
-		  				<p:password id="jsf_senha" requerid="false" value="#{anuncianteBean.anunciante.senha}"> </p:password>
-		  			
-		  				<h:outputLabel value="Confirmar Senha*"> </h:outputLabel>
-		  				<p:password id="jsf_conf_senha" requerid="false" value="#{anuncianteBean.confirmarSenha}"> </p:password>
-		  								 	
-		  			 	<f:facet name="footer">
-		  			 		<p:row>
-		  			 			<p:outputPanel style="width: 100%; text-align: right" layout="block">			 						
-		  			 				<p:commandButton actionListener="#{anuncianteBean.cadastrarAnunciante}" styleClass="botaoazul" value="Cadastrar"></p:commandButton>
-		  			 			</p:outputPanel>
-		  			 		</p:row> 			 	
-		  			 	</f:facet>		 	  			 
-		  			</h:panelGrid>		
-	  			</p:panel>
-  			</center>	
-  		</h:form>	
-		
-		</div>
-	
-	</div>
-	
-	<div class="linha" style="height:100px;" />
-	
-<!-- 	Corpo do meio fim -->
-	
-<!-- 	Rodapé -->
-	
-	<div class="footer">
-		
-		<div class="linha">
-		
-			<footer>
-			
-				<div class="coluna col12">
-					
-					<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
-					
-				</div>
-			
-			</footer>
-		
-		</div>
-	
-	
-	</div>
-	
-<!-- 	Rodapé fim -->
 
-	
+		<div class="coluna col12">
+
+			<h:form id="cadastroAnunciantes">
+				<center> <p:panel header="CADASTRO">
+					<h:panelGrid styleClass="ui-panelgrid" columns="2">
+
+						<h:outputLabel value="nome*">
+						</h:outputLabel>
+						<p:inputText id="jsf_nome" requerid="false"
+							value="#{anuncianteBean.anunciante.nome}">
+						</p:inputText>
+
+						<h:outputLabel value="Sobrenome*">
+						</h:outputLabel>
+						<p:inputText id="jsf_sobrenome" requerid="false"
+							value="#{anuncianteBean.anunciante.sobreNome}">
+						</p:inputText>
+
+						<h:outputLabel value="email*">
+						</h:outputLabel>
+						<p:inputText id="jsf_email" requerid="false"
+							value="#{anuncianteBean.anunciante.email}">
+						</p:inputText>
+
+						<h:outputLabel value="Data de Nascimento*">
+						</h:outputLabel>
+						<p:inputText id="jsf_dataDeNascimento" type="date"
+							requerid="false" value="#{anuncianteBean.dataDeNascimento}">
+						</p:inputText>
+
+
+						<h:outputLabel value="Telefone">
+						</h:outputLabel>
+						<p:inputText id="jsf_telefone" requerid="false"
+							value="#{anuncianteBean.anunciante.telefone}" maxlength="15" onkeypress="mascara(this,mtel)">
+						</p:inputText>
+
+
+						<h:outputLabel value="CRECI">
+						</h:outputLabel>
+						<p:inputText id="jsf_creci" requerid="false"
+							value="#{anuncianteBean.anunciante.creci}">
+						</p:inputText>
+
+						<h:outputLabel value="CPF*">
+						</h:outputLabel>
+						<p:inputMask id="jsf_cpf" mask="999.999.999-99" requerid="false"
+							value="#{anuncianteBean.anunciante.cpf}">
+						</p:inputMask>
+
+						<h:outputLabel value="Login*">
+						</h:outputLabel>
+						<p:inputText id="jsf_login" requerid="false"
+							value="#{anuncianteBean.anunciante.login}">
+						</p:inputText>
+
+						<h:outputLabel value="Senha*">
+						</h:outputLabel>
+						<p:password id="jsf_senha" requerid="false"
+							value="#{anuncianteBean.anunciante.senha}">
+						</p:password>
+
+						<h:outputLabel value="Confirmar Senha*">
+						</h:outputLabel>
+						<p:password id="jsf_conf_senha" requerid="false"
+							value="#{anuncianteBean.confirmarSenha}">
+						</p:password>
+
+						<f:facet name="footer">
+							<p:row>
+								<p:outputPanel style="width: 100%; text-align: right"
+									layout="block">
+									<p:commandButton
+										actionListener="#{anuncianteBean.cadastrarAnunciante}"
+										styleClass="botaoazul" value="Cadastrar"></p:commandButton>
+								</p:outputPanel>
+							</p:row>
+						</f:facet>
+					</h:panelGrid>
+				</p:panel> </center>
+			</h:form>
+
+		</div>
+
+	</div>
+
+	<div class="linha" style="height: 100px;" />
+
+	<!-- 	Corpo do meio fim -->
+
+	<!-- 	Rodapé -->
+
+	<div class="footer">
+
+		<div class="linha">
+
+			<footer>
+
+			<div class="coluna col12">
+
+				<span>&copy; #{loginBean.anoAgora} - Imovel Hunter</span>
+
+			</div>
+
+			</footer>
+
+		</div>
+
+
+	</div>
+
+	<!-- 	Rodapé fim -->
+
+
 </h:body>
 </html>
