@@ -284,6 +284,10 @@ public class ImovelBean implements Serializable {
 					}
 				}
 			}
+			//
+			if(this.imovelImagens.isEmpty()){
+				
+			}
 		}
 	}
 
@@ -306,6 +310,9 @@ public class ImovelBean implements Serializable {
 			fos.flush();
 			fos.close();
 			imagensNoTemp();
+			
+		
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -323,6 +330,20 @@ public class ImovelBean implements Serializable {
 	}
 
 	public void cadastrarImovel() {
+		
+		
+		/// let´s go
+		if(this.imovelImagens.size()==0){
+			System.out.println("validacao paranaue");
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Imagem não cadastrada","Cadastre ao menos uma imagem.");
+			this.primeUtil.update("idFormMensagem");
+			
+			
+			
+		}
+
+		
+		
 		this.imovel.setCaracteristicas(new ArrayList<Caracteristica>());
 		for (Caracteristica caract : this.allCacaracteristicas) {
 			if (checked.get(caract.getIdCaracteristica())) {
@@ -345,8 +366,14 @@ public class ImovelBean implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		
+		
+	
 		this.imovel.setAnunciante(this.anunciante);
+		
+		
 
 		Imovel im = this.imovelService.inserir(this.imovel);
 		if (im != null) {
@@ -369,8 +396,12 @@ public class ImovelBean implements Serializable {
 					"Imóvel cadastrado com sucesso.");			
 			this.primeUtil.update("idFormMensagem");
 			this.navegador.redirecionarPara("cadastroImovel.xhtml");
+			
 
-		} else {
+		} 
+		
+		
+		else {
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Erro",
 					"Não foi possível cadastrar o imóvel.");
 			this.primeUtil.update("idFormMensagem");
@@ -440,9 +471,16 @@ public class ImovelBean implements Serializable {
 				return event.getOldStep();
 			}
 		}
+		if(event.getOldStep().equals("imovelCaracteristica")){
+			System.out.println("TESTE VALIDAÇÃO");
+			//validarCamposTabImagem(); add metodo de validação de imovel caracteristica
+			
+		}
 		return event.getNewStep();
 
 	}
+	
+
 
 	public SituacaoImovel[] getSituacao() {
 		return SituacaoImovel.values();
@@ -452,6 +490,9 @@ public class ImovelBean implements Serializable {
 		return TipoImovel.values();
 	}
 
+	
+	
+	//
 	public boolean validarCamposGerais() {
 		if (this.imovel.getNomeDoProprietario() == null
 				|| this.imovel.getNomeDoProprietario().trim().equals("")) {
@@ -510,9 +551,18 @@ public class ImovelBean implements Serializable {
 					"Campo inválido", "O valor do imóvel deve ser informado.");
 			this.primeUtil.update("idFormMensagem");
 			return false;
-		} else {
+		}
+		
+		
+		
+		
+		
+		else {
 			try {
-				this.imovel.setPreco(Double.parseDouble(this.valorImovel));
+				String valor = this.valorImovel.replaceAll("\\.","").replace(",", ".");
+				
+				
+				this.imovel.setPreco(Double.parseDouble(valor));
 			} catch (NumberFormatException e) {
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
 						"Campo inválido",
@@ -521,6 +571,22 @@ public class ImovelBean implements Serializable {
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	///////////////
+	
+	public boolean validarCamposTabImagem(){
+		
+		System.out.println("entrou no metodo validar campostabimagem");
+		if(this.imovelImagens.size()<1){
+		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Imagem não cadastrada","Cadastre ao menos uma imagem.");
+		this.primeUtil.update("idFormMensagem");
+		return false;
+		
+		
+	}
+		
 		return true;
 	}
 }
