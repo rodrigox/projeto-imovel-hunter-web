@@ -23,8 +23,8 @@ public class LocalServidor implements Serializable{
 	}
 	
 	public static String localServidor(){
-		String sistema = System.getProperty("os.name");							
-		if(sistema.substring(0,7).toUpperCase().equals("WINDOWS")){
+		String sistema = System.getProperty("os.name"); 				
+		if(sistema.length() >= 7 && sistema.substring(0,7).toUpperCase().equals("WINDOWS")){
 			return "http://localhost:8080/imovelhunterweb/";
 		}else{
 			return "http://ec2-54-68-17-181.us-west-2.compute.amazonaws.com/imovelhunterweb/";
