@@ -33,6 +33,7 @@ public class AnuncianteBean implements Serializable {
 	private Navegador navegador;
 	private EmailValidator validadorDeEmail;
 	private ValidaCPF validaCpf;
+	private String telefone;
 	
 	/**
 	 * Este atributo é o que irá utilizar a persistencia do anunciante, O spring cuida da parte de fazer a injeção de dependência desse atributo
@@ -63,9 +64,24 @@ public class AnuncianteBean implements Serializable {
 		this.navegador = new Navegador();
 		this.validadorDeEmail = new EmailValidator();
 		this.validaCpf = new ValidaCPF();
+		
+		this.telefone ="";
 	}
 	
 	
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+
+
 	public Anunciante getAnunciante() {
 		return anunciante;
 	}
@@ -114,6 +130,7 @@ public class AnuncianteBean implements Serializable {
 				Date dataVencimento = calendario.getTime();
 				this.anunciante.setDataDeCriacao(dataAgora);
 				this.anunciante.setDataDeVencimento(dataVencimento);
+				//this.anunciante.setTelefone();
 				
 				this.anunciante.setCpf(cpfValidacao);
 				this.anunciante = this.anuncianteService.inserir(this.anunciante);
@@ -219,6 +236,23 @@ public class AnuncianteBean implements Serializable {
 			return false;
 		}
 		
+		
+		// removendo parenteses e hifens do numero de telefone do anunciante
+		
+		String xTelefone =this.anunciante.getTelefone().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("-", "").replaceAll(" ", "");
+		
+		this.anunciante.setTelefone(xTelefone);
+		System.out.println("Numero do telefone"+ xTelefone);
+		if(this.anunciante.getTelefone().length()<10){
+				
+				System.out.println("Numero do telefone"+ telefone);
+			
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+						"Erro ao Cadastrar numero de telefone","insira no minimo 10 digitos incluindo o DDD");
+				
+				this.primeUtil.update("idFormMensagem");
+			return false;
+		}
 		
 		return true;
 	}
