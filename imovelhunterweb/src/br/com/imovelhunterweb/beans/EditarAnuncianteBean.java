@@ -46,6 +46,8 @@ public class EditarAnuncianteBean implements Serializable{
 	
 	private String email;
 	
+	private String telefone;
+	
 	private EmailValidator validadorDeEmail;
 
 	
@@ -79,6 +81,18 @@ public class EditarAnuncianteBean implements Serializable{
 
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
+	}
+
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 
@@ -129,6 +143,10 @@ public class EditarAnuncianteBean implements Serializable{
 			return false;
 		}
 		
+		
+		
+		
+		
 		if(!this.anunciante.getEmail().equals(this.email) && this.email.length() == 0){
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Campo inválido","O email do anunciante deve ser informado");
 			//Atualiza o componente que exibe a mensagem para o usuário, para que ele exiba
@@ -156,6 +174,28 @@ public class EditarAnuncianteBean implements Serializable{
 				return false;
 			}
 		}
+		
+		
+		// removendo parenteses e hifens do numero de telefone do anunciante
+		
+		String telefone =this.anunciante.getTelefone().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("-", "").replaceAll(" ", "");
+		
+		this.anunciante.setTelefone(telefone);
+		System.out.println("Numero do telefone"+ telefone);
+		if(this.anunciante.getTelefone().length()<10){
+				
+				System.out.println("Numero do telefone"+ telefone);
+			
+				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+						"Erro ao Cadastrar numero de telefone","insira no minimo 10 digitos incluindo o DDD");
+				
+				this.primeUtil.update("idFormMensagem");
+			return false;
+		}
+		
+
+		
+		
 		
 		
 		return true;
