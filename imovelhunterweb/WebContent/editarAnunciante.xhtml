@@ -15,6 +15,31 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo.css" />
 	
+
+	<script type="text/javascript">
+/* Máscaras ER */
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mtel(v){
+    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+}
+function id( el ){
+	return document.getElementById( el );
+}
+	</script>
+
+
+
+
 	<style type="text/css">
 	
 	.ui-widget-header {
@@ -199,6 +224,12 @@
 		  				
 		  				<h:outputLabel value="Data de Nascimento*"> </h:outputLabel>
 		  				<p:inputText id="jsf_dataDeNascimento" type="date" requerid="false" value="#{editarAnuncianteBean.dataDeNascimento}"> </p:inputText>
+		  			
+		  				<h:outputLabel value="Telefone">
+						</h:outputLabel>
+						<p:inputText id="jsf_telefone" requerid="false"
+							value="#{editarAnuncianteBean.anunciante.telefone}" maxlength="15" onkeypress="mascara(this,mtel)">
+						</p:inputText>
 		  				
 		  				<h:outputLabel value="CRECI"> </h:outputLabel>
 		  				<p:inputText id="jsf_creci" requerid="false" value="#{editarAnuncianteBean.anunciante.creci}"> </p:inputText>  				
