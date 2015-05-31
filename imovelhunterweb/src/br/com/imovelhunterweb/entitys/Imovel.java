@@ -19,11 +19,12 @@ import javax.persistence.OneToOne;
 
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
+import br.com.imovelhunterweb.util.ObjetoJSON;
 
 
 
 @Entity
-public class Imovel implements Serializable{
+public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 
 	/**
 	 * 

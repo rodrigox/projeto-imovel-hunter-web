@@ -24,16 +24,20 @@ import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
+import br.com.imovelhunterweb.entitys.Perfil;
 import br.com.imovelhunterweb.entitys.PontoGeografico;
+import br.com.imovelhunterweb.entitys.Usuario;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.service.ImagemService;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.service.PerfilService;
 import br.com.imovelhunterweb.service.PontoGeograficoService;
 import br.com.imovelhunterweb.util.ConsultaCEP;
 import br.com.imovelhunterweb.util.EnderecoImagens;
+import br.com.imovelhunterweb.util.GcmUtil;
 import br.com.imovelhunterweb.util.LocalizacaoUtil;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
@@ -81,9 +85,16 @@ public class ImovelBean implements Serializable {
 
 	@ManagedProperty("#{caracteristicaService}")
 	private CaracteristicaService caracteristicaService;
+	
+	@ManagedProperty("#{perfilService}")
+	private PerfilService perfilService;
+	
+	private GcmUtil gcmUtil;
+
 
 	@PostConstruct
 	public void init() {
+		this.gcmUtil = new GcmUtil();
 		this.navegador = new Navegador();
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
@@ -397,6 +408,22 @@ public class ImovelBean implements Serializable {
 			this.primeUtil.update("idFormMensagem");
 			this.navegador.redirecionarPara("cadastroImovel.xhtml");
 			
+			
+			List<Perfil> listaPerfil = this.perfilService.listarPerfilPorImovel(imovel);
+
+			if(listaPerfil != null && listaPerfil.size() > 0){
+				List<Usuario> usuarios= new ArrayList<Usuario>();
+				for(Perfil p : listaPerfil){
+					if(p.getUsuario() != null)
+					usuarios.add(p.getUsuario());
+				}
+				try {
+					gcmUtil.enviarObjetoJsonViaGcm(im, gcmUtil.montarTokens(usuarios), null, false);
+				} catch (IOException e) {					
+					e.printStackTrace();
+				}
+			}
+
 
 		} 
 		
@@ -588,5 +615,9 @@ public class ImovelBean implements Serializable {
 	}
 		
 		return true;
+	}
+
+	public void setPerfilService(PerfilService perfilService) {
+		this.perfilService = perfilService;
 	}
 }
