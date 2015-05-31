@@ -1,18 +1,18 @@
 package br.com.imovelhunterweb.entitys;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import br.com.imovelhunterweb.util.ObjetoJSON;
+
 @Entity
-public class Usuario implements Serializable {
+public class Usuario extends ObjetoJSON<Usuario> implements Serializable {
 	
 	/**
 	 * 
