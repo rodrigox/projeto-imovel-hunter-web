@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.imovelhunterweb.util.ObjetoJSON;
+
 @Entity
-public class Imagem implements Serializable {
+public class Imagem extends ObjetoJSON<Imagem> implements Serializable {
 	/**
 	 * 
 	 */

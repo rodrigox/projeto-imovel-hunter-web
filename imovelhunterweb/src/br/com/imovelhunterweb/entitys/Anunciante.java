@@ -16,9 +16,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.imovelhunterweb.enums.TipoUsuario;
+import br.com.imovelhunterweb.util.ObjetoJSON;
 
 @Entity
-public class Anunciante implements Serializable {
+public class Anunciante extends ObjetoJSON<Anunciante> implements Serializable {
 
 	/**
 	 * 

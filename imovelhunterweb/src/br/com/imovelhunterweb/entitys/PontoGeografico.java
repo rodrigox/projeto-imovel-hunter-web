@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.imovelhunterweb.util.ObjetoJSON;
+
 @Entity
-public class PontoGeografico implements Serializable {
+public class PontoGeografico extends ObjetoJSON<PontoGeografico> implements Serializable {
 	
 	/**
 	 * 
