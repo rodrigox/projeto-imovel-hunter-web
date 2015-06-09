@@ -13,8 +13,10 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CollectionId;
 
+import br.com.imovelhunterweb.util.ObjetoJSON;
+
 @Entity
-public class Caracteristica implements Serializable{
+public class Caracteristica extends ObjetoJSON<Caracteristica> implements Serializable{
 
 	/**
 	 * 

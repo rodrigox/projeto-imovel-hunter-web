@@ -50,9 +50,9 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 		perfil2.setValor(perfil.getValor());
 		perfil2.setUsuario(perfil.getUsuario());
 		
-			perfil2 = this.perfilDao.insert(perfil2);
+		perfil2 = this.perfilDao.insert(perfil2);
 			
-			return perfil2;
+		return perfil2;
 	}
 
 	@Override
@@ -124,15 +124,14 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 	}
 
 	@Override
-	public List<Perfil> listarPerfilPorImovel(Imovel imovel) {
-		String situacao = imovel.getSituacaoImovel().name();
+	public List<Perfil> listarPerfilPorImovel(Imovel imovel) {		
 		
 		String query = "FROM Perfil p WHERE ";
 		
 		Map<String,Object> parametros = new HashMap<String,Object>();
 		
 		
-		if(situacao.equals("ALUGAR")){
+		if(imovel.getSituacaoImovel().equals(SituacaoImovel.LOCACAO)){
 			/*
 		<item>Ate R$ 1000</item>
         <item>De R$ 1001 a R$ 1500</item>
@@ -141,27 +140,27 @@ public class PerfilServiceImp implements PerfilService,Serializable {
         <item>De R$ 2501 a R$ 3000</item>
         <item>De R$ 3001 a R$ 5000</item>*/
 			parametros.put("situacaoImovel",SituacaoImovel.LOCACAO);
-			query += "i.situacaoImovel=:situacaoImovel ";
+			query += "p.situacaoImovel=:situacaoImovel ";
 			
 			double precoImovel = imovel.getPreco();
 			
 			if(precoImovel <= 1000){
-				query += "AND p.valor <= '1000' ";
+				query += "AND (p.valor = 1 OR  p.valor = 0) ";
 			}else if(1001 > precoImovel && precoImovel <= 1500){
-				query += "AND p.valor >= '1001' AND p.valor <= '1500' ";
+				query += "AND (p.valor = 2 OR  p.valor = 0) ";
 			}else if(1501 > precoImovel && precoImovel <= 2000){
-				query += "AND p.valor >= '1501' AND p.valor <= '2000' ";
+				query += "AND (p.valor = 3 OR  p.valor = 0) ";
 			}else if(2001 > precoImovel && precoImovel <= 2500){
-				query += "AND p.valor >= '2001' AND p.valor <= '2500' ";
+				query += "AND (p.valor = 4 OR  p.valor = 0) ";
 			}else if(2501 > precoImovel && precoImovel <= 3000){
-				query += "AND p.valor >= '2501' AND p.valor <= '3000' ";
+				query += "AND (p.valor = 5 OR  p.valor = 0) ";
 			}else if(3001 > precoImovel && precoImovel <= 5000){
-				query += "AND p.valor >= '3001' AND p.valor <= '5000' ";
+				query += "AND (p.valor = 6 OR  p.valor = 0) ";
 			}else if(precoImovel > 5000){
-				query += "AND p.valor > '5000' ";
+				query += "AND (p.valor = 7 OR  p.valor = 0) ";
 			}
 			
-		}else{
+		}else if(imovel.getSituacaoImovel().equals(SituacaoImovel.VENDA)){
 			/*
 		<item>Ate R$ 135 mil</item>
         <item>De R$ 136 mil a R$ 250 mil</item>
@@ -172,23 +171,23 @@ public class PerfilServiceImp implements PerfilService,Serializable {
         <item>Acima de R$ 1 milhão</item>*/
 			
 			parametros.put("situacaoImovel",SituacaoImovel.VENDA);
-			query += "i.situacaoImovel=:situacaoImovel ";
+			query += "p.situacaoImovel=:situacaoImovel ";
 			double precoImovel = imovel.getPreco();
 			
 			if(precoImovel <= 135000){
-				query += "AND p.valor <= '135000' ";
+				query += "AND (p.valor = 1 OR  p.valor = 0) ";
 			}else if(precoImovel > 135000 && precoImovel <= 250000){
-				query += "AND p.valor > 135000 AND p.valor <= '250000' ";
+				query += "AND (p.valor = 2 OR  p.valor = 0) ";
 			}else if(precoImovel > 250000 && precoImovel <=  350000){
-				query += "AND p.valor > 250000 AND p.valor <= '350000' ";
+				query += "AND (p.valor = 3 OR  p.valor = 0) ";
 			}else if(precoImovel > 350000 && precoImovel <=  500000){
-				query += "AND p.valor > 350000 AND p.valor <= '500000' ";
+				query += "AND (p.valor = 4 OR  p.valor = 0) ";
 			}else if(precoImovel > 500000 && precoImovel <=  700000){
-				query += "AND p.valor > 500000 AND p.valor <= '700000' ";
+				query += "AND (p.valor = 5 OR  p.valor = 0) ";
 			}else if(precoImovel > 700000 && precoImovel <=  1000000){
-				query += "AND p.valor > 701000 AND p.valor <= '1000000' ";
+				query += "AND (p.valor = 6 OR  p.valor = 0) ";
 			}else if(precoImovel > 1000000){
-				query += "AND p.valor > '1000000' ";
+				query += "AND (p.valor = 7 OR  p.valor = 0) ";
 			}
 			
 		}
@@ -205,7 +204,7 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 		
 		Integer qtdQUartos = imovel.getNumeroDeQuartos();
 		
-		parametros.put("nQuartos", qtdQUartos);
+		//parametros.put("nQuartos", qtdQUartos);
 		
 		/*
 		<item>1 quarto</item>
@@ -214,23 +213,25 @@ public class PerfilServiceImp implements PerfilService,Serializable {
         <item>4 quartos</item>
         <item>5 ou mais quartos</item>*/
 		
-		if(qtdQUartos == 1){
-			query += "AND p.qtQuartos = :nQuartos ";
-		}else if(qtdQUartos == 2){
-			query += "AND i.qtQuartos = :nQuartos ";
-		}else if(qtdQUartos == 3){
-			query += "AND i.qtQuartos = :nQuartos ";
-		}else if(qtdQUartos == 4){
-			query += "AND i.qtQuartos = :nQuartos ";
-		}else if(qtdQUartos >= 5){
-			query += "AND i.qtQuartos >= :nQuartos ";
+		if(qtdQUartos != null){
+			if(qtdQUartos == 1){
+				query += "AND (p.qtQuartos = 0 OR p.qtQuartos IS NULL) ";
+			}else if(qtdQUartos == 2){
+				query += "AND (p.qtQuartos = 1 OR p.qtQuartos IS NULL) ";
+			}else if(qtdQUartos == 3){
+				query += "AND (p.qtQuartos = 2 OR p.qtQuartos IS NULL) ";
+			}else if(qtdQUartos == 4){
+				query += "AND (p.qtQuartos = 3 OR p.qtQuartos IS NULL) ";
+			}else if(qtdQUartos >= 5){
+				query += "AND (p.qtQuartos >= 4 OR p.qtQuartos IS NULL) ";
+			}
 		}
 		
 		try{
 			TipoImovel tipoImovel = imovel.getTipoImovel();
 			
 			parametros.put("tipoImovel",tipoImovel);
-			query += "AND p.tipo=:tipoImovel";
+			query += "AND (p.tipo=:tipoImovel OR p.tipo IS NULL)";
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
