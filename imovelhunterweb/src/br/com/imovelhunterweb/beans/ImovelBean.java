@@ -418,6 +418,7 @@ public class ImovelBean implements Serializable {
 					usuarios.add(p.getUsuario());
 				}
 				try {
+					im.setImagens(imovelImagens);
 					gcmUtil.enviarObjetoJsonViaGcm(im, gcmUtil.montarTokens(usuarios), null, false);
 				} catch (IOException e) {					
 					e.printStackTrace();

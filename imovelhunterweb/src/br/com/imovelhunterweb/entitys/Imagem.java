@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.imovelhunterweb.annotations.NaoJSON;
 import br.com.imovelhunterweb.util.ObjetoJSON;
 
 @Entity
@@ -30,6 +31,7 @@ public class Imagem extends ObjetoJSON<Imagem> implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "imovel_idImovel")
+	@NaoJSON
 	private Imovel imovel;
 
 	public Imagem(){
