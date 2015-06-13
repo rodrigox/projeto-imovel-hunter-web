@@ -1,15 +1,20 @@
 package br.com.imovelhunterweb.util;
 
 import java.io.File;
+import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 
-public class EnderecoImagens {
+public class EnderecoImagens implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5281410381151588527L;
 	private String caminhoServidor;
 	private String caminhoTemp;
 	private String caminhoServidorRedz;

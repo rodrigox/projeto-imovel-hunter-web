@@ -19,26 +19,26 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
-import br.com.imovelhunterweb.entitys.Perfil;
-import br.com.imovelhunterweb.entitys.PontoGeografico;
-import br.com.imovelhunterweb.entitys.Usuario;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.service.ImagemService;
 import br.com.imovelhunterweb.service.ImovelService;
-import br.com.imovelhunterweb.service.PerfilService;
 import br.com.imovelhunterweb.service.PontoGeograficoService;
 import br.com.imovelhunterweb.util.ConsultaCEP;
 import br.com.imovelhunterweb.util.EnderecoImagens;
-import br.com.imovelhunterweb.util.GcmUtil;
-import br.com.imovelhunterweb.util.LocalizacaoUtil;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
@@ -61,9 +61,17 @@ public class EditarImovelBean implements Serializable {
 	private Caracteristica caracteristica;
 	private List<Caracteristica> allCacaracteristicas;
 	private boolean skip;
-	private String valorImovel;
+	private int valorImovel;
 	private EnderecoImagens enderecoImagens;
 	private String cep;
+	
+	private MapModel draggableModel;
+
+	private Marker marker;
+	
+	private int zoom;
+
+
 
 	@ManagedProperty("#{imovelService}")
 	private ImovelService imovelService;
@@ -79,23 +87,17 @@ public class EditarImovelBean implements Serializable {
 
 	@ManagedProperty("#{caracteristicaService}")
 	private CaracteristicaService caracteristicaService;
-	
-	@ManagedProperty("#{perfilService}")
-	private PerfilService perfilService;
-	
-	private GcmUtil gcmUtil;
 
 	@PostConstruct
 	public void init() {
 		this.navegador = new Navegador();
-		this.gcmUtil = new GcmUtil();
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
 		if (this.anunciante == null) {
 			this.navegador.redirecionarPara("login.xhtml");
 			return;
 		}
-
+		this.draggableModel = new DefaultMapModel();
 		this.enderecoImagens = new EnderecoImagens();
 		System.out.println(getEnderecoImagens().getCaminhoServidor());
 		this.navegador = new Navegador();
@@ -103,11 +105,21 @@ public class EditarImovelBean implements Serializable {
 		this.imovelImagens = new ArrayList<Imagem>();
 		this.imovel = (Imovel) UtilSession.getHttpSessionObject("imovelSelecionado");
 		this.cep = this.imovel.getCep();
-		this.valorImovel = String.valueOf(this.imovel.getPreco());
+//		this.valorImovel = String.valueOf(this.imovel.getPreco());
+		this.valorImovel = (int)this.imovel.getPreco();
 		this.allCacaracteristicas = this.caracteristicaService.listarTodos();
+		this.zoom = 17;
 		deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
 		carregarCaracteristicaSelecionadas();
 		carregarImagensSelecionadas();
+	}
+	
+	public int getZoom(){
+		return this.zoom;
+	}
+	
+	public void getZoom(int zoom){
+		this.zoom = zoom;
 	}
 
 	public List<Imagem> getImovelImagens() {
@@ -133,6 +145,10 @@ public class EditarImovelBean implements Serializable {
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
+	
+	public MapModel getDraggableModel() {
+		return draggableModel;
+	}	
 
 	public ImovelService getImovelService() {
 		return imovelService;
@@ -251,11 +267,11 @@ public class EditarImovelBean implements Serializable {
 		this.imovel.setBairro(endereco.getBairro());
 	}
 
-	public String getValorImovel() {
+	public int getValorImovel() {
 		return valorImovel;
 	}
 
-	public void setValorImovel(String valorImovel) {
+	public void setValorImovel(int valorImovel) {
 		this.valorImovel = valorImovel;
 	}
 
@@ -368,19 +384,19 @@ public class EditarImovelBean implements Serializable {
 		}
 		///checked.clear();
 
-		LocalizacaoUtil localizacao = new LocalizacaoUtil();
-		try {
-			PontoGeografico pg = pontoGeograficoService.inserir(localizacao
-					.getPontoGeografico(this.imovel.getLogradouro() + ", "
-							+ this.imovel.getNumeroDoImovel() + ", "
-							+ this.imovel.getBairro() + ", "
-							+ this.imovel.getCidade()));
-
-			this.imovel.setPontoGeografico(pg);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		LocalizacaoUtil localizacao = new LocalizacaoUtil();
+//		try {
+////			PontoGeografico pg = pontoGeograficoService.inserir(localizacao
+////					.getPontoGeografico(this.imovel.getLogradouro() + ", "
+////							+ this.imovel.getNumeroDoImovel() + ", "
+////							+ this.imovel.getBairro() + ", "
+////							+ this.imovel.getCidade()));
+////
+////			this.imovel.setPontoGeografico(pg);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		this.imovel.setAnunciante(this.anunciante);
 		this.imovel.setImagens(this.imovelImagens);
@@ -395,23 +411,6 @@ public class EditarImovelBean implements Serializable {
 					"Imóvel alterado com sucesso.");			
 			this.navegador.redirecionarPara("listarImovel.xhtml");
 			this.primeUtil.update("idFormMensagem");
-			
-			
-			List<Perfil> listaPerfil = this.perfilService.listarPerfilPorImovel(imovel);
-
-			if(listaPerfil != null && listaPerfil.size() > 0){
-				List<Usuario> usuarios= new ArrayList<Usuario>();
-				for(Perfil p : listaPerfil){
-					if(p.getUsuario() != null)
-					usuarios.add(p.getUsuario());
-				}
-				try {
-					im.setImagens(imovelImagens);
-					gcmUtil.enviarObjetoJsonViaGcm(im, gcmUtil.montarTokens(usuarios), null, false);
-				} catch (IOException e) {					
-					e.printStackTrace();
-				}
-			}
 
 		} else {
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Erro",
@@ -481,9 +480,50 @@ public class EditarImovelBean implements Serializable {
 			if (!validarCamposGerais()) {
 				return event.getOldStep();
 			}
+			carregarPontoGeografico();
 		}
 		return event.getNewStep();
+	}
+	
+	public void onMarkerDrag(MarkerDragEvent event) {
+        this.marker = event.getMarker();  
+        System.out.println(this.zoom);
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + marker.getLatlng().getLat() + ", Lng:" + marker.getLatlng().getLng()));
+    }   
 
+    public void onPointSelect(PointSelectEvent event) {
+        LatLng latlng = event.getLatLng();
+        this.marker = new Marker(latlng);
+        draggableModel.getMarkers().clear();
+        draggableModel.addOverlay(this.marker);
+        this.imovel.getPontoGeografico().setLatitude(latlng.getLat());
+        this.imovel.getPontoGeografico().setLongitude(latlng.getLng()); 
+    }
+ 
+	private void carregarPontoGeografico(){
+//		LocalizacaoUtil localizacao = new LocalizacaoUtil();
+
+//		try {
+//			this.pontoGeografico = localizacao
+//					.getPontoGeografico(this.imovel.getLogradouro() + ","
+//								      + this.imovel.getNumeroDoImovel() + ","
+//								      + this.imovel.getBairro() + ","
+//								      + this.imovel.getCidade() + ","
+//			 					      + this.imovel.getEstado());
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+        //Criando as coordenadas a serem inseridas no mapa.
+        LatLng coordenada = new LatLng(this.imovel.getPontoGeografico().getLatitude(), this.imovel.getPontoGeografico().getLongitude());
+          
+        //Draggable (Criando o modelo de coordenadas).
+        draggableModel.addOverlay(new Marker(coordenada, this.imovel.getLogradouro()));
+        // Como existe apenas uma coordenada, estou pegando apenas a primeira posição.
+        Marker premarker = this.draggableModel.getMarkers().get(0);  
+        premarker.setClickable(true);
+        premarker.setDraggable(true);
 	}
 
 	public SituacaoImovel[] getSituacao() {
@@ -547,14 +587,30 @@ public class EditarImovelBean implements Serializable {
 			return false;
 		}
 
-		if (this.valorImovel == null || valorImovel.trim().equals("")) {
+//		if (this.valorImovel == null || valorImovel.trim().equals("")) {
+		if (this.valorImovel == 0) {
+
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
 					"Campo inválido", "O valor do imóvel deve ser informado.");
 			this.primeUtil.update("idFormMensagem");
 			return false;
+
 		} else {
 			try {
-				this.imovel.setPreco(Double.parseDouble(this.valorImovel));
+//				String valor = this.valorImovel.replaceAll("\\.","").replace(",", ".");
+								
+				this.imovel.setPreco(valorImovel);
+				
+//				
+//				if (this.imovel.getPreco() > 9000000){
+//					this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+//							"Campo inválido", "O valor do imóvel não deve ultrapassar 9.000.000 reais.");
+//					this.primeUtil.update("idFormMensagem");
+//					return false;					
+//				}
+				
+				
+				
 			} catch (NumberFormatException e) {
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
 						"Campo inválido",
@@ -564,9 +620,5 @@ public class EditarImovelBean implements Serializable {
 			}
 		}
 		return true;
-	}
-
-	public void setPerfilService(PerfilService perfilService) {
-		this.perfilService = perfilService;
 	}
 }

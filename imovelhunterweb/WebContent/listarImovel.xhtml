@@ -161,7 +161,9 @@
 					<h:outputText value="Número: #{imovel.numeroDoImovel}" />
 					<h:outputText value="Bairro: #{imovel.bairro}" />
 					<h:outputText value="Cidade: #{imovel.cidade}" />
-					<h:outputText value="Preço: R$#{imovel.preco}" />
+					<h:outputLabel value="#{imovel.preco}"> 
+						<f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>
+					</h:outputLabel>
 					<h:panelGrid columns="3">
 						<p:commandButton value="Detalhes" actionListener="#{listarImovelBean.imovelSelecionado(imovel)}" style="width:100px; height:25px; font-size: 12px">
 						</p:commandButton>

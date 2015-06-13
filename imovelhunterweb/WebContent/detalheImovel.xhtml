@@ -113,7 +113,7 @@
 							
 				</script>
 
-			<div class="coluna col10	">
+			<div class="coluna col10">
 				<nav>
 				<ul class="menu inline sem-marcador">					
 					<li><a href="listarImovel.xhtml">Imoveis cadastrados</a></li>
@@ -173,7 +173,9 @@
 			<p:outputLabel value="#{detalheImovelBean.imovel.situacaoImovel}" style="font-size:100%"></p:outputLabel> | 
 			
 			<p:outputLabel value="Preço: R$ " style="font-size:100%"></p:outputLabel>
-			<p:outputLabel value="#{detalheImovelBean.imovel.preco}" style="font-size:100%;color:#1F3C58"></p:outputLabel><br/>
+			<p:outputLabel value="#{detalheImovelBean.imovel.preco}" style="font-size:100%;color:#1F3C58">	
+				<f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>
+			</p:outputLabel><br/>
 			
 			<p:outputLabel  value="Rua: "
 				style="font-size:180%;color:#1F3C58"></p:outputLabel >
