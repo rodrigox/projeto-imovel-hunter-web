@@ -19,6 +19,12 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
@@ -62,8 +68,13 @@ public class ImovelBean implements Serializable {
 	private Caracteristica caracteristica;
 	private List<Caracteristica> allCacaracteristicas;
 	private boolean skip;
-	private String valorImovel;
+	private int valorImovel;
 	private EnderecoImagens enderecoImagens;
+	private PontoGeografico pontoGeografico;
+
+	private MapModel draggableModel;
+
+	private Marker marker;
 
 	public EnderecoImagens getEnderecoImagens() {
 		return enderecoImagens;
@@ -90,6 +101,8 @@ public class ImovelBean implements Serializable {
 	private PerfilService perfilService;
 	
 	private GcmUtil gcmUtil;
+	
+	private int zoom;
 
 
 	@PostConstruct
@@ -102,16 +115,24 @@ public class ImovelBean implements Serializable {
 			this.navegador.redirecionarPara("login.xhtml");
 			return;
 		}
-
+		//Para teste (Diego Oliveira)
+		//ConsultaCEP.retornarEndereco();
+		this.draggableModel = new DefaultMapModel();
+		
 		this.enderecoImagens = new EnderecoImagens();
 		this.navegador = new Navegador();
 		this.primeUtil = new PrimeUtil();
 		this.imovelImagens = new ArrayList<Imagem>();
 		this.imovel = new Imovel();
 		this.caracteristica = new Caracteristica();
+		this.pontoGeografico = new PontoGeografico();
 		this.allCacaracteristicas = this.caracteristicaService.listarTodos();
 		deletarTemp(new File(enderecoImagens.getCaminhoTemp()));
 
+	}
+	
+	private int getZoom(){
+		return this.zoom;
 	}
 
 	public List<Imagem> getImovelImagens() {
@@ -137,6 +158,14 @@ public class ImovelBean implements Serializable {
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
+	
+	public PontoGeografico getPontoGeografico() {
+		return pontoGeografico;
+	}
+	
+	public MapModel getDraggableModel() {
+		return draggableModel;
+	}	
 
 	public ImovelService getImovelService() {
 		return imovelService;
@@ -255,11 +284,11 @@ public class ImovelBean implements Serializable {
 		this.imovel.setBairro(endereco.getBairro());
 	}
 
-	public String getValorImovel() {
+	public int getValorImovel() {
 		return valorImovel;
 	}
 
-	public void setValorImovel(String valorImovel) {
+	public void setValorImovel(int valorImovel) {
 		this.valorImovel = valorImovel;
 	}
 
@@ -348,12 +377,9 @@ public class ImovelBean implements Serializable {
 			System.out.println("validacao paranaue");
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Imagem não cadastrada","Cadastre ao menos uma imagem.");
 			this.primeUtil.update("idFormMensagem");
-			
-			
-			
+
 		}
 
-		
 		
 		this.imovel.setCaracteristicas(new ArrayList<Caracteristica>());
 		for (Caracteristica caract : this.allCacaracteristicas) {
@@ -363,7 +389,7 @@ public class ImovelBean implements Serializable {
 			}
 		}
 		checked.clear();
-
+		/*	
 		LocalizacaoUtil localizacao = new LocalizacaoUtil();
 		try {
 			PontoGeografico pg = pontoGeograficoService.inserir(localizacao
@@ -377,14 +403,11 @@ public class ImovelBean implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
+		this.pontoGeografico = pontoGeograficoService.inserir(this.pontoGeografico);
+		this.imovel.setPontoGeografico(this.pontoGeografico);
 		
-		
-		
-		
-	
 		this.imovel.setAnunciante(this.anunciante);
-		
-		
 
 		Imovel im = this.imovelService.inserir(this.imovel);
 		if (im != null) {
@@ -407,7 +430,6 @@ public class ImovelBean implements Serializable {
 					"Imóvel cadastrado com sucesso.");			
 			this.primeUtil.update("idFormMensagem");
 			this.navegador.redirecionarPara("cadastroImovel.xhtml");
-			
 			
 			List<Perfil> listaPerfil = this.perfilService.listarPerfilPorImovel(imovel);
 
@@ -496,8 +518,10 @@ public class ImovelBean implements Serializable {
 	public String onFlowProcess(FlowEvent event) {
 		if (event.getOldStep().equals("imovelEndereco")) {
 			if (!validarCamposGerais()) {
-				return event.getOldStep();
+				return event.getOldStep();				
 			}
+			carregarPontoGeografico();	
+
 		}
 		if(event.getOldStep().equals("imovelCaracteristica")){
 			System.out.println("TESTE VALIDAÇÃO");
@@ -507,9 +531,22 @@ public class ImovelBean implements Serializable {
 		return event.getNewStep();
 
 	}
+    
+	public void onMarkerDrag(MarkerDragEvent event) {
+        marker = event.getMarker();          
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + marker.getLatlng().getLat() + ", Lng:" + marker.getLatlng().getLng()));
+    }   
+
+    public void onPointSelect(PointSelectEvent event) {
+        LatLng latlng = event.getLatLng();
+        this.marker = new Marker(latlng);
+        draggableModel.getMarkers().clear();
+        draggableModel.addOverlay(this.marker);
+        this.pontoGeografico.setLatitude(latlng.getLat());
+        this.pontoGeografico.setLongitude(latlng.getLng());  
+    }
+
 	
-
-
 	public SituacaoImovel[] getSituacao() {
 		return SituacaoImovel.values();
 	}
@@ -518,9 +555,7 @@ public class ImovelBean implements Serializable {
 		return TipoImovel.values();
 	}
 
-	
-	
-	//
+
 	public boolean validarCamposGerais() {
 		if (this.imovel.getNomeDoProprietario() == null
 				|| this.imovel.getNomeDoProprietario().trim().equals("")) {
@@ -574,23 +609,22 @@ public class ImovelBean implements Serializable {
 			return false;
 		}
 
-		if (this.valorImovel == null || valorImovel.trim().equals("")) {
-			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+//		if (this.valorImovel == null || valorImovel.trim().equals("")) {
+		if (this.valorImovel == 0) {
+
+		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
 					"Campo inválido", "O valor do imóvel deve ser informado.");
 			this.primeUtil.update("idFormMensagem");
 			return false;
 		}
-		
-		
-		
-		
-		
+	
 		else {
 			try {
-				String valor = this.valorImovel.replaceAll("\\.","").replace(",", ".");
+//				String valor = this.valorImovel.replaceAll("\\.","").replace(",", ".");
+								
+//				this.imovel.setPreco(Double.parseDouble(valor));
+				this.imovel.setPreco(valorImovel);
 				
-				
-				this.imovel.setPreco(Double.parseDouble(valor));
 			} catch (NumberFormatException e) {
 				this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
 						"Campo inválido",
@@ -602,19 +636,41 @@ public class ImovelBean implements Serializable {
 		return true;
 	}
 	
-	///////////////
-	
-	public boolean validarCamposTabImagem(){
+	private void carregarPontoGeografico(){
+		LocalizacaoUtil localizacao = new LocalizacaoUtil();
+
+		try {
+			this.pontoGeografico = localizacao
+					.getPontoGeografico(this.imovel.getLogradouro() + ","
+								      + this.imovel.getNumeroDoImovel() + ","
+								      + this.imovel.getBairro() + ","
+								      + this.imovel.getCidade() + ","
+			 					      + this.imovel.getEstado());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		System.out.println("entrou no metodo validar campostabimagem");
-		if(this.imovelImagens.size()<1){
-		this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,"Imagem não cadastrada","Cadastre ao menos uma imagem.");
-		this.primeUtil.update("idFormMensagem");
-		return false;
-		
-		
+        //Criando as coordenadas a serem inseridas no mapa.
+        LatLng coordenada = new LatLng(this.pontoGeografico.getLatitude(), this.pontoGeografico.getLongitude());
+          
+        //Draggable (Criando o modelo de coordenadas).
+        draggableModel.addOverlay(new Marker(coordenada, this.imovel.getLogradouro()));
+        // Como existe apenas uma coordenada, estou pegando apenas a primeira posição.
+        Marker premarker = this.draggableModel.getMarkers().get(0);  
+        premarker.setClickable(true);
+        premarker.setDraggable(true);
 	}
-		
+	
+	public boolean validarCamposTabImagem() {
+
+		System.out.println("entrou no metodo validar campostabimagem");
+		if (this.imovelImagens.size() < 1) {
+			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO,
+					"Imagem não cadastrada", "Cadastre ao menos uma imagem.");
+			this.primeUtil.update("idFormMensagem");
+			return false;
+		}
 		return true;
 	}
 

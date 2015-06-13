@@ -9,11 +9,36 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Imovel Hunter Web</title>	
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 	
 	<link rel="stylesheet" href="css/personalizado/normalize.css" />
 	<link rel="stylesheet" href="css/personalizado/colunasgrid.css" />
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/personalizado/estilo-cadastro-imovel.css" />
+
+
+<script>
+	function mascara(o,f){   
+    v_obj=o   
+    v_fun=f   
+    setTimeout("execmascara()",1)   
+}   
+  
+function execmascara(){   
+    v_obj.value=v_fun(v_obj.value)   
+}   
+  
+function moeda(v){   
+    v=v.replace(/\D/g,""); // permite digitar apenas numero   
+    v=v.replace(/(\d{1})(\d{15})$/,"$1.$2") // coloca ponto antes dos ultimos digitos   
+    v=v.replace(/(\d{1})(\d{11})$/,"$1.$2") // coloca ponto antes dos ultimos 11 digitos   
+    v=v.replace(/(\d{1})(\d{8})$/,"$1.$2") // coloca ponto antes dos ultimos 8 digitos   
+    v=v.replace(/(\d{1})(\d{5})$/,"$1.$2") // coloca ponto antes dos ultimos 5 digitos   
+     v=v.replace(/(\d{1})(\d{1,2})$/,"$1,$2") // coloca virgula antes dos ultimos 2 digitos   
+    return v;   
+}  
+	
+</script>
 	
 	
 	<style>
@@ -247,7 +272,9 @@
 									
 								<h:outputText value="Valor R$:*" />
 								<p:inputText id="sfs_valorVenda"
-									value="#{editarImovelBean.valorImovel}"></p:inputText>									
+									value="#{editarImovelBean.valorImovel}" onkeypress="mascara(this,moeda)">
+									<f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>
+								</p:inputText>									
 
 								<h:outputText value="Situação: " />
 								<h:selectOneMenu value="#{editarImovelBean.imovel.situacaoImovel}">
@@ -257,6 +284,17 @@
 							</h:panelGrid>
 							<h5>(*) Campos de preenchimento obrigatório.</h5>	
 						</p:panel>
+					</p:tab>
+
+					<p:tab id="imovelMapa" title="Mapa">
+
+					   <p:panel header="Informe a posição no Mapa">
+    					<p:gmap id="gmap" center="#{editarImovelBean.imovel.pontoGeografico.latitude},#{editarImovelBean.imovel.pontoGeografico.longitude}" zoom="#{editarImovelBean.zoom}" type="HYBRID"  model="#{editarImovelBean.draggableModel}" style="width:100%;height:300px">
+<!--         					<p:ajax event="markerDrag" listener="#{editarImovelBean.onMarkerDrag}" /> -->
+        					<p:ajax event="pointSelect" listener="#{editarImovelBean.onPointSelect}" update="gmap"/>
+    					</p:gmap>
+    					</p:panel>
+
 					</p:tab>
 
 					<p:tab id="imovelCaracteristica" title="Características">

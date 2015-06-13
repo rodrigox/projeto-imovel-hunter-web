@@ -8,7 +8,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Imovel Hunter Web</title>	
+	<title>Imovel Hunter Web</title>
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 	
 	<link rel="stylesheet" href="css/personalizado/normalize.css" />
 	<link rel="stylesheet" href="css/personalizado/colunasgrid.css" />
 	<link rel="shortcut icon" href="imovelhunterlogo.png" />
@@ -151,14 +152,6 @@ function moeda(v){
 	
 </h:head>
 <h:body>
-
-	<!-- 	primefaces -->
-	
-	<h:form>
-    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
-	</h:form>
-	
-	
 	<!-- dialog de processo -->
 		<p:ajaxStatus onstart="processandoDialog.show();"
 			onsuccess="processandoDialog.hide();" />
@@ -173,8 +166,13 @@ function moeda(v){
 			<p:growl autoUpdate="false" showDetail="true" life="3000" />
 		</h:form>
 	
+	<!-- 	primefaces -->
 	
-<!-- 	primefaces fim -->
+	<h:form>
+    	<p:remoteCommand name="rc" action="#{loginBean.deslogar}" />    
+	</h:form>
+	
+	
 
 	<div class="header">
 		
@@ -268,11 +266,12 @@ function moeda(v){
 								</h:selectOneMenu>
 									
 								<h:outputText value="Valor R$:*" />
-								<p:inputText  id="sfs_valorVenda"
-									 maxlength="14" value="#{imovelBean.valorImovel}" onkeypress="mascara(this,moeda)">
 									
-									
-									</p:inputText>									
+								<p:inputText id="sfs_valorVenda"
+									value="#{imovelBean.valorImovel}" onkeypress="mascara(this,moeda)">
+									<f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>
+								</p:inputText>										
+																		
 
 								<h:outputText value="Situação: " />
 								<h:selectOneMenu value="#{imovelBean.imovel.situacaoImovel}">
@@ -283,7 +282,18 @@ function moeda(v){
 							<h5>(*) Campos de preenchimento obrigatório.</h5>	
 						</p:panel>
 					</p:tab>
+					
+					<p:tab id="imovelMapa" title="Mapa">
 
+					   <p:panel header="Informe a posição no Mapa">
+    					<p:gmap id="gmap" center="#{imovelBean.pontoGeografico.latitude},#{imovelBean.pontoGeografico.longitude}" zoom="17" type="HYBRID"  model="#{imovelBean.draggableModel}" style="width:100%;height:300px">
+<!--         					<p:ajax event="markerDrag" listener="#{imovelBean.onMarkerDrag}" /> -->
+        					<p:ajax event="pointSelect" listener="#{imovelBean.onPointSelect}" update="gmap"/>
+    					</p:gmap>
+    					</p:panel>
+
+					</p:tab>
+					
 					<p:tab id="imovelCaracteristica" title="Características">
 						<p:panel header="Informe as características do imóvel">
 							<h:panelGrid columns="4">

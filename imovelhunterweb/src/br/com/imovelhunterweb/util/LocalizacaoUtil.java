@@ -28,9 +28,13 @@ public class LocalizacaoUtil{
     public PontoGeografico getPontoGeografico(String address) throws IOException {
 
     	
-        String query = "http://maps.google.com/maps/api/geocode/json?address=" + address.replaceAll(" ","%20")
+//        String query = "http://maps.google.com/maps/api/geocode/json?address=" + address.replaceAll(" ","%20")
+//                + "&sensor=false";
+        
+        String query = "http://maps.google.com/maps/api/geocode/json?address=" + address.replaceAll(" ","+")
                 + "&sensor=false";
         
+        //query = "http://maps.google.com/maps/api/geocode/json?address= Químico Antônio Victor, 1027, Candeias, Jaboatão dos Guararapes";
         this.httpUtil.setUrl(query);
         
         PontoGeografico addr = null;

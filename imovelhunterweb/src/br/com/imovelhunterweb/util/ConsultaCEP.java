@@ -1,5 +1,9 @@
 package br.com.imovelhunterweb.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 
@@ -7,6 +11,9 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.json.HTTP;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ConsultaCEP {
 
@@ -118,5 +125,47 @@ public class ConsultaCEP {
 		this.logradouro = "";
 		this.resultado = 0;
 	}
+		
+	
+	// Utilizando Json dos Correios.
+	
+	/*
+	public static void retornarEndereco(){
+		try{
+		  URL url = new URL("http://cep.correiocontrol.com.br/54450010.json");  
 
-}
+		  BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));  
+		  String str;              
+
+		  if ((str = in.readLine()) != null) 
+		  {  
+		    JSONObject obj = new JSONObject(str);
+		    System.out.println(obj.getString("bairro") +
+		    obj.getString("localidade") +
+		    obj.getString("logradouro") +
+		    obj.getString("uf"));
+		  }     
+
+		  in.close();  
+		} catch (MalformedURLException e) {  
+			  e.printStackTrace();
+
+			} catch (IOException e) {  
+			  e.printStackTrace();
+
+			} catch (JSONException e) {
+			  e.printStackTrace();
+			}
+		  
+	}
+	
+	*/
+	
+}	
+	
+
+
+
+
+	
+
