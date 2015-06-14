@@ -20,6 +20,7 @@ import javax.persistence.OneToOne;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.util.ObjetoJSON;
+import br.com.imovelhunterweb.util.RemoverAcentuacao;
 
 
 
@@ -155,7 +156,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setNomeDoProprietario(String nomeDoProprietario) {
-		this.nomeDoProprietario = nomeDoProprietario;
+		this.nomeDoProprietario = RemoverAcentuacao.removerAcentos(nomeDoProprietario);
 	}
 
 	public String getDescricao() {
@@ -219,7 +220,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+		this.logradouro = RemoverAcentuacao.removerAcentos(logradouro);
 	}
 
 	public String getBairro() {
@@ -227,7 +228,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setBairro(String bairro) {
-		this.bairro = bairro;
+		this.bairro = RemoverAcentuacao.removerAcentos(bairro);
 	}
 
 	public String getCidade() {
@@ -235,7 +236,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setCidade(String cidade) {
-		this.cidade = cidade;
+		this.cidade = RemoverAcentuacao.removerAcentos(cidade);
 	}
 
 	public String getEstado() {
