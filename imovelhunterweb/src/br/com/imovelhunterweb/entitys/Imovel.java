@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import br.com.imovelhunterweb.annotations.NaoJSON;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.util.ObjetoJSON;
@@ -39,6 +40,10 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	
 	@OneToMany (mappedBy="imovel",fetch=FetchType.EAGER, cascade=CascadeType.ALL)	
 	private List<Imagem> imagens;
+	
+	@Transient
+	@NaoJSON
+	private RemoverAcentuacao remAcent = new RemoverAcentuacao();
 	
 	@Column
 	private String numeroDoImovel;
@@ -160,7 +165,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setNomeDoProprietario(String nomeDoProprietario) {
-		this.nomeDoProprietario = RemoverAcentuacao.removerAcentos(nomeDoProprietario);
+		this.nomeDoProprietario = remAcent.removerAcentos(nomeDoProprietario);
 	}
 
 	public String getDescricao() {
@@ -224,7 +229,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setLogradouro(String logradouro) {
-		this.logradouro = RemoverAcentuacao.removerAcentos(logradouro);
+		this.logradouro = remAcent.removerAcentos(logradouro);
 	}
 
 	public String getBairro() {
@@ -232,7 +237,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setBairro(String bairro) {
-		this.bairro = RemoverAcentuacao.removerAcentos(bairro);
+		this.bairro = remAcent.removerAcentos(bairro);
 	}
 
 	public String getCidade() {
@@ -240,7 +245,7 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 	}
 
 	public void setCidade(String cidade) {
-		this.cidade = RemoverAcentuacao.removerAcentos(cidade);
+		this.cidade = remAcent.removerAcentos(cidade);
 	}
 
 	public String getEstado() {
