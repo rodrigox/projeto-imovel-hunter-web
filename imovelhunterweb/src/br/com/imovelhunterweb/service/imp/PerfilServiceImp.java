@@ -193,14 +193,14 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 		}
 		
 		
-		parametros.put("uf",imovel.getEstado());
-		query += "AND p.uf=:uf ";
+		parametros.put("uf","%"+imovel.getEstado().toUpperCase()+"%");
+		query += "AND UPPER(p.uf) LIKE :uf ";
 		
-		parametros.put("cidade",imovel.getCidade());
-		query += "AND p.cidade=:cidade ";
+		parametros.put("cidade","%"+imovel.getCidade().toUpperCase()+"%");
+		query += "AND UPPER(p.cidade) LIKE :cidade ";
 		
-		parametros.put("bairro",imovel.getBairro());
-		query += "AND p.bairro=:bairro ";
+		parametros.put("bairro","%"+imovel.getBairro().toUpperCase()+"%");
+		query += "AND UPPER(p.bairro) LIKE :bairro ";
 		
 		Integer qtdQUartos = imovel.getNumeroDeQuartos();
 		
