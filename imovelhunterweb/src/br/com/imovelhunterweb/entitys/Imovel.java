@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
@@ -101,6 +102,9 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 
 	@ManyToOne
 	private Anunciante anunciante;
+	
+	@Transient
+	private long idUsuarioNotificacao;
 	
 	@ManyToMany
 	private List<Caracteristica> caracteristicas;
@@ -318,6 +322,14 @@ public class Imovel extends ObjetoJSON<Imovel> implements Serializable{
 
 	public void setImagens(List<Imagem> imagens) {
 		this.imagens = imagens;
+	}
+
+	public long getIdUsuarioNotificacao() {
+		return idUsuarioNotificacao;
+	}
+
+	public void setIdUsuarioNotificacao(long idUsuarioNotificacao) {
+		this.idUsuarioNotificacao = idUsuarioNotificacao;
 	}
 	
 	
