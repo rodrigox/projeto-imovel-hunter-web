@@ -164,6 +164,51 @@ public class GcmUtil implements Serializable {
 	}
 	
 	
+	/**
+	 * Monta os tokens de acordo com a quantidade de usuários
+	 * @param usuarios
+	 * @return
+	 */
+	public StringBuffer montarTokens(Usuario... usuarios){
+		StringBuffer stb = new StringBuffer();
+		
+		if(usuarios != null){
+			
+			int cont = 0;
+			int tam = usuarios.length;
+			
+			Boolean fim = false;
+			
+			for(Usuario u : usuarios){
+				
+				if(cont + 1 == tam){
+					fim = true;
+				}
+				
+				if(!fim){
+					stb.append("\"");
+					stb.append(u.getChaveGCM());
+					stb.append("\",");
+				}else{
+					stb.append("\"");
+					stb.append(u.getChaveGCM());
+					stb.append("\"");
+				}
+				
+				
+				cont++;
+			}
+			
+		}		
+		
+		
+		return stb;
+	}
+	
+	
+	
+	
+	
 	
 	
 	public String listaParaJson(List<? extends ObjetoJSON<?>> lista) {

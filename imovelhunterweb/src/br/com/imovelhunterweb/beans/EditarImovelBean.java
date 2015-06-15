@@ -30,15 +30,19 @@ import br.com.imovelhunterweb.entitys.Anunciante;
 import br.com.imovelhunterweb.entitys.Caracteristica;
 import br.com.imovelhunterweb.entitys.Imagem;
 import br.com.imovelhunterweb.entitys.Imovel;
+import br.com.imovelhunterweb.entitys.Perfil;
+import br.com.imovelhunterweb.entitys.Usuario;
 import br.com.imovelhunterweb.enums.SituacaoImovel;
 import br.com.imovelhunterweb.enums.TipoImovel;
 import br.com.imovelhunterweb.service.AnuncianteService;
 import br.com.imovelhunterweb.service.CaracteristicaService;
 import br.com.imovelhunterweb.service.ImagemService;
 import br.com.imovelhunterweb.service.ImovelService;
+import br.com.imovelhunterweb.service.PerfilService;
 import br.com.imovelhunterweb.service.PontoGeograficoService;
 import br.com.imovelhunterweb.util.ConsultaCEP;
 import br.com.imovelhunterweb.util.EnderecoImagens;
+import br.com.imovelhunterweb.util.GcmUtil;
 import br.com.imovelhunterweb.util.Navegador;
 import br.com.imovelhunterweb.util.PrimeUtil;
 import br.com.imovelhunterweb.util.UtilSession;
@@ -87,10 +91,16 @@ public class EditarImovelBean implements Serializable {
 
 	@ManagedProperty("#{caracteristicaService}")
 	private CaracteristicaService caracteristicaService;
+	
+	@ManagedProperty("#{perfilService}")
+	private PerfilService perfilService;
 
+	private GcmUtil gcmUtil;
+	
 	@PostConstruct
 	public void init() {
 		this.navegador = new Navegador();
+		this.gcmUtil = new GcmUtil();
 		this.anunciante = (Anunciante) UtilSession
 				.getHttpSessionObject("anuncianteLogado");
 		if (this.anunciante == null) {
@@ -411,6 +421,27 @@ public class EditarImovelBean implements Serializable {
 					"Imóvel alterado com sucesso.");			
 			this.navegador.redirecionarPara("listarImovel.xhtml");
 			this.primeUtil.update("idFormMensagem");
+			
+			
+			List<Perfil> listaPerfil = this.perfilService.listarPerfilPorImovel(imovel);
+
+			if(listaPerfil != null && listaPerfil.size() > 0){
+				List<Usuario> usuarios= new ArrayList<Usuario>();
+				for(Perfil p : listaPerfil){
+					if(p.getUsuario() != null)
+					usuarios.add(p.getUsuario());
+				}
+				try {
+					im.setImagens(imovelImagens);
+					for(Usuario u : usuarios){
+						im.setIdUsuarioNotificacao(u.getIdUsuario());
+						gcmUtil.enviarObjetoJsonViaGcm(im, gcmUtil.montarTokens(u), null, false);
+					}
+					
+				} catch (IOException e) {					
+					e.printStackTrace();
+				}
+			}
 
 		} else {
 			this.primeUtil.mensagem(FacesMessage.SEVERITY_INFO, "Erro",
@@ -620,5 +651,9 @@ public class EditarImovelBean implements Serializable {
 			}
 		}
 		return true;
+	}
+
+	public void setPerfilService(PerfilService perfilService) {
+		this.perfilService = perfilService;
 	}
 }
