@@ -412,6 +412,7 @@ public class EditarImovelBean implements Serializable {
 		this.imovel.setImagens(this.imovelImagens);
 
 		Imovel im = this.imovelService.atualizar(this.imovel);
+		im = this.imovelService.buscarPorId(im.getIdImovel());
 		if (im != null) {
 			for (Imagem img : this.imovelImagens) {
 				this.imagemService.atualizar(img);
