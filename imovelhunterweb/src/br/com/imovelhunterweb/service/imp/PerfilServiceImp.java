@@ -144,19 +144,19 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 			
 			double precoImovel = imovel.getPreco();
 			
-			if(precoImovel <= 1000){
+			if(precoImovel <= 1000d){
 				query += "AND (p.valor = 1 OR  p.valor = 0) ";
-			}else if(1001 > precoImovel && precoImovel <= 1500){
+			}else if(1001d < precoImovel && precoImovel <= 1500d){
 				query += "AND (p.valor = 2 OR  p.valor = 0) ";
-			}else if(1501 > precoImovel && precoImovel <= 2000){
+			}else if(1501d < precoImovel && precoImovel <= 2000d){
 				query += "AND (p.valor = 3 OR  p.valor = 0) ";
-			}else if(2001 > precoImovel && precoImovel <= 2500){
+			}else if(2001d < precoImovel && precoImovel <= 2500d){
 				query += "AND (p.valor = 4 OR  p.valor = 0) ";
-			}else if(2501 > precoImovel && precoImovel <= 3000){
+			}else if(2501d < precoImovel && precoImovel <= 3000d){
 				query += "AND (p.valor = 5 OR  p.valor = 0) ";
-			}else if(3001 > precoImovel && precoImovel <= 5000){
+			}else if(3001d < precoImovel && precoImovel <= 5000d){
 				query += "AND (p.valor = 6 OR  p.valor = 0) ";
-			}else if(precoImovel > 5000){
+			}else if(precoImovel > 5000d){
 				query += "AND (p.valor = 7 OR  p.valor = 0) ";
 			}
 			
@@ -174,19 +174,19 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 			query += "p.situacaoImovel=:situacaoImovel ";
 			double precoImovel = imovel.getPreco();
 			
-			if(precoImovel <= 135000){
+			if(precoImovel <= 135000.0){
 				query += "AND (p.valor = 1 OR  p.valor = 0) ";
-			}else if(precoImovel > 135000 && precoImovel <= 250000){
+			}else if(precoImovel > 135000d && precoImovel <= 250000d){
 				query += "AND (p.valor = 2 OR  p.valor = 0) ";
-			}else if(precoImovel > 250000 && precoImovel <=  350000){
+			}else if(precoImovel > 250000d && precoImovel <=  350000d){
 				query += "AND (p.valor = 3 OR  p.valor = 0) ";
-			}else if(precoImovel > 350000 && precoImovel <=  500000){
+			}else if(precoImovel > 350000d && precoImovel <=  500000d){
 				query += "AND (p.valor = 4 OR  p.valor = 0) ";
-			}else if(precoImovel > 500000 && precoImovel <=  700000){
+			}else if(precoImovel > 500000d && precoImovel <=  700000d){
 				query += "AND (p.valor = 5 OR  p.valor = 0) ";
-			}else if(precoImovel > 700000 && precoImovel <=  1000000){
+			}else if(precoImovel > 700000d && precoImovel <=  1000000d){
 				query += "AND (p.valor = 6 OR  p.valor = 0) ";
-			}else if(precoImovel > 1000000){
+			}else if(precoImovel > 1000000d){
 				query += "AND (p.valor = 7 OR  p.valor = 0) ";
 			}
 			
@@ -215,15 +215,15 @@ public class PerfilServiceImp implements PerfilService,Serializable {
 		
 		if(qtdQUartos != null){
 			if(qtdQUartos == 1){
-				query += "AND (p.qtQuartos = 0 OR p.qtQuartos IS NULL) ";
+				query += "AND (p.qtQuartos = 1 OR p.qtQuartos IS NULL OR p.qtQuartos = 0) ";
 			}else if(qtdQUartos == 2){
-				query += "AND (p.qtQuartos = 1 OR p.qtQuartos IS NULL) ";
+				query += "AND (p.qtQuartos = 2 OR p.qtQuartos IS NULL OR p.qtQuartos = 0) ";
 			}else if(qtdQUartos == 3){
-				query += "AND (p.qtQuartos = 2 OR p.qtQuartos IS NULL) ";
+				query += "AND (p.qtQuartos = 3 OR p.qtQuartos IS NULL OR p.qtQuartos = 0) ";
 			}else if(qtdQUartos == 4){
-				query += "AND (p.qtQuartos = 3 OR p.qtQuartos IS NULL) ";
+				query += "AND (p.qtQuartos = 4 OR p.qtQuartos IS NULL OR p.qtQuartos = 0) ";
 			}else if(qtdQUartos >= 5){
-				query += "AND (p.qtQuartos >= 4 OR p.qtQuartos IS NULL) ";
+				query += "AND (p.qtQuartos >= 5 OR p.qtQuartos IS NULL OR p.qtQuartos = 0) ";
 			}
 		}
 		
